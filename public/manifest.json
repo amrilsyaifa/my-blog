@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Amril Syaifa Yasin",
+  "name": "Hi, i am Amril, A passionate and enthusiastic web and mobile developer with 3+ years of experience. I love new challenges to help me invest all my skills and experience into succeeding them",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "images/sand-paper.png",
       "type": "image/png",
       "sizes": "192x192"
     },

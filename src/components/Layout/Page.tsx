@@ -5,7 +5,7 @@ interface Props {
   children: [ReactNode, ReactNode]
 }
 
-const Wrapper = styled.body`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
