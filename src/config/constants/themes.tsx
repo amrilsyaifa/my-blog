@@ -8,6 +8,7 @@ export const Darks: Dark = {
   color: {
     primary: '#fdfdfd',
     secondary: '#efefef',
+    burnSienna: '#ec7a56',
   },
 }
 
@@ -19,5 +20,6 @@ export const Lights: Light = {
   color: {
     primary: '#232636',
     secondary: '#2f3345',
+    burnSienna: '#ec7a56',
   },
 }

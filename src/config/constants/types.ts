@@ -18,4 +18,5 @@ export type BackgroundType = {
 export type ColorType = {
   primary: string
   secondary: string
+  burnSienna: string
 }
