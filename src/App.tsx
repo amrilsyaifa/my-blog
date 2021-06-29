@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, useContext } from 'react'
+import { Route, Router, Switch } from 'react-router-dom'
 
-function App() {
+import GlobalStyle from './style/Global'
+import PageLoader from './components/PageLoader'
+import SuspenseWithChunkError from './components/SuspenseWithChunkError'
+import history from './routerHistory'
+
+import { ThemeContext } from 'contexts/ThemeContext'
+
+// Route-based code splitting
+// Only pool is included in the main bundle because of it's the most visited page
+const Home = lazy(() => import('./views/Home'))
+const NotFound = lazy(() => import('./views/NotFound'))
+
+const App: React.FC = () => {
+  const { themeMatch } = useContext(ThemeContext)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router history={history}>
+      <GlobalStyle themeMatch={themeMatch} />
+      <SuspenseWithChunkError fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          {/* 404 */}
+          <Route component={NotFound} />
+        </Switch>
+      </SuspenseWithChunkError>
+    </Router>
+  )
 }
 
-export default App;
+export default React.memo(App)
