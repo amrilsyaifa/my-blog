@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import NavBar from 'components/NavBar'
 import Page from 'components/Layout/Page'
+import Typewriter from 'typewriter-effect'
 
 interface TextProps {
   lineHeight?: string
   paddingTop?: string
+  paddingLeft?: string
   fontSize?: string
   fontWeight?: string
 }
@@ -73,6 +75,13 @@ const Text = styled.div<TextProps>`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'normal')};
   line-height: ${(props) => (props.lineHeight ? props.lineHeight : '')};
   padding-top: ${(props) => (props.paddingTop ? props.paddingTop : '')};
+  padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 const Home: React.FC = () => {
@@ -91,9 +100,20 @@ const Home: React.FC = () => {
             <Text fontSize="30px" fontWeight="bold" paddingTop="20px" lineHeight="30px">
               4 Years experience
             </Text>
-            <Text fontSize="30px" fontWeight="bold" paddingTop="20px" lineHeight="30px">
-              As :
-            </Text>
+            <Row>
+              <Text fontSize="30px" fontWeight="bold" paddingTop="20px" lineHeight="30px">
+                As :
+              </Text>
+              <Text paddingLeft="10px" fontSize="30px" fontWeight="bold" paddingTop="20px" lineHeight="30px">
+                <Typewriter
+                  options={{
+                    strings: ['Software engineer', 'Web Developer', 'Android Developer'],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </Text>
+            </Row>
           </Left>
         </Section1>
       </Content>
