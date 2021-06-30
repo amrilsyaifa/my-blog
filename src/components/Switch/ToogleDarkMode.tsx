@@ -68,17 +68,15 @@ const MoonIcon = styled(Moon)`
 const ToogleDarkMode = () => {
   const { isDark, toggleTheme } = useTheme()
   return (
-    <div>
-      <ToggleSlot onClick={toggleTheme} check={isDark}>
-        <SunIconWrapper check={isDark}>
-          <SunIcon />
-        </SunIconWrapper>
-        <ToogleButton check={isDark} />
-        <MoonIconWrapper check={isDark}>
-          <MoonIcon />
-        </MoonIconWrapper>
-      </ToggleSlot>
-    </div>
+    <ToggleSlot onClick={toggleTheme} check={isDark}>
+      <SunIconWrapper check={isDark}>
+        <SunIcon />
+      </SunIconWrapper>
+      <ToogleButton check={isDark} />
+      <MoonIconWrapper check={isDark}>
+        <MoonIcon />
+      </MoonIconWrapper>
+    </ToggleSlot>
   )
 }
 

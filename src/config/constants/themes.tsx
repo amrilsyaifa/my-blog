@@ -4,6 +4,7 @@ const Defaults = {
   color: {
     burnSienna: '#ec7a56',
     white: '#ffffff',
+    gray: '#d3d3d3d3',
   },
 }
 

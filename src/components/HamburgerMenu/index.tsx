@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
 import styled from 'styled-components'
+import { Props } from './types'
 
 interface SpanProps {
   open: boolean
@@ -82,10 +82,9 @@ const Span3 = styled.span<SpanProps>`
   top: ${(props) => (props.open ? '12px' : '24px')};
 `
 
-const HamburgerMenu = () => {
-  const [open, setOpen] = useState(false)
+const HamburgerMenu: React.FC<Props> = ({ onClick, open }: Props) => {
   return (
-    <Wrap onClick={() => setOpen(!open)}>
+    <Wrap onClick={onClick}>
       <Span1 open={open} />
       <Span2 open={open} />
       <Span3 open={open} />
