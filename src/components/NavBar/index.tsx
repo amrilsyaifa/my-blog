@@ -107,7 +107,7 @@ const NavBar: React.FC = () => {
               <Button>Hire me</Button>
             </Li>
             <Li>
-              <div style={{ position: 'absolute', top: 10 }}>
+              <div style={{ position: 'absolute', top: 2 }}>
                 <ToogleDarkMode />
               </div>
             </Li>
