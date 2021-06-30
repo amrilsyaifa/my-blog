@@ -2,29 +2,41 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from 'components/Button'
 import HamburgerMenu from 'components/HamburgerMenu'
+import ToogleDarkMode from 'components/Switch/ToogleDarkMode'
+import useScroll from '@react-hooks-custom/use-scroll'
+import useTheme from 'hooks/useTheme'
 
-const Wrapper = styled.section`
+interface Props {
+  scroll: boolean
+  isDark: boolean
+}
+// background-color: ${(props) => props.theme.background?.primary};
+const Wrapper = styled.section<Props>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.background?.primary};
-  width: 80%;
+  height: ${(props) => (props.scroll && props.isDark ? '70px' : '')};
+  top: ${(props) => (props.scroll && props.isDark ? '0' : '')};
+  position: ${(props) => (props.scroll && props.isDark ? 'fixed' : 'relative')};
+  background-color: ${(props) =>
+    props.scroll && props.isDark ? props.theme.color?.primary : props.theme.background?.primary};
+  width: ${(props) => (props.scroll && props.isDark ? '100%' : '80%')};
   align-self: center;
   @media (max-width: 1025px) {
-    width: 85%;
+    width: ${(props) => (props.scroll && props.isDark ? '100%' : '85%')};
   }
   @media (max-width: 801px) {
-    width: 90%;
+    width: ${(props) => (props.scroll && props.isDark ? '100%' : '90%')};
   }
   @media (max-width: 600px) {
-    width: 92%;
+    width: ${(props) => (props.scroll && props.isDark ? '100%' : '92%')};
   }
   @media (max-width: 480px) {
-    width: 95%;
+    width: ${(props) => (props.scroll && props.isDark ? '100%' : '95%')};
   }
   @media (max-width: 320px) {
-    width: 98%;
+    width: ${(props) => (props.scroll && props.isDark ? '100%' : '98%')};
   }
 `
 
@@ -40,7 +52,6 @@ const Ul = styled.ul`
   margin: 0;
   padding: 0;
   overflow: hidden;
-  display: inline;
 `
 const Li = styled.li`
   display: inline-block;
@@ -75,8 +86,10 @@ const A = styled.a`
 `
 
 const NavBar: React.FC = () => {
+  const { scrollY } = useScroll()
+  const { isDark } = useTheme()
   return (
-    <Wrapper>
+    <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark}>
       <Logo>Amril Syaifa</Logo>
       <Ul>
         <LiWrapper>
@@ -92,6 +105,11 @@ const NavBar: React.FC = () => {
             </Li>
             <Li>
               <Button>Hire me</Button>
+            </Li>
+            <Li>
+              <div style={{ position: 'absolute', top: 10 }}>
+                <ToogleDarkMode />
+              </div>
             </Li>
           </Ul>
         </LiWrapper>
