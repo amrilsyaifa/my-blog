@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-  children: [ReactNode, ReactNode]
+  children: React.ReactNode
 }
 
 const Wrapper = styled.div`

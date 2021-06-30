@@ -6,8 +6,8 @@ type Props = {
 }
 
 const Btn = styled.button`
-  background: ${(props) => props.theme.color?.burnSienna};
-  color: ${(props) => props.theme.color?.primary};
+  background: ${(props) => props.theme.default?.color?.burnSienna};
+  color: ${(props) => props.theme.default?.color?.white};
   font-size: 16px;
   font-weight: 600;
   padding: 0.5em 1em;

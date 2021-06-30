@@ -1,25 +1,32 @@
 import { Dark, Light } from './types'
 
+const Defaults = {
+  color: {
+    burnSienna: '#ec7a56',
+    white: '#ffffff',
+  },
+}
+
 export const Darks: Dark = {
   background: {
     primary: '#232636',
     secondary: '#2f3345',
   },
   color: {
-    primary: '#fdfdfd',
-    secondary: '#efefef',
-    burnSienna: '#ec7a56',
+    primary: '#efefef',
+    secondary: '#fdfdfd',
   },
+  default: Defaults,
 }
 
 export const Lights: Light = {
   background: {
-    primary: '#fdfdfd',
-    secondary: '#efefef',
+    primary: '#efefef',
+    secondary: '#fdfdfd',
   },
   color: {
     primary: '#232636',
     secondary: '#2f3345',
-    burnSienna: '#ec7a56',
   },
+  default: Defaults,
 }

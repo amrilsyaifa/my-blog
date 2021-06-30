@@ -60,7 +60,7 @@ const Section1 = styled.section`
 const Left = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   margin-left: 10%;
   margin-top: 100px;
   @media (max-width: 600px) {

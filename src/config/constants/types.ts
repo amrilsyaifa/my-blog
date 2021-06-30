@@ -2,12 +2,14 @@
 export type Dark = {
   background: BackgroundType
   color: ColorType
+  default: Default
 }
 
 // Define Props type for light themes
 export type Light = {
   background: BackgroundType
   color: ColorType
+  default: Default
 }
 
 export type BackgroundType = {
@@ -18,5 +20,12 @@ export type BackgroundType = {
 export type ColorType = {
   primary: string
   secondary: string
+}
+
+export type Default = {
+  color: DefaultColor
+}
+
+export type DefaultColor = {
   burnSienna: string
 }

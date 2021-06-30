@@ -18,13 +18,11 @@ const ThemeContextProvider = ({ children }: Props) => {
 
   const toggleTheme = () => {
     setIsDark((prevState) => {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(prevState))
-      return prevState
+      localStorage.setItem(CACHE_KEY, JSON.stringify(!prevState))
+      return !prevState
     })
   }
-
   const themeMatch = () => (isDark ? Darks : Lights)
-
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme, themeMatch }}>
       <ThemeProvider theme={themeMatch}>{children}</ThemeProvider>

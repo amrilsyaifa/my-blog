@@ -25,7 +25,7 @@ const Span1 = styled.span<SpanProps>`
   position: absolute;
   height: 6px;
   width: 100%;
-  background: ${(props) => props.theme.color?.burnSienna};
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 7px;
   opacity: 1;
   left: 0;
@@ -45,7 +45,7 @@ const Span2 = styled.span<SpanProps>`
   position: absolute;
   height: 6px;
   width: 100%;
-  background: ${(props) => props.theme.color?.burnSienna};
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 7px;
   opacity: 1;
   left: 0;
@@ -67,7 +67,7 @@ const Span3 = styled.span<SpanProps>`
   position: absolute;
   height: 6px;
   width: 100%;
-  background: ${(props) => props.theme.color?.burnSienna};
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 7px;
   opacity: 1;
   left: 0;
