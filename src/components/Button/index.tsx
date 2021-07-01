@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 type Props = {
   children: string
+  onClick: () => void
 }
 
 const Btn = styled.button`
@@ -19,8 +20,12 @@ const Btn = styled.button`
   }
 `
 
-const Button: React.FC<Props> = ({ children, ...props }: Props) => {
-  return <Btn {...props}>{children}</Btn>
+const Button: React.FC<Props> = ({ onClick, children, ...props }: Props) => {
+  return (
+    <Btn onClick={onClick} {...props}>
+      {children}
+    </Btn>
+  )
 }
 
 export default Button

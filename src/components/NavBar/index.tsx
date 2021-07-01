@@ -183,22 +183,50 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
         <LiWrapper show={show}>
           <UlWrapper show={show} scroll={scrollY > 0 ? true : false} isDark={isDark}>
             <Li>
-              <A onClick={() => onClick('about')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A
+                onClick={() => {
+                  onClick('about')
+                  setShow(!show)
+                }}
+                scroll={scrollY > 0 ? true : false}
+                isDark={isDark}
+              >
                 About Us
               </A>
             </Li>
             <Li>
-              <A onClick={() => onClick('portfolio')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A
+                onClick={() => {
+                  onClick('portfolio')
+                  setShow(!show)
+                }}
+                scroll={scrollY > 0 ? true : false}
+                isDark={isDark}
+              >
                 Portfolio
               </A>
             </Li>
             <Li>
-              <A onClick={() => onClick('contact')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A
+                onClick={() => {
+                  onClick('contact')
+                  setShow(!show)
+                }}
+                scroll={scrollY > 0 ? true : false}
+                isDark={isDark}
+              >
                 Contact
               </A>
             </Li>
             <Li>
-              <Button>Hire me</Button>
+              <Button
+                onClick={() => {
+                  onClick('hire')
+                  setShow(!show)
+                }}
+              >
+                Hire me
+              </Button>
             </Li>
             <Li>
               <WrapperToogleDarkMode position="absolute" bottom="-10px">
