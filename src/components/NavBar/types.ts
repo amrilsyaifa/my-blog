@@ -3,6 +3,11 @@ export type WrapperType = {
   isDark: boolean
 }
 
+export type LogoType = {
+  scroll: boolean
+  isDark: boolean
+}
+
 export type ListWrapperType = {
   show: boolean
 }
@@ -13,6 +18,10 @@ export type UlWrapperType = {
 
 export type WrapperToogleDarkModeTypes = {
   position: string
-  top: string
   bottom?: string
+}
+
+export type AType = {
+  scroll: boolean
+  isDark: boolean
 }

@@ -4,7 +4,7 @@ import Typewriter from 'typewriter-effect'
 import FooterSocialMedia from './FooterSocialMedia'
 import { TextProps } from './types'
 
-const Section1 = styled.section`
+const Section = styled.section`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   column-gap: 1em;
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 `
 
 const Text = styled.div<TextProps>`
-  color: ${(props) => props.theme.color?.primary};
+  color: ${(props) => props.theme.color?.secondary};
   font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'normal')};
   line-height: ${(props) => (props.lineHeight ? props.lineHeight : '')};
@@ -52,7 +52,7 @@ const Text = styled.div<TextProps>`
 
 const SectionHead = () => {
   return (
-    <Section1>
+    <Section>
       <Wrapper>
         <Text fontSize="50px" fontWeight="bold">
           Hello!
@@ -74,7 +74,7 @@ const SectionHead = () => {
         </Text>
       </Wrapper>
       <FooterSocialMedia />
-    </Section1>
+    </Section>
   )
 }
 

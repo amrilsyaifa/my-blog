@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: ${(props) => props.theme.background?.primary};
+  background-color: ${(props) => props.theme.background?.secondary};
 `
 
 const Page: React.FC<Props> = ({ children }: Props) => {

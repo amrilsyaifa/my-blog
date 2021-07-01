@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   height: 100% !important;
   position: absolute;
   width: 100% !important;
-  background-color: ${(props) => props.theme.background?.primary};
+  background-color: ${(props) => props.theme.background?.secondary};
 `
 
 const Loader = styled.div`
@@ -63,7 +63,7 @@ const Circle2 = styled.div`
 const Text = styled.div`
   font-family: arial;
   font-size: 20px;
-  color: ${(props) => props.theme.color?.primary};
+  color: ${(props) => props.theme.color?.secondary};
 `
 
 const PageLoader: React.FC = () => {

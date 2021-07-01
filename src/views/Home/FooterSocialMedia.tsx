@@ -5,7 +5,7 @@ import useTheme from 'hooks/useTheme'
 import { TextProps, PropsRow } from './types'
 
 const Text = styled.div<TextProps>`
-  color: ${(props) => props.theme.color?.primary};
+  color: ${(props) => props.theme.color?.secondary};
   font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'normal')};
   line-height: ${(props) => (props.lineHeight ? props.lineHeight : '')};
@@ -54,7 +54,7 @@ const FooterSocialMedia = () => {
     <ContainerSocialMedia>
       <Row>
         <WrapIcon onClick={() => openInNewTab('https://github.com/amrilsyaifa')}>
-          <GitHub color={theme.color.primary} size={20} />
+          <GitHub color={theme.color.secondary} size={20} />
         </WrapIcon>
         <Text paddingLeft="3px" fontSize="14px" fontWeight="bold">
           @amrilsyaifa
@@ -62,7 +62,7 @@ const FooterSocialMedia = () => {
       </Row>
       <Row>
         <WrapIcon onClick={() => openInNewTab('https://www.linkedin.com/in/amril-syaifa-yasin-506530141/')}>
-          <Linkedin color={theme.color.primary} size={20} />
+          <Linkedin color={theme.color.secondary} size={20} />
         </WrapIcon>
         <Text paddingLeft="3px" fontSize="14px" fontWeight="bold">
           Amril Syaifa Yasin
@@ -70,7 +70,7 @@ const FooterSocialMedia = () => {
       </Row>
       <Row>
         <WrapIcon onClick={() => openInNewTab('https://www.instagram.com/amril.syaifa/')}>
-          <Instagram color={theme.color.primary} size={20} />
+          <Instagram color={theme.color.secondary} size={20} />
         </WrapIcon>
         <Text paddingLeft="3px" fontSize="14px" fontWeight="bold">
           @amrilsyaifa

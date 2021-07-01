@@ -5,7 +5,7 @@ const Body = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: ${(props) => props.theme.background?.primary};
+  background-color: ${(props) => props.theme.background?.secondary};
   border-radius: 24px;
   padding: 20px;
   box-sizing: border-box;

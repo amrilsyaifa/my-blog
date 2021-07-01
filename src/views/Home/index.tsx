@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import NavBar from 'components/NavBar'
 import Page from 'components/Layout/Page'
 import SectionHead from './SectionHead'
+import AboutUs from './AboutUs'
+import PortFolio from './PortFolio'
+import Contact from './Contact'
 
 const Content = styled.div`
   display: flex;
@@ -12,6 +15,9 @@ const Content = styled.div`
   min-height: 100vh;
   position: absolute;
   top: 0;
+`
+
+const WrapperSectionHead = styled.div`
   @media (max-width: 1025px) {
     width: 85%;
   }
@@ -34,7 +40,12 @@ const Home: React.FC = () => {
     <Page>
       <NavBar />
       <Content>
-        <SectionHead />
+        <WrapperSectionHead>
+          <SectionHead />
+        </WrapperSectionHead>
+        <AboutUs />
+        <PortFolio />
+        <Contact />
       </Content>
     </Page>
   )

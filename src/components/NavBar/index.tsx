@@ -6,27 +6,31 @@ import ToogleDarkMode from 'components/Switch/ToogleDarkMode'
 import useScroll from '@react-hooks-custom/use-scroll'
 import useTheme from 'hooks/useTheme'
 import useClickOutside from 'hooks/useClickOutside'
-import { ListWrapperType, UlWrapperType, WrapperType, WrapperToogleDarkModeTypes } from './types'
+import { ListWrapperType, UlWrapperType, WrapperType, WrapperToogleDarkModeTypes, LogoType, AType } from './types'
 
-// background-color: ${(props) => props.theme.background?.primary};
 const Wrapper = styled.section<WrapperType>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: ${(props) => (props.scroll && props.isDark ? '80px' : '')};
-  top: ${(props) => (props.scroll && props.isDark ? '0' : '0')};
-  position: ${(props) => (props.scroll && props.isDark ? 'fixed' : 'absolute')};
+  height: ${(props) => ((props.scroll && props.isDark) || (props.scroll && !props.isDark) ? '80px' : '')};
+  top: ${(props) => ((props.scroll && props.isDark) || (props.scroll && !props.isDark) ? '0' : '0')};
+  position: ${(props) => ((props.scroll && props.isDark) || (props.scroll && !props.isDark) ? 'fixed' : 'absolute')};
   background-color: ${(props) =>
-    props.scroll && props.isDark ? props.theme.color?.primary : props.theme.background?.primary};
+    (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+      ? props.theme.color?.secondary
+      : props.theme.background?.secondary};
   width: 100%;
   align-self: center;
   z-index: 2;
   padding-top: 10px;
 `
 
-const Logo = styled.div`
-  color: ${(props) => props.theme.color?.primary};
+const Logo = styled.div<LogoType>`
+  color: ${(props) =>
+    (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+      ? props.theme.background?.secondary
+      : props.theme.color?.secondary};
   font-size: 24px;
   font-family: Ballet;
   cursor: pointer;
@@ -72,6 +76,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: inline-block;
   padding-right: 30px;
+  position: relative;
   @media (max-width: 1025px) {
     padding-right: 0px;
     padding-left: 10px;
@@ -93,7 +98,7 @@ const LiWrapper = styled.li<ListWrapperType>`
     top: ${(props) => (props.show ? '50px' : '-300px')};
     left: 0px;
     width: 100%;
-    background-color: ${(props) => props.theme.background?.primary};
+    background-color: ${(props) => props.theme.background?.secondary};
     box-sizing: border-box;
     box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px,
       rgb(0 0 0 / 1%) 0px 24px 32px;
@@ -121,9 +126,12 @@ const LiHamburger = styled.li`
   }
 `
 
-const A = styled.a`
+const A = styled.a<AType>`
   font-size: 18px;
-  color: ${(props) => props.theme.color?.primary};
+  color: ${(props) =>
+    (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+      ? props.theme.background?.secondary
+      : props.theme.color?.secondary};
   display: block;
   text-align: center;
   text-decoration: none;
@@ -151,7 +159,9 @@ const NavBar: React.FC = () => {
 
   return (
     <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark} ref={liWrapperRef}>
-      <Logo>Amril Syaifa</Logo>
+      <Logo scroll={scrollY > 0 ? true : false} isDark={isDark}>
+        Amril Syaifa
+      </Logo>
       <Ul>
         <LiHamburger>
           <HamburgerMenu onClick={() => setShow(!show)} open={show} />
@@ -159,19 +169,25 @@ const NavBar: React.FC = () => {
         <LiWrapper show={show}>
           <UlWrapper show={show}>
             <Li>
-              <A>About Us</A>
+              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+                About Us
+              </A>
             </Li>
             <Li>
-              <A>Service</A>
+              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+                Portfolio
+              </A>
             </Li>
             <Li>
-              <A>Portfolio</A>
+              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+                Contact
+              </A>
             </Li>
             <Li>
               <Button>Hire me</Button>
             </Li>
             <Li>
-              <WrapperToogleDarkMode position="absolute" top="2px" bottom="10px">
+              <WrapperToogleDarkMode position="absolute" bottom="-10px">
                 <ToogleDarkMode />
               </WrapperToogleDarkMode>
             </Li>

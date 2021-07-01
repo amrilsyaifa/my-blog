@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle<Props>`
   }
 
   body {
-    background-color: ${(props) => props.themeMatch().background.primary};
+    background-color: ${(props) => props.themeMatch().background.secondary};
     img {
       height: auto;
       max-width: 100%;
