@@ -173,7 +173,14 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
 
   return (
     <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark} ref={liWrapperRef}>
-      <Logo onClick={() => onClick('home')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
+      <Logo
+        onClick={() => {
+          onClick('home')
+          setShow(!show)
+        }}
+        scroll={scrollY > 0 ? true : false}
+        isDark={isDark}
+      >
         Amril Syaifa
       </Logo>
       <Ul>
