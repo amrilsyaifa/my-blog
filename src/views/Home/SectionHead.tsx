@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import Typewriter from 'typewriter-effect'
 import FooterSocialMedia from './FooterSocialMedia'
+import Copyright from './Copyright'
 import { TextProps } from './types'
 
 const Section = styled.section`
@@ -74,6 +75,7 @@ const SectionHead = forwardRef<HTMLInputElement>(function SectionHead(_Props, re
         </Text>
       </Wrapper>
       <FooterSocialMedia />
+      <Copyright />
     </Section>
   )
 })

@@ -103,7 +103,7 @@ const LiWrapper = styled.li<ListWrapperType>`
   @media (max-width: 1025px) {
     display: inline-block;
     position: absolute;
-    top: ${(props) => (props.show ? '50px' : '-300px')};
+    top: ${(props) => (props.show ? '90px' : '-300px')};
     left: 0px;
     width: 100%;
     background-color: ${(props) => props.theme.background?.secondary};
@@ -123,6 +123,10 @@ const UlWrapper = styled.ul<UlWrapperType>`
     align-items: flex-start;
     padding: 0px 0px 50px 0px;
     width: 100%;
+    background-color: ${(props) =>
+      (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+        ? props.theme.color?.secondary
+        : props.theme.background?.secondary};
   }
 `
 
@@ -152,8 +156,10 @@ const A = styled.a<AType>`
 const WrapperToogleDarkMode = styled.div<WrapperToogleDarkModeTypes>`
   position: ${(props) => (props.position ? props.position : 'relative')};
   bottom: ${(props) => (props.bottom ? props.bottom : '0')};
+  @media (max-width: 1025px) {
+    bottom: -40px;
+  }
 `
-
 const NavBar: React.FC<Props> = ({ onClick }: Props) => {
   const { scrollY } = useScroll()
   const { isDark } = useTheme()
@@ -175,7 +181,7 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
           <HamburgerMenu onClick={() => setShow(!show)} open={show} />
         </LiHamburger>
         <LiWrapper show={show}>
-          <UlWrapper show={show}>
+          <UlWrapper show={show} scroll={scrollY > 0 ? true : false} isDark={isDark}>
             <Li>
               <A onClick={() => onClick('about')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
                 About Us

@@ -4,6 +4,7 @@ export type TextProps = {
   paddingLeft?: string
   fontSize?: string
   fontWeight?: string
+  color?: string
 }
 
 export type PropsRow = {

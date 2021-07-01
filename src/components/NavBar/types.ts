@@ -18,6 +18,8 @@ export type ListWrapperType = {
 
 export type UlWrapperType = {
   show: boolean
+  scroll: boolean
+  isDark: boolean
 }
 
 export type WrapperToogleDarkModeTypes = {
