@@ -14,9 +14,9 @@ const Text = styled.div<TextProps>`
 `
 
 const ContainerSocialMedia = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1em;
   position: absolute;
   bottom: 0;
   width: 90%;
@@ -25,6 +25,10 @@ const ContainerSocialMedia = styled.div`
   @media (max-width: 600px) {
     margin-left: 0;
     width: 100%;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 `
 
@@ -56,7 +60,7 @@ const FooterSocialMedia = () => {
           @amrilsyaifa
         </Text>
       </Row>
-      <Row marginLeft="12px">
+      <Row>
         <WrapIcon onClick={() => openInNewTab('https://www.linkedin.com/in/amril-syaifa-yasin-506530141/')}>
           <Linkedin color={theme.color.primary} size={20} />
         </WrapIcon>
@@ -64,7 +68,7 @@ const FooterSocialMedia = () => {
           Amril Syaifa Yasin
         </Text>
       </Row>
-      <Row marginLeft="12px">
+      <Row>
         <WrapIcon onClick={() => openInNewTab('https://www.instagram.com/amril.syaifa/')}>
           <Instagram color={theme.color.primary} size={20} />
         </WrapIcon>
