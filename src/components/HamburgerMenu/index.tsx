@@ -19,6 +19,7 @@ const Wrap = styled.div`
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
+  z-index: 10;
 `
 const Span1 = styled.span<SpanProps>`
   display: block;

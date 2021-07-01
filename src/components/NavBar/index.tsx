@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import Button from 'components/Button'
 import HamburgerMenu from 'components/HamburgerMenu'
 import ToogleDarkMode from 'components/Switch/ToogleDarkMode'
 import useScroll from '@react-hooks-custom/use-scroll'
 import useTheme from 'hooks/useTheme'
+import useClickOutside from 'hooks/useClickOutside'
 import { ListWrapperType, UlWrapperType, WrapperType, WrapperToogleDarkModeTypes } from './types'
 
 // background-color: ${(props) => props.theme.background?.primary};
@@ -13,13 +14,15 @@ const Wrapper = styled.section<WrapperType>`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: ${(props) => (props.scroll && props.isDark ? '70px' : '')};
-  top: ${(props) => (props.scroll && props.isDark ? '0' : '')};
-  position: ${(props) => (props.scroll && props.isDark ? 'fixed' : 'relative')};
+  height: ${(props) => (props.scroll && props.isDark ? '80px' : '')};
+  top: ${(props) => (props.scroll && props.isDark ? '0' : '0')};
+  position: ${(props) => (props.scroll && props.isDark ? 'fixed' : 'absolute')};
   background-color: ${(props) =>
     props.scroll && props.isDark ? props.theme.color?.primary : props.theme.background?.primary};
   width: 100%;
   align-self: center;
+  z-index: 2;
+  padding-top: 10px;
 `
 
 const Logo = styled.div`
@@ -28,6 +31,7 @@ const Logo = styled.div`
   font-family: Ballet;
   cursor: pointer;
   padding-left: 10%;
+  z-index: 10;
   @media (max-width: 1025px) {
     padding-left: 15%;
   }
@@ -70,33 +74,41 @@ const Li = styled.li`
   padding-right: 30px;
   @media (max-width: 1025px) {
     padding-right: 0px;
+    padding-left: 10px;
     display: flex;
     width: 98%;
     margin-bottom: 5px;
+    z-index: 2;
     &:hover {
-      background: ${(props) => props.theme.default?.color?.gray};
+      background-color: rgb(0 0 0 / 4%);
     }
   }
 `
+
 const LiWrapper = styled.li<ListWrapperType>`
   display: inline-block;
   @media (max-width: 1025px) {
-    display: ${(props) => (props.show ? 'inline-block' : 'none')};
+    display: inline-block;
     position: absolute;
-    top: 50px;
-    left: 0;
-    right: 0;
+    top: ${(props) => (props.show ? '50px' : '-300px')};
+    left: 0px;
     width: 100%;
+    background-color: ${(props) => props.theme.background?.primary};
+    box-sizing: border-box;
+    box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px,
+      rgb(0 0 0 / 1%) 0px 24px 32px;
+    transition: all 0.5s ease;
+    z-index: 2;
   }
 `
 const UlWrapper = styled.ul<UlWrapperType>`
   list-style-type: none;
   margin: 0;
   @media (max-width: 1025px) {
-    display: ${(props) => (props.show ? 'flex' : 'none')};
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px 0px 50px 10px;
+    padding: 0px 0px 50px 0px;
     width: 100%;
   }
 `
@@ -105,6 +117,7 @@ const LiHamburger = styled.li`
   display: none;
   @media (max-width: 1025px) {
     display: inline-block;
+    z-index: 2;
   }
 `
 
@@ -131,8 +144,13 @@ const NavBar: React.FC = () => {
 
   const [show, setShow] = useState(false)
 
+  const liWrapperRef = useRef()
+  useClickOutside(liWrapperRef, () => {
+    setShow(false)
+  })
+
   return (
-    <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark}>
+    <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark} ref={liWrapperRef}>
       <Logo>Amril Syaifa</Logo>
       <Ul>
         <LiHamburger>
