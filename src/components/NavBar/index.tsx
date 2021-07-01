@@ -6,7 +6,15 @@ import ToogleDarkMode from 'components/Switch/ToogleDarkMode'
 import useScroll from '@react-hooks-custom/use-scroll'
 import useTheme from 'hooks/useTheme'
 import useClickOutside from 'hooks/useClickOutside'
-import { ListWrapperType, UlWrapperType, WrapperType, WrapperToogleDarkModeTypes, LogoType, AType } from './types'
+import {
+  Props,
+  ListWrapperType,
+  UlWrapperType,
+  WrapperType,
+  WrapperToogleDarkModeTypes,
+  LogoType,
+  AType,
+} from './types'
 
 const Wrapper = styled.section<WrapperType>`
   display: flex;
@@ -146,7 +154,7 @@ const WrapperToogleDarkMode = styled.div<WrapperToogleDarkModeTypes>`
   bottom: ${(props) => (props.bottom ? props.bottom : '0')};
 `
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<Props> = ({ onClick }: Props) => {
   const { scrollY } = useScroll()
   const { isDark } = useTheme()
 
@@ -159,7 +167,7 @@ const NavBar: React.FC = () => {
 
   return (
     <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark} ref={liWrapperRef}>
-      <Logo scroll={scrollY > 0 ? true : false} isDark={isDark}>
+      <Logo onClick={() => onClick('home')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
         Amril Syaifa
       </Logo>
       <Ul>
@@ -169,17 +177,17 @@ const NavBar: React.FC = () => {
         <LiWrapper show={show}>
           <UlWrapper show={show}>
             <Li>
-              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A onClick={() => onClick('about')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
                 About Us
               </A>
             </Li>
             <Li>
-              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A onClick={() => onClick('portfolio')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
                 Portfolio
               </A>
             </Li>
             <Li>
-              <A scroll={scrollY > 0 ? true : false} isDark={isDark}>
+              <A onClick={() => onClick('contact')} scroll={scrollY > 0 ? true : false} isDark={isDark}>
                 Contact
               </A>
             </Li>

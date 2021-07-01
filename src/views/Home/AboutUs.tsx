@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { TextProps } from './types'
 
@@ -60,9 +60,9 @@ const P = styled.p<TextProps>`
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
 `
 
-const AboutUs = () => {
+const AboutUs = forwardRef<HTMLInputElement>(function AboutUs(_Props, ref) {
   return (
-    <Section>
+    <Section ref={ref}>
       <Wrapper>
         <Label>About</Label>
         <WrapperDescription>
@@ -86,6 +86,6 @@ const AboutUs = () => {
       </Wrapper>
     </Section>
   )
-}
+})
 
 export default AboutUs

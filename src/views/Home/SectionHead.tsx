@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import Typewriter from 'typewriter-effect'
 import FooterSocialMedia from './FooterSocialMedia'
@@ -50,9 +50,9 @@ const Text = styled.div<TextProps>`
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
 `
 
-const SectionHead = () => {
+const SectionHead = forwardRef<HTMLInputElement>(function SectionHead(_Props, ref) {
   return (
-    <Section>
+    <Section ref={ref}>
       <Wrapper>
         <Text fontSize="50px" fontWeight="bold">
           Hello!
@@ -76,6 +76,6 @@ const SectionHead = () => {
       <FooterSocialMedia />
     </Section>
   )
-}
+})
 
 export default SectionHead

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import { TextProps } from './types'
 
@@ -42,9 +42,9 @@ const Text = styled.div<TextProps>`
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
 `
 
-const Portfolio = () => {
+const Portfolio = forwardRef<HTMLInputElement>(function Portfolio(_Props, ref) {
   return (
-    <Section>
+    <Section ref={ref}>
       <Wrapper>
         <Label>Portfolio</Label>
         <Text fontSize="20px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
@@ -55,6 +55,6 @@ const Portfolio = () => {
       </Wrapper>
     </Section>
   )
-}
+})
 
 export default Portfolio

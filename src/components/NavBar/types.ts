@@ -1,3 +1,7 @@
+export type Props = {
+  onClick: (p: string) => void
+}
+
 export type WrapperType = {
   scroll: boolean
   isDark: boolean

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import NavBar from 'components/NavBar'
 import Page from 'components/Layout/Page'
@@ -36,16 +36,39 @@ const WrapperSectionHead = styled.div`
 `
 
 const Home: React.FC = () => {
+  const myHome = useRef(null)
+  const myAboutUs = useRef(null)
+  const myPortfolio = useRef(null)
+  const myContact = useRef(null)
+
+  const onNavigate = (e) => {
+    switch (e) {
+      case 'home':
+        myHome.current.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'about':
+        myAboutUs.current.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'portfolio':
+        myPortfolio.current.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'contact':
+        myContact.current.scrollIntoView({ behavior: 'smooth' })
+        break
+      default:
+        break
+    }
+  }
   return (
     <Page>
-      <NavBar />
+      <NavBar onClick={(e) => onNavigate(e)} />
       <Content>
         <WrapperSectionHead>
-          <SectionHead />
+          <SectionHead ref={myHome} />
         </WrapperSectionHead>
-        <AboutUs />
-        <PortFolio />
-        <Contact />
+        <AboutUs ref={myAboutUs} />
+        <PortFolio ref={myPortfolio} />
+        <Contact ref={myContact} />
       </Content>
     </Page>
   )
