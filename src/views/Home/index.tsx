@@ -61,7 +61,7 @@ const Home: React.FC = () => {
         myContact.current.scrollIntoView({ behavior: 'smooth' })
         break
       case 'hire':
-        openInNewTab('mailto:amrilsyaifa@gmail.com?subject=SendMail&body=Description')
+        openInNewTab('mailto:amrilsyaifa@gmail.com?subject=Hire%20Amril%20Syaifa%20Yasin&body=Description')
         break
       default:
         break
