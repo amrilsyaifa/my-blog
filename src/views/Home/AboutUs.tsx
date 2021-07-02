@@ -68,19 +68,17 @@ const AboutUs = forwardRef<HTMLInputElement>(function AboutUs(_Props, ref) {
         <WrapperDescription>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em">
             <Image src="/images/amril-syaifa-yasin.jpeg" alt="amril-syaifa-yasin" />
-            Sit commodo enim fugiat officia ut cillum consectetur eu reprehenderit commodo laborum veniam. Aliqua
-            consectetur dolor qui veniam commodo incididunt sunt labore sunt consequat non sunt. Ea cupidatat ea Lorem
-            consectetur culpa. Sit anim nostrud duis aute consectetur quis.
+            Hi, my name is Amril.
           </P>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
-            Sit commodo enim fugiat officia ut cillum consectetur eu reprehenderit commodo laborum veniam. Aliqua
-            consectetur dolor qui veniam commodo incididunt sunt labore sunt consequat non sunt. Ea cupidatat ea Lorem
-            consectetur culpa. Sit anim nostrud duis aute consectetur quis.
+            I am a profesional fullstack developer from Medan, Indonesia. i Have been working as fullstack developer for
+            4 years. everyday I work as a fullstack developer with 2 cups of coffee a day.
           </P>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
-            Sit commodo enim fugiat officia ut cillum consectetur eu reprehenderit commodo laborum veniam. Aliqua
-            consectetur dolor qui veniam commodo incididunt sunt labore sunt consequat non sunt. Ea cupidatat ea Lorem
-            consectetur culpa. Sit anim nostrud duis aute consectetur quis.
+            Currently I have handled several successful projects, starting from the project or continuing the project.
+          </P>
+          <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
+            {`Actualy i love cats but don't have cats, Also I don't like smoking nor dancing.`}
           </P>
         </WrapperDescription>
       </Wrapper>

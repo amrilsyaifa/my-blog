@@ -42,15 +42,38 @@ const Text = styled.div<TextProps>`
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
 `
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const Underscore = styled.div`
+  width: 200px;
+  height: 30px;
+  margin-left: 10px;
+  border-bottom: 2px solid ${(props) => props.theme.default?.color?.burnSienna};
+`
+
 const Contact = forwardRef<HTMLInputElement>(function Contact(_Props, ref) {
   return (
     <Section ref={ref}>
       <Wrapper>
         <Label>Contact</Label>
-        <Text fontSize="20px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
-          Sit commodo enim fugiat officia ut cillum consectetur eu reprehenderit commodo laborum veniam. Aliqua
-          consectetur dolor qui veniam commodo incididunt sunt labore sunt consequat non sunt. Ea cupidatat ea Lorem
-          consectetur culpa. Sit anim nostrud duis aute consectetur quis.
+        <Text fontSize="30px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
+          Any type of question & discussion.
+        </Text>
+        <Row>
+          <Text fontSize="20px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
+            Lets talk
+          </Text>
+          <Underscore />
+        </Row>
+        <Text fontSize="25px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
+          amrilsyaifa@gmail.com
+        </Text>
+        <Text fontSize="20px" lineHeight="2em" paddingTop="20px">
+          Whatsapp: +62 822 7227 1374
         </Text>
       </Wrapper>
     </Section>
