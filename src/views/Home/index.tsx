@@ -41,6 +41,11 @@ const Home: React.FC = () => {
   const myPortfolio = useRef(null)
   const myContact = useRef(null)
 
+  const openInNewTab = (url: string) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
   const onNavigate = (e) => {
     switch (e) {
       case 'home':
@@ -54,6 +59,9 @@ const Home: React.FC = () => {
         break
       case 'contact':
         myContact.current.scrollIntoView({ behavior: 'smooth' })
+        break
+      case 'hire':
+        openInNewTab('mailto:amrilsyaifa@gmail.com?subject=SendMail&body=Description')
         break
       default:
         break
