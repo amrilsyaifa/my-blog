@@ -10,3 +10,8 @@ export type TextProps = {
 export type PropsRow = {
   marginLeft?: string
 }
+
+export type ImgProps = {
+  width?: string
+  height?: string
+}
