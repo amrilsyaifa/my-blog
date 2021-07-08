@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import Home from '../../views/Home'
+import Copyright from '../../views/Home/Copyright'
 
 test('renders learn react link', () => {
-  render(<Home />)
-  const linkElement = screen.getByText(/User will be distributed/i)
+  render(<Copyright />)
+  const linkElement = screen.getByText(/ReactJS/i)
   expect(linkElement).toBeInTheDocument()
 })
