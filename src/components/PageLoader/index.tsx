@@ -35,7 +35,7 @@ const Loader = styled.div`
 const Circle = styled.div`
   width: 20px;
   height: 20px;
-  background: rgb(248, 209, 47);
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 50%;
   animation: ${jump} 1s linear infinite;
   margin: 0 10px;
@@ -43,7 +43,7 @@ const Circle = styled.div`
 const Circle1 = styled.div`
   width: 20px;
   height: 20px;
-  background: rgb(248, 209, 47);
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 50%;
   animation: ${jump} 1s linear infinite;
   margin: 0 10px;
@@ -53,7 +53,7 @@ const Circle1 = styled.div`
 const Circle2 = styled.div`
   width: 20px;
   height: 20px;
-  background: rgb(248, 209, 47);
+  background: ${(props) => props.theme.default?.color?.burnSienna};
   border-radius: 50%;
   animation: ${jump} 1s linear infinite;
   margin: 0 10px;
