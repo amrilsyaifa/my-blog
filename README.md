@@ -1,3 +1,3 @@
-# Safari Swap Fundin
+# Amril Syaifa Yasin
 
-If you want to contribute, please refer to the [contributing guidelines](./CONTRIBUTING.md) of this project.
+this project using create-react-app and typescript.

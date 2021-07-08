@@ -9,6 +9,8 @@ const Text = styled.div<TextProps>`
   line-height: ${(props) => (props.lineHeight ? props.lineHeight : '')};
   padding-top: ${(props) => (props.paddingTop ? props.paddingTop : '')};
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
+  padding-right: ${(props) => (props.paddingRight ? props.paddingRight : '')};
+  cursor: ${(props) => (props.cursor ? props.cursor : '')};
 `
 
 const ContainerSocialMedia = styled.div`
@@ -59,6 +61,20 @@ const Copyright = () => {
         <Image src="/images/logo.svg" alt="react" />
         <Text onClick={() => openInNewTab('http://reactjs.org/')} paddingLeft="2px" fontSize="12px" color="#0000EE">
           ReactJS
+        </Text>
+        <Text fontSize="12px">,</Text>
+        <Text paddingLeft="10px" fontSize="12px">
+          source code is
+        </Text>
+        <Text
+          onClick={() => openInNewTab('https://github.com/amrilsyaifa/my-blog/tree/main')}
+          cursor="pointer"
+          color="#0000EE"
+          paddingLeft="5px"
+          paddingRight="5px"
+          fontSize="12px"
+        >
+          here
         </Text>
       </Row>
     </ContainerSocialMedia>
