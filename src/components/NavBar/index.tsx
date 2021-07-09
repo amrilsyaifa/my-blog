@@ -156,10 +156,36 @@ const A = styled.a<AType>`
 const WrapperToogleDarkMode = styled.div<WrapperToogleDarkModeTypes>`
   position: ${(props) => (props.position ? props.position : 'relative')};
   bottom: ${(props) => (props.bottom ? props.bottom : '0')};
+  right: -15px;
   @media (max-width: 1025px) {
-    bottom: -40px;
+    bottom: -80px;
+    right: '';
+    left: 10px;
   }
 `
+const Select = styled.select`
+  width: 100%;
+  height: 35px;
+  background-color: ${(props) => props.theme.background?.secondary};
+  color: gray;
+  padding-left: 5px;
+  font-size: 14px;
+  border: none;
+  margin-left: 30px;
+  @media (max-width: 1025px) {
+    margin-left: 0px;
+  }
+
+  option {
+    color: black;
+    background-color: ${(props) => props.theme.background?.secondary};
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+`
+
 const NavBar: React.FC<Props> = ({ onClick }: Props) => {
   const { scrollY } = useScroll()
   const { isDark } = useTheme()
@@ -239,6 +265,14 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
               <WrapperToogleDarkMode position="absolute" bottom="-10px">
                 <ToogleDarkMode />
               </WrapperToogleDarkMode>
+            </Li>
+            <Li>
+              <Select value="en">
+                <option value="id">{'🇮🇩'}: ID</option>
+                <option value="en">{'🇬🇧'}: EN</option>
+                <option value="sa">{'🇸🇦'}: SA</option>
+                <option value="jp">{'🇯🇵'}: JP</option>
+              </Select>
             </Li>
           </UlWrapper>
         </LiWrapper>
