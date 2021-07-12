@@ -12,6 +12,10 @@ const Text = styled.div<TextProps>`
   padding-left: ${(props) => (props.paddingLeft ? props.paddingLeft : '')};
   padding-right: ${(props) => (props.paddingRight ? props.paddingRight : '')};
   cursor: ${(props) => (props.cursor ? props.cursor : '')};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `
 
 const ContainerSocialMedia = styled.div`
@@ -60,24 +64,27 @@ const Copyright = () => {
   return (
     <ContainerSocialMedia>
       <Row>
-        <Text fontSize="12px">{t('This website is made using')}</Text>
-        <Image src="/images/logo.svg" alt="react" />
-        <Text onClick={() => openInNewTab('http://reactjs.org/')} paddingLeft="2px" fontSize="12px" color="#0000EE">
-          ReactJS
-        </Text>
-        <Text fontSize="12px">,</Text>
-        <Text paddingLeft="10px" fontSize="12px">
-          {t('source code')}
-        </Text>
-        <Text
-          onClick={() => openInNewTab('https://github.com/amrilsyaifa/my-blog/tree/main')}
-          cursor="pointer"
-          color="#0000EE"
-          paddingLeft="5px"
-          paddingRight="5px"
-          fontSize="12px"
-        >
-          {t('here')}
+        <Text fontSize="12px">
+          {t('This website is made using')}
+          <Image src="/images/logo.svg" alt="react" />
+          <Text onClick={() => openInNewTab('http://reactjs.org/')} paddingLeft="2px" fontSize="12px" color="#0000EE">
+            ReactJS
+          </Text>
+          <Text fontSize="12px" paddingRight="10px">
+            ,
+          </Text>
+          <Text paddingRight="5px" fontSize="12px">
+            {t('source code')}
+          </Text>
+          <Text
+            onClick={() => openInNewTab('https://github.com/amrilsyaifa/my-blog/tree/main')}
+            cursor="pointer"
+            color="#0000EE"
+            paddingRight="5px"
+            fontSize="12px"
+          >
+            {t('source code')}
+          </Text>
         </Text>
       </Row>
     </ContainerSocialMedia>
