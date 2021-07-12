@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import Button from 'components/Button'
@@ -195,6 +195,18 @@ const Select = styled.select<AType>`
 
 const NavBar: React.FC<Props> = ({ onClick }: Props) => {
   const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    fetch('https://extreme-ip-lookup.com/json/')
+      .then((res) => res.json())
+      .then((response) => {
+        setLang(response.countryCode.toLowerCase())
+        i18n.changeLanguage(response.countryCode.toLowerCase())
+      })
+      .catch((data) => {
+        throw data
+      })
+  }, [])
 
   const { scrollY } = useScroll()
   const { isDark } = useTheme()
