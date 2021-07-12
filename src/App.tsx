@@ -7,6 +7,7 @@ import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import history from './routerHistory'
 
 import { ThemeContext } from 'contexts/ThemeContext'
+import './config/i186n/i186n'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page

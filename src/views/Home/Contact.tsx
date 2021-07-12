@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { TextProps } from './types'
 
@@ -56,16 +57,17 @@ const Underscore = styled.div`
 `
 
 const Contact = forwardRef<HTMLInputElement>(function Contact(_Props, ref) {
+  const { t } = useTranslation()
   return (
     <Section ref={ref}>
       <Wrapper>
-        <Label>Contact</Label>
+        <Label>{t('Contact')}</Label>
         <Text fontSize="30px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
-          Any type of question & discussion.
+          {t('Any type of question & discussion')}.
         </Text>
         <Row>
           <Text fontSize="20px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
-            Lets talk
+            {t('Lets talk')}
           </Text>
           <Underscore />
         </Row>

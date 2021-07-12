@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { TextProps } from './types'
 
 const Text = styled.div<TextProps>`
@@ -50,6 +51,8 @@ const Image = styled.img`
 `
 
 const Copyright = () => {
+  const { t } = useTranslation()
+
   const openInNewTab = (url: string) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
@@ -57,14 +60,14 @@ const Copyright = () => {
   return (
     <ContainerSocialMedia>
       <Row>
-        <Text fontSize="12px">This website is made using</Text>
+        <Text fontSize="12px">{t('This website is made using')}</Text>
         <Image src="/images/logo.svg" alt="react" />
         <Text onClick={() => openInNewTab('http://reactjs.org/')} paddingLeft="2px" fontSize="12px" color="#0000EE">
           ReactJS
         </Text>
         <Text fontSize="12px">,</Text>
         <Text paddingLeft="10px" fontSize="12px">
-          source code is
+          {t('source code')}
         </Text>
         <Text
           onClick={() => openInNewTab('https://github.com/amrilsyaifa/my-blog/tree/main')}
@@ -74,7 +77,7 @@ const Copyright = () => {
           paddingRight="5px"
           fontSize="12px"
         >
-          here
+          {t('here')}
         </Text>
       </Row>
     </ContainerSocialMedia>

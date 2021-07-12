@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { TextProps } from './types'
 
@@ -61,24 +62,30 @@ const P = styled.p<TextProps>`
 `
 
 const AboutUs = forwardRef<HTMLInputElement>(function AboutUs(_Props, ref) {
+  const { t } = useTranslation()
   return (
     <Section ref={ref}>
       <Wrapper>
-        <Label>About</Label>
+        <Label>{t('About Us')}</Label>
         <WrapperDescription>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em">
             <Image src="/images/amril-syaifa-yasin.jpeg" alt="amril-syaifa-yasin" />
-            Hi, my name is Amril.
+            {t('Hi, my name is')} Amril.
           </P>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
-            I am a profesional fullstack developer from Medan, Indonesia. i Have been working as fullstack developer for
-            4 years. everyday I work as a fullstack developer with 2 cups of coffee a day.
+            {t(
+              `I am a profesional fullstack developer from Medan, Indonesia. i Have been working as fullstack developer for 4 years. everyday I work as a fullstack developer with 2 cups of coffee a day`,
+            )}
+            .
           </P>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
-            Currently I have handled several successful projects, starting from the project or continuing the project.
+            {t(
+              'Currently I have handled several successful projects, starting from the project or continuing the project',
+            )}
+            .
           </P>
           <P fontSize="20px" fontWeight="bold" lineHeight="2.5em" paddingTop="20px">
-            {`Actualy i love cats but don't have cats, Also I don't like smoking nor dancing.`}
+            {t(`Actualy i love cats but don't have cats, Also I don't like smoking nor dancing`)}.
           </P>
         </WrapperDescription>
       </Wrapper>

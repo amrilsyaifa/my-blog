@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import CardAnimated from 'components/Card/CardAnimated'
 import { TextProps, ImgProps } from './types'
 
@@ -66,6 +67,8 @@ const ImgPortfolio = styled.img<ImgProps>`
   cursor: pointer;
 `
 const Portfolio = forwardRef<HTMLInputElement>(function Portfolio(_Props, ref) {
+  const { t } = useTranslation()
+
   const openInNewTab = (url: string) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
@@ -74,9 +77,9 @@ const Portfolio = forwardRef<HTMLInputElement>(function Portfolio(_Props, ref) {
   return (
     <Section ref={ref}>
       <Wrapper>
-        <Label>Portfolio</Label>
+        <Label>{t('Portfolio')}</Label>
         <Text fontSize="30px" fontWeight="bold" lineHeight="2em" paddingTop="20px">
-          below is a portfolio that I have worked on.
+          {t('below is a portfolio that I have worked on')}.
         </Text>
         <WrapPortfolio>
           <CardAnimated>

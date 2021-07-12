@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import Typewriter from 'typewriter-effect'
 import FooterSocialMedia from './FooterSocialMedia'
@@ -52,17 +53,18 @@ const Text = styled.div<TextProps>`
 `
 
 const SectionHead = forwardRef<HTMLInputElement>(function SectionHead(_Props, ref) {
+  const { t } = useTranslation()
   return (
     <Section ref={ref}>
       <Wrapper>
         <Text fontSize="50px" fontWeight="bold">
-          Hello!
+          {t('Hello')}!
         </Text>
         <Text fontSize="60px" fontWeight="bold" paddingTop="20px" lineHeight="70px">
-          {`I'm`} Amril Syaifa Yasin
+          {t(`I'm`)} Amril Syaifa Yasin
         </Text>
         <Text fontSize="30px" fontWeight="bold" paddingTop="20px" lineHeight="40px">
-          4 Years experience as :
+          {t('4 Years experience as')} :
         </Text>
         <Text fontSize="30px" fontWeight="bold" lineHeight="40px">
           <Typewriter

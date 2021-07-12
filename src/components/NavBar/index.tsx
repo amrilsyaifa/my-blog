@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import Button from 'components/Button'
 import HamburgerMenu from 'components/HamburgerMenu'
@@ -163,10 +164,13 @@ const WrapperToogleDarkMode = styled.div<WrapperToogleDarkModeTypes>`
     left: 10px;
   }
 `
-const Select = styled.select`
+const Select = styled.select<AType>`
   width: 100%;
   height: 35px;
-  background-color: ${(props) => props.theme.background?.secondary};
+  background-color: ${(props) =>
+    (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+      ? props.theme.color?.secondary
+      : props.theme.background?.secondary};
   color: gray;
   padding-left: 5px;
   font-size: 14px;
@@ -178,7 +182,10 @@ const Select = styled.select`
 
   option {
     color: black;
-    background-color: ${(props) => props.theme.background?.secondary};
+    background-color: ${(props) =>
+      (props.scroll && props.isDark) || (props.scroll && !props.isDark)
+        ? props.theme.color?.secondary
+        : props.theme.background?.secondary};
     display: flex;
     white-space: pre;
     min-height: 20px;
@@ -187,15 +194,23 @@ const Select = styled.select`
 `
 
 const NavBar: React.FC<Props> = ({ onClick }: Props) => {
+  const { t, i18n } = useTranslation()
+
   const { scrollY } = useScroll()
   const { isDark } = useTheme()
 
   const [show, setShow] = useState(false)
+  const [lang, setLang] = useState('en')
 
   const liWrapperRef = useRef()
   useClickOutside(liWrapperRef, () => {
     setShow(false)
   })
+
+  const onSelectLanguage = (event) => {
+    setLang(event.target.value)
+    i18n.changeLanguage(event.target.value)
+  }
 
   return (
     <Wrapper scroll={scrollY > 0 ? true : false} isDark={isDark} ref={liWrapperRef}>
@@ -224,7 +239,7 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
                 scroll={scrollY > 0 ? true : false}
                 isDark={isDark}
               >
-                About Us
+                {t('About Us')}
               </A>
             </Li>
             <Li>
@@ -236,7 +251,7 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
                 scroll={scrollY > 0 ? true : false}
                 isDark={isDark}
               >
-                Portfolio
+                {t('Portfolio')}
               </A>
             </Li>
             <Li>
@@ -248,7 +263,7 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
                 scroll={scrollY > 0 ? true : false}
                 isDark={isDark}
               >
-                Contact
+                {t('Contact')}
               </A>
             </Li>
             <Li>
@@ -258,7 +273,7 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
                   setShow(!show)
                 }}
               >
-                Hire me
+                {t('Hire me')}
               </Button>
             </Li>
             <Li>
@@ -267,9 +282,9 @@ const NavBar: React.FC<Props> = ({ onClick }: Props) => {
               </WrapperToogleDarkMode>
             </Li>
             <Li>
-              <Select value="en">
-                <option value="id">{'🇮🇩'}: ID</option>
+              <Select scroll={scrollY > 0 ? true : false} isDark={isDark} value={lang} onChange={onSelectLanguage}>
                 <option value="en">{'🇬🇧'}: EN</option>
+                <option value="id">{'🇮🇩'}: ID</option>
                 <option value="sa">{'🇸🇦'}: SA</option>
                 <option value="jp">{'🇯🇵'}: JP</option>
               </Select>
