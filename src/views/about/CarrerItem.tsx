@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Sun } from "react-feather";
+import Link from "next/link";
 
 interface CarrerItemProps {
   job_title: string;
@@ -25,6 +26,7 @@ const CarrerItem: FC<CarrerItemProps> = ({
   start_date,
   end_date,
   dev_stack,
+  company_url,
 }) => {
   const startDate = new Date(start_date).toLocaleString("en-us", {
     month: "short",
@@ -49,7 +51,9 @@ const CarrerItem: FC<CarrerItemProps> = ({
           </span>
         </h3>
         <div className="flex flex-row items-center gap-2">
-          <p className="text-gray-400 text-md">{company}.</p>
+          <Link href={company_url} rel="noopener noreferrer" target="_blank">
+            <p className="text-gray-400 text-md">{company}.</p>
+          </Link>
           <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
           <p className="font-bold text-md">{job_location}</p>
         </div>
