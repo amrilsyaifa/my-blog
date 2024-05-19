@@ -1,0 +1,27 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "project": "Projects",
+    "blog": "Blog"
+  },
+  "home": {
+    "greeting": "Hello 👋 ✋ ✋",
+    "description": "I'm Amril Syaifa, an experienced software engineer from Indonesia as a fullstack developer.",
+    "next_description": "I have experience in web and mobile application development.",
+    "more": "More about me"
+  },
+  "about": {
+    "about_me": "About Me",
+    "greeting": "Hi, my name is Amril. I am a profesional fullstack developer from Medan, Indonesia. I have been working as fullstack developer for {year} years. I have experience in web and mobile application development.",
+    "this_is_me": "This is me:",
+    "works": "Software engineer",
+    "english": "English conversation business",
+    "location": "Fulltime remote",
+    "coffee": "2 cups of coffee a day",
+    "game": "Moba game player",
+    "careers": "Careers:",
+    "skills": "Skills:"
+  }
+}

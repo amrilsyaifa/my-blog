@@ -1,0 +1,27 @@
+{
+  "navbar": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "project": "Proyek",
+    "blog": "Blog"
+  },
+  "home": {
+    "greeting": "Halo 👋 ✋ ✋",
+    "description": "Saya Amril Syaifa, seorang software engineer berpengalaman dari Indonesia sebagai fullstack developer.",
+    "next_description": "Saya memiliki pengalaman dalam pengembangan aplikasi web dan mobile.",
+    "more": "Lebih banyak tentang saya"
+  },
+  "about": {
+    "about_me": "Tentang Saya",
+    "greeting": "Hai, nama saya Amril. Saya seorang pengembang fullstack profesional dari Medan, Indonesia. Saya telah bekerja sebagai pengembang fullstack selama {year} tahun. Saya memiliki pengalaman dalam pengembangan aplikasi web dan mobile apps.",
+    "this_is_me": "Ini saya:",
+    "works": "Software engineer",
+    "english": "Percakapan bahasa Inggris untuk bisnis",
+    "location": "Fulltime remote",
+    "coffee": "2 gelas kopi sehari",
+    "game": "Pemain game moba",
+    "careers": "Karir:",
+    "skills": "Keterampilan:"
+  }
+}
