@@ -21,7 +21,7 @@ export default function About() {
   const year = diffYears(new Date(), new Date("2020-01-01"));
 
   return (
-    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start p-4 md:p-24 bg-white dark:bg-slate-900 scrollbar">
+    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start p-4 md:p-24 pt-20 bg-white dark:bg-slate-900 scrollbar">
       <div className="max-w-screen-xl md:max-w-screen-md mx-auto w-full">
         <div className="w-full">
           <TitleAbout title={t("about_me")} />
