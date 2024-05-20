@@ -12,7 +12,7 @@ const TitleHome: FC<TitleHomeProps> = ({ title }) => {
     <Typewriter
       text={title}
       speed={50}
-      className=" text-4xl md:text-6xl dark:text-[#ec7a56] text-gray-600"
+      className=" text-4xl md:text-6xl dark:text-[#ec7a56] text-gray-800"
     />
   );
 };

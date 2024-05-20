@@ -21,49 +21,59 @@ export default function About() {
   const year = diffYears(new Date(), new Date("2020-01-01"));
 
   return (
-    <main className="flex min-h-[calc(100vh-7.5em)] flex-col items-start p-4 md:p-24 bg-white dark:bg-slate-900 scrollbar">
+    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start p-4 md:p-24 bg-white dark:bg-slate-900 scrollbar">
       <div className="max-w-screen-xl md:max-w-screen-md mx-auto w-full">
         <div className="w-full">
           <TitleAbout title={t("about_me")} />
           <p className="mt-4 text-xl md:text-2xl ">{t("greeting", { year })}</p>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-600">
+          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
             {t("this_is_me")}
           </h3>
           <div className="ml-4">
             <ul className="mt-2">
               <li className="mb-3">
                 <div className="flex flex-row items-center gap-4">
-                  <Airplay className="dark:text-[#ec7a56] text-gray-600" />
-                  <span>{t("works")}</span>
+                  <Airplay className="dark:text-[#ec7a56] text-gray-800" />
+                  <span className="text-gray-800 dark:text-white">
+                    {t("works")}
+                  </span>
                 </div>
               </li>
               <li className="mb-3">
                 <div className="flex flex-row items-center gap-4">
-                  <Home className="dark:text-[#ec7a56] text-gray-600" />
-                  <span>{t("location")}</span>
+                  <Home className="dark:text-[#ec7a56] text-gray-800" />
+                  <span className="text-gray-800 dark:text-white">
+                    {t("location")}
+                  </span>
                 </div>
               </li>
               <li className="mb-3">
                 <div className="flex flex-row items-center gap-4">
-                  <Volume2 className="dark:text-[#ec7a56] text-gray-600" />
-                  <span>{t("english")}</span>
+                  <Volume2 className="dark:text-[#ec7a56] text-gray-800" />
+                  <span className="text-gray-800 dark:text-white">
+                    {t("english")}
+                  </span>
                 </div>
               </li>
               <li className="mb-3">
                 <div className="flex flex-row items-center gap-4">
-                  <ToggleRight className="dark:text-[#ec7a56] text-gray-600" />
-                  <span>{t("game")}</span>
+                  <ToggleRight className="dark:text-[#ec7a56] text-gray-800" />
+                  <span className="text-gray-800 dark:text-white">
+                    {t("game")}
+                  </span>
                 </div>
               </li>
               <li className="mb-3">
                 <div className="flex flex-row items-center gap-4">
-                  <Coffee className="dark:text-[#ec7a56] text-gray-600" />
-                  <span>{t("coffee")}</span>
+                  <Coffee className="dark:text-[#ec7a56] text-gray-800" />
+                  <span className="text-gray-800 dark:text-white">
+                    {t("coffee")}
+                  </span>
                 </div>
               </li>
             </ul>
           </div>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-600">
+          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
             {t("careers")}
           </h3>
           <div className="ml-4">
@@ -77,7 +87,7 @@ export default function About() {
                 ))}
             </ul>
           </div>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-600">
+          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
             {t("skills")}
           </h3>
           <div className="ml-4">

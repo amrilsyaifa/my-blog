@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Blog() {
   return (
-    <main className="flex min-h-[calc(100vh-7.5em)] flex-col items-start justify-center p-24 bg-white dark:bg-slate-900">
+    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start justify-center p-24 bg-white dark:bg-slate-900">
       <div>Blog</div>
     </main>
   );

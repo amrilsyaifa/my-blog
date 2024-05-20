@@ -1,11 +1,25 @@
+"use client";
+import { Locale } from "@components/constants/locale";
 import Link from "next/link";
+import { useParams, useRouter, usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathName = usePathname();
+  const router = useRouter();
+  const { locale } = useParams();
+
   const copyRight = new Date().getFullYear();
+
+  const onChangeOption = (val: string) => {
+    const findLocale = Locale.find((locale) => locale === val);
+    let removeLocale = pathName.replace(`/${locale}`, `/${findLocale}`);
+    router.replace(removeLocale);
+  };
+
   return (
     <footer className="bg-white dark:bg-slate-900 p-4">
-      <div className="h-14 max-w-screen-xl mx-auto flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-4">
+      <div className="h-14 max-w-screen-xl mx-auto flex md:flex-row flex-col md:items-center md:justify-between">
+        <div className="flex flex-row items-center gap-4 justify-between md:justify-normal">
           <Link
             href="https://github.com/amrilsyaifa"
             rel="noopener noreferrer"
@@ -73,8 +87,17 @@ const Footer = () => {
             </div>
           </Link>
         </div>
-        <div>
-          <p>© {copyRight}</p>
+        <div className="flex flex-row items-center gap-4 justify-center md:justify-normal">
+          <select
+            id="countries"
+            className="bg-transparent"
+            value={locale}
+            onChange={(e) => onChangeOption(e.target.value)}
+          >
+            <option value="en">English</option>
+            <option value="id">Bahasa Indonesia</option>
+          </select>
+          <p className="w-20">© {copyRight}</p>
         </div>
       </div>
     </footer>

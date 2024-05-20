@@ -12,7 +12,7 @@ const TitleAbout: FC<TitleAboutProps> = ({ title }) => {
     <Typewriter
       text={title}
       speed={50}
-      className="text-2xl md:text-4xl dark:text-[#ec7a56] text-gray-600"
+      className="text-2xl md:text-4xl dark:text-[#ec7a56] text-gray-800"
     />
   );
 };

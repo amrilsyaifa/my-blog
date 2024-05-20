@@ -41,31 +41,35 @@ const CarrerItem: FC<CarrerItemProps> = ({
   return (
     <div className="flex flex-row gap-4 ">
       <div className="w-4 h-4">
-        <Sun className="dark:text-[#ec7a56] text-gray-600 w-4 h-4 mt-1.5" />
+        <Sun className="dark:text-[#ec7a56] text-gray-800 w-4 h-4 mt-1.5" />
       </div>
       <div className="flex flex-col items-start">
-        <h3 className="font-bold text-lg dark:text-[#ec7a56] text-gray-600 ">
+        <h3 className="font-bold text-lg dark:text-[#ec7a56] text-gray-800 ">
           {job_title}
-          <span className="font-normal text-sm pl-2 dark:text-white text-gray-600">
+          <span className="font-normal text-sm pl-2 dark:text-white text-gray-800">
             ({job_tipe})
           </span>
         </h3>
         <div className="flex flex-row items-center gap-2">
           <Link href={company_url} rel="noopener noreferrer" target="_blank">
-            <p className="text-gray-400 text-md">{company}.</p>
+            <p className="dark:text-gray-400 text-gray-800 text-md">
+              {company}.
+            </p>
           </Link>
           <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
-          <p className="font-bold text-md">{job_location}</p>
+          <p className="font-bold text-md dark:text-gray-400 text-gray-800">
+            {job_location}
+          </p>
         </div>
-        <p className="text-gray-400 text-md">
+        <p className="text-md dark:text-gray-400 text-gray-800">
           {startDate} - {endDate}
         </p>
         <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
-          <span className="font-bold">[ </span>
+          <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
           {dev_stack.map((stack, idx) => {
             return (
               <div key={stack} className="flex flex-row items-center">
-                <span className="text-gray-600 dark:text-[#ec7a56]">
+                <span className="text-gray-800 dark:text-[#ec7a56]">
                   {stack}
                 </span>
                 {idx !== dev_stack.length - 1 && (
@@ -74,9 +78,11 @@ const CarrerItem: FC<CarrerItemProps> = ({
               </div>
             );
           })}
-          <span className="font-bold"> ]</span>
+          <span className="font-bold dark:text-gray-400 text-gray-800"> ]</span>
         </div>
-        <p className="text-gray-400 text-md">{company_address}</p>
+        <p className=" text-md dark:text-gray-400 text-gray-800">
+          {company_address}
+        </p>
       </div>
     </div>
   );
