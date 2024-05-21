@@ -8,6 +8,7 @@ export interface BlogItemProps {
   url: string;
   lang: "en" | "id";
   date: string;
+  order: number;
 }
 
 const BlogItem: FC<BlogItemProps> = ({ title, description, date, url }) => {

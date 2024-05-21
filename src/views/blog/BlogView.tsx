@@ -45,16 +45,18 @@ const BlogView = () => {
     <>
       <Tab data={tabs} value={tab} onSelect={setTab} />
       <div className="mt-12 ">
-        {blogs.map((blog, idx) => (
-          <div
-            className={classNames("pb-6 border-b mb-6", {
-              hidden: blog.lang !== tab,
-            })}
-            key={blog.id}
-          >
-            <BlogItem {...blog} />
-          </div>
-        ))}
+        {blogs
+          .sort((a, b) => b.order - a.order)
+          .map((blog) => (
+            <div
+              className={classNames("pb-6 border-b mb-6", {
+                hidden: blog.lang !== tab,
+              })}
+              key={blog.id}
+            >
+              <BlogItem {...blog} />
+            </div>
+          ))}
       </div>
     </>
   );
