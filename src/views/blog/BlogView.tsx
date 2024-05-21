@@ -47,8 +47,7 @@ const BlogView = () => {
       <div className="mt-12 ">
         {blogs.map((blog, idx) => (
           <div
-            className={classNames("", {
-              "pb-6 border-b mb-6": idx !== blogs.length - 1,
+            className={classNames("pb-6 border-b mb-6", {
               hidden: blog.lang !== tab,
             })}
             key={blog.id}
