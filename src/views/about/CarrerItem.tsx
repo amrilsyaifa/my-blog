@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Sun } from "react-feather";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export interface CarrerItemProps {
   id: string;
@@ -29,12 +30,14 @@ const CarrerItem: FC<CarrerItemProps> = ({
   dev_stack,
   company_url,
 }) => {
+  const t = useTranslations("common");
+
   const startDate = new Date(start_date).toLocaleString("en-us", {
     month: "short",
     year: "numeric",
   });
   const endDate = is_active
-    ? "Present"
+    ? t("present")
     : new Date(end_date ?? new Date()).toLocaleString("en-us", {
         month: "short",
         year: "numeric",

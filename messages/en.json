@@ -28,6 +28,7 @@
     "title": "Let's have a talk..."
   },
   "common": {
+    "present": "Present",
     "empty_data": "No Data Available"
   }
 }
