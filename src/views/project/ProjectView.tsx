@@ -41,9 +41,11 @@ const ProjectView = () => {
       )}
       {!hasEmptyData && (
         <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-6 gap-4">
-          {projects.map((project) => (
-            <ProjectItem {...project} key={project.id} />
-          ))}
+          {projects
+            .sort((a, b) => b.order - a.order)
+            .map((project) => (
+              <ProjectItem {...project} key={project.id} />
+            ))}
         </div>
       )}
     </>
