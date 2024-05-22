@@ -1,13 +1,12 @@
 import { diffYears } from "@components/helpers/common";
-import CarrerItem from "@components/views/about/CarrerItem";
-import SkillItem from "@components/views/about/SkillItem";
 import TitleAbout from "@components/views/about/Title";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { Airplay, Home, Coffee, ToggleRight, Volume2 } from "react-feather";
 
-import careersData from "@components/data/careers.json";
-import skillsData from "@components/data/skills.json";
+// import careersData from "@components/data/careers.json";
+// import skillsData from "@components/data/skills.json";
+import AboutCV from "@components/views/about/AboutCV";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -73,34 +72,7 @@ export default function About() {
               </li>
             </ul>
           </div>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
-            {t("careers")}
-          </h3>
-          <div className="ml-4">
-            <ul className="mt-2">
-              {careersData
-                .sort((a, b) => b.company_order - a.company_order)
-                .map((career) => (
-                  <li className="mb-3" key={career.id}>
-                    <CarrerItem {...career} />
-                  </li>
-                ))}
-            </ul>
-          </div>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
-            {t("skills")}
-          </h3>
-          <div className="ml-4">
-            <ul className="mt-2">
-              {skillsData
-                .sort((a, b) => a.skill_order - b.skill_order)
-                .map((skill) => (
-                  <li className="mb-3" key={skill.id}>
-                    <SkillItem {...skill} />
-                  </li>
-                ))}
-            </ul>
-          </div>
+          <AboutCV />
         </div>
       </div>
     </main>

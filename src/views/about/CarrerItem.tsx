@@ -2,7 +2,8 @@ import { FC } from "react";
 import { Sun } from "react-feather";
 import Link from "next/link";
 
-interface CarrerItemProps {
+export interface CarrerItemProps {
+  id: string;
   job_title: string;
   job_tipe: string;
   job_location: string;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Aperture } from "react-feather";
 
-interface SkillItemProps {
+export interface SkillItemProps {
   id: string;
   name: string;
   data: string[];
