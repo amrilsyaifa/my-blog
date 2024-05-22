@@ -26,5 +26,8 @@
   },
   "contact": {
     "title": "Ayo kita ngobrol lebih jauh..."
+  },
+  "common": {
+    "empty_data": "Data tidak ditemukan"
   }
 }

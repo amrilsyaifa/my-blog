@@ -15,7 +15,7 @@ const tabs = [
 ];
 
 const BlogView = () => {
-  const [isLoading, handle] = useDisclosure();
+  const [isLoading, handle] = useDisclosure(true);
   const [tab, setTab] = useState("en");
   const [blogs, setBlogs] = useState<BlogItemProps[]>([]);
 

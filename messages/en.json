@@ -26,5 +26,8 @@
   },
   "contact": {
     "title": "Let's have a talk..."
+  },
+  "common": {
+    "empty_data": "No Data Available"
   }
 }
