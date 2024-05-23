@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Carousel from "./Carousel";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ProjectDetailProps } from "@components/app/[locale]/project/[id]/page";
 import { useDisclosure } from "@components/hooks/useDisclosure";
 import ProjectDetailShimmer from "./ProjectDetailShimmer";
@@ -15,11 +15,12 @@ import { useTranslations } from "next-intl";
 const OPTIONS: EmblaOptionsType = {};
 
 const ProjectDetailView = () => {
+  const router = useRouter();
   const t = useTranslations("project_detail");
   const [isLoading, handle] = useDisclosure(true);
 
   const [data, setData] = useState({} as ProjectDetailProps);
-  const { id } = useParams();
+  const { id, locale } = useParams();
 
   const getProjectDetail = async () => {
     try {
@@ -50,9 +51,28 @@ const ProjectDetailView = () => {
 
   return (
     <div>
-      <h1 className="text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800 capitalize">
-        {data.title}
-      </h1>
+      <div className="flex flex-row items-start gap-6">
+        <div onClick={() => router.push(`/${locale}/project`)}>
+          <svg
+            className="w-5 h-5 mt-1 dark:text-[#ec7a56] text-gray-800 mx-1 rotate-180 cursor-pointer"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+        </div>
+        <h1 className="text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800 capitalize">
+          {data.title}
+        </h1>
+      </div>
       {data?.images && (
         <>
           <h2 className="text-lg md:text-xl dark:text-[#ec7a56] text-gray-800 mt-8 mb-2">
