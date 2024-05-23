@@ -8,7 +8,7 @@ type Props = {
   params: { id: string; locale: "en" | "id" };
 };
 
-interface ProjectDetailProps {
+export interface ProjectDetailProps {
   title: string;
   meta_desc: string;
   description: string;
