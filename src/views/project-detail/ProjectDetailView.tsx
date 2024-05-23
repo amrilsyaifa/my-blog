@@ -104,7 +104,11 @@ const ProjectDetailView = () => {
             {data.links.map((val, idx) => (
               <div key={idx} className="flex flex-row items-start gap-4">
                 <p className="capitalize min-w-[70px]">{val.title}:</p>
-                <Link href={val.url}>
+                <Link
+                  href={val.url}
+                  rel="noopener noreferrer"
+                  target={val.is_open_new_tab ? "_blank" : undefined}
+                >
                   <p className="dark:text-[#ec7a56] text-gray-800">{val.url}</p>
                 </Link>
               </div>
