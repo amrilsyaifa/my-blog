@@ -24,8 +24,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
 
-  console.log("isi slides ", selectedIndex);
-
   const {
     prevBtnDisabled,
     nextBtnDisabled,
