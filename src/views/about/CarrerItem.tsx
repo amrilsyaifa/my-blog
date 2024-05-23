@@ -54,16 +54,18 @@ const CarrerItem: FC<CarrerItemProps> = ({
             ({job_tipe})
           </span>
         </h3>
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center gap-2 flex-wrap">
           <Link href={company_url} rel="noopener noreferrer" target="_blank">
             <p className="dark:text-gray-400 text-gray-800 text-md">
               {company}.
             </p>
           </Link>
-          <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
-          <p className="font-bold text-md dark:text-gray-400 text-gray-800">
-            {job_location}
-          </p>
+          <div className="flex flex-row items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
+            <p className="font-bold text-md dark:text-gray-400 text-gray-800">
+              {job_location}
+            </p>
+          </div>
         </div>
         <p className="text-md dark:text-gray-400 text-gray-800">
           {startDate} - {endDate}

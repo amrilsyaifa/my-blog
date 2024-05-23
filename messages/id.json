@@ -30,5 +30,9 @@
   "common": {
     "present": "Sekarang",
     "empty_data": "Data tidak ditemukan"
+  },
+  "404": {
+    "title": "Halaman Tidak Ditemukan – 404!",
+    "back_home": "Kembali ke Beranda"
   }
 }
