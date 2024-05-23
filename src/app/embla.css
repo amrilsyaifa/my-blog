@@ -12,17 +12,17 @@
   backface-visibility: hidden;
   display: flex;
   touch-action: pan-y pinch-zoom;
-  margin-left: calc(var(--slide-spacing) * -1);
+  margin-left: calc(1rem * -1);
 }
 .embla__slide {
-  flex: 0 0 var(--slide-size);
+  flex: 0 0 100%;
   min-width: 0;
-  padding-left: var(--slide-spacing);
+  padding-left: 1rem;
 }
 .embla__slide__img {
   border-radius: 1.8rem;
   display: block;
-  height: var(--slide-height);
+  height: 19rem;
   width: 100%;
   object-fit: cover;
 }
@@ -31,7 +31,7 @@
   grid-template-columns: auto 1fr;
   justify-content: space-between;
   gap: 1.2rem;
-  margin-top: 1.8rem;
+  margin-top: 0.5rem;
 }
 .embla__buttons {
   display: grid;
@@ -40,7 +40,7 @@
   align-items: center;
 }
 .embla__button {
-  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-tap-highlight-color: rgba(230, 230, 230, 0.5);
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;
@@ -51,18 +51,18 @@
   border: 0;
   padding: 0;
   margin: 0;
-  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-  width: 3.6rem;
-  height: 3.6rem;
+  box-shadow: inset 0 0 0 0.2rem rgb(25, 25, 25);
+  width: 2.5rem;
+  height: 2.5rem;
   z-index: 1;
   border-radius: 50%;
-  color: var(--text-body);
+  color: rgb(222, 222, 222);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .embla__button:disabled {
-  color: var(--detail-high-contrast);
+  color: rgb(101, 101, 101);
 }
 .embla__button__svg {
   width: 35%;
@@ -76,7 +76,7 @@
   margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
 }
 .embla__dot {
-  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-tap-highlight-color: rgba(230, 230, 230, 0.5);
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;
@@ -95,24 +95,24 @@
   border-radius: 50%;
 }
 .embla__dot:after {
-  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-  width: 1.4rem;
-  height: 1.4rem;
+  box-shadow: inset 0 0 0 0.2rem rgb(25, 25, 25);
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   content: "";
 }
 .embla__dot--selected:after {
-  box-shadow: inset 0 0 0 0.2rem var(--text-body);
+  box-shadow: inset 0 0 0 0.2rem rgb(222, 222, 222);
 }
 .embla__lazy-load {
   position: relative;
   height: 100%;
 }
 .embla__lazy-load__spinner {
-  border: 0.4rem solid rgba(var(--text-high-contrast-rgb-value), 0.2);
-  border-left: 0.4rem solid var(--text-high-contrast);
+  border: 0.4rem solid rgba(230, 230, 230, 0.2);
+  border-left: 0.4rem solid rgb(230, 230, 230);
   font-size: 1rem;
   display: inline-flex;
   position: absolute;
@@ -146,4 +146,11 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.embla__text {
+  font-size: 12px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-style: italic;
 }

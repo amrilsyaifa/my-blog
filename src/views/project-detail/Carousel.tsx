@@ -83,6 +83,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           ))}
         </div>
       </div>
+      <div className="embla__text">
+        <p className="dark:text-gray-400 text-gray-800">
+          Quis irure amet in amet consectetur. Sit eiusmod aliqua do laborum
+          eiusmod culpa aliqua enim veniam est. Culpa eu esse voluptate
+          incididunt minim.
+        </p>
+      </div>
     </div>
   );
 };
