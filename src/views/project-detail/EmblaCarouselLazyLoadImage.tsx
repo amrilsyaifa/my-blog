@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useCallback } from "react";
 
 const PLACEHOLDER_SRC = `data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D`;
 
 type PropType = {
+  alt: string;
   imgSrc: string;
   inView: boolean;
   index: number;
 };
 
 export const LazyLoadImage: React.FC<PropType> = (props) => {
-  const { imgSrc, inView } = props;
+  const { imgSrc, inView, alt } = props;
   const [hasLoaded, setHasLoaded] = useState(false);
 
   const setLoaded = useCallback(() => {
@@ -28,7 +30,7 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
           className="embla__slide__img embla__lazy-load__img"
           onLoad={setLoaded}
           src={inView ? imgSrc : PLACEHOLDER_SRC}
-          alt="Your alt text"
+          alt={alt}
           data-src={imgSrc}
         />
       </div>

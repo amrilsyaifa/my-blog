@@ -30,7 +30,7 @@ const Navbar = () => {
   }, [path]);
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10">
       <div
         ref={ref}
         className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"

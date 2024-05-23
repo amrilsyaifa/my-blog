@@ -9,9 +9,10 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import "../../app/embla.css";
+import { ImageProps } from "@components/app/[locale]/project/[id]/page";
 
 type PropType = {
-  slides: number[];
+  slides: ImageProps[];
   options?: EmblaOptionsType;
 };
 
@@ -22,6 +23,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
+
+  console.log("isi slides ", selectedIndex);
 
   const {
     prevBtnDisabled,
@@ -54,12 +57,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRed}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((img, idx) => (
             <LazyLoadImage
-              key={index}
-              index={index}
-              imgSrc={`https://picsum.photos/600/350?v=${index}`}
-              inView={slidesInView.indexOf(index) > -1}
+              key={idx}
+              index={idx}
+              imgSrc={img.url}
+              inView={slidesInView.indexOf(idx) > -1}
+              alt={img.description}
             />
           ))}
         </div>
@@ -83,13 +87,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-      <div className="embla__text">
-        <p className="dark:text-gray-400 text-gray-800">
-          Quis irure amet in amet consectetur. Sit eiusmod aliqua do laborum
-          eiusmod culpa aliqua enim veniam est. Culpa eu esse voluptate
-          incididunt minim.
-        </p>
-      </div>
+      {slides[selectedIndex] && (
+        <div className="embla__text mt-2">
+          <p className="dark:text-gray-400 text-gray-800">
+            {slides[selectedIndex].description}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

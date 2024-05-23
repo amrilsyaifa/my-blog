@@ -34,5 +34,11 @@
   "404": {
     "title": "Halaman Tidak Ditemukan – 404!",
     "back_home": "Kembali ke Beranda"
+  },
+  "project_detail": {
+    "overview": "Ringkasan:",
+    "description": "Deskripsi:",
+    "links": "Tautan:",
+    "link": "Tautan:"
   }
 }

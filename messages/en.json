@@ -34,5 +34,11 @@
   "404": {
     "title": "Not found – 404!",
     "back_home": "Go back to Home"
+  },
+  "project_detail": {
+    "overview": "Overview:",
+    "description": "Description:",
+    "links": "Links:",
+    "link": "Link:"
   }
 }
