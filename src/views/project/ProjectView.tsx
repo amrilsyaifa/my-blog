@@ -6,6 +6,7 @@ import { useDisclosure } from "@components/hooks/useDisclosure";
 import EmptyData from "@components/components/EmptyData";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
+import ProjectShimmer from "./ProjectShimmer";
 
 const ProjectView = () => {
   const [isLoading, handle] = useDisclosure(true);
@@ -29,6 +30,10 @@ const ProjectView = () => {
   useEffect(() => {
     getProjects();
   }, []);
+
+  if (isLoading) {
+    return <ProjectShimmer />;
+  }
 
   const hasEmptyData = !isLoading && projects.length === 0;
 

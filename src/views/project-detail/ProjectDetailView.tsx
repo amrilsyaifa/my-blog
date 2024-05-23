@@ -9,6 +9,11 @@ import { ProjectDetailProps } from "@components/app/[locale]/project/[id]/page";
 import { useDisclosure } from "@components/hooks/useDisclosure";
 import ProjectDetailShimmer from "./ProjectDetailShimmer";
 import Link from "next/link";
+import { EmblaOptionsType } from "embla-carousel";
+
+const OPTIONS: EmblaOptionsType = {};
+const SLIDE_COUNT = 10;
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 const ProjectDetailView = () => {
   const [isLoading, handle] = useDisclosure(true);
@@ -48,10 +53,10 @@ const ProjectDetailView = () => {
       <h1 className="text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800 capitalize">
         {data.title}
       </h1>
-      <h2 className="text-lg md:text-xl dark:text-[#ec7a56] text-gray-800 mt-8">
+      <h2 className="text-lg md:text-xl dark:text-[#ec7a56] text-gray-800 mt-8 mb-2">
         Overview:
       </h2>
-      <Carousel />
+      <Carousel slides={SLIDES} options={OPTIONS} />
       <h2 className="text-lg md:text-xl dark:text-[#ec7a56] text-gray-800 mt-8">
         Description:
       </h2>
@@ -75,7 +80,7 @@ const ProjectDetailView = () => {
         Link:
       </h2>
       <div className="ml-4 mt-2">
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-start gap-4">
           <p>Github: </p>
           <Link href="/">
             <p className="dark:text-[#ec7a56] text-gray-800">
@@ -83,7 +88,7 @@ const ProjectDetailView = () => {
             </p>
           </Link>
         </div>
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-start gap-4">
           <p>Github: </p>
           <Link href="/">
             <p className="dark:text-[#ec7a56] text-gray-800">
