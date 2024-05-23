@@ -11,6 +11,7 @@ type Props = {
 export interface LinkProps {
   title: string;
   url: string;
+  is_open_new_tab?: boolean;
 }
 
 export interface ImageProps {
