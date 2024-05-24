@@ -1,13 +1,18 @@
 import { Link } from "@components/i18n/routing";
 import { FC } from "react";
 
+export interface DevStackProps {
+  title: string;
+  is_open_new_tab?: boolean;
+  url?: string;
+}
 export interface ProjectItemProps {
   id: string;
   title: string;
   description: string;
   link: string;
   order: number;
-  dev_stack: string[];
+  dev_stack: DevStackProps[];
   is_detail?: boolean;
 }
 
@@ -39,8 +44,23 @@ const ProjectItem: FC<ProjectItemProps> = ({
         <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
         {dev_stack.map((stack, idx) => {
           return (
-            <div key={stack} className="flex flex-row items-center">
-              <span className="text-gray-800 dark:text-[#ec7a56]">{stack}</span>
+            <div key={idx} className="flex flex-row items-center">
+              {stack?.url && (
+                <Link
+                  href={stack.url}
+                  rel="noopener noreferrer"
+                  target={stack.is_open_new_tab ? "_blank" : undefined}
+                >
+                  <span className="text-gray-800 dark:text-[#ec7a56]">
+                    {stack.title}
+                  </span>
+                </Link>
+              )}
+              {!stack?.url && (
+                <span className="text-gray-800 dark:text-[#ec7a56]">
+                  {stack.title}
+                </span>
+              )}
               {idx !== dev_stack.length - 1 && (
                 <div className="ml-2 w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
               )}
