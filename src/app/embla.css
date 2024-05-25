@@ -22,9 +22,9 @@
 .embla__slide__img {
   border-radius: 12px;
   display: block;
-  height: 19rem;
-  width: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
 }
 .embla__controls {
   display: grid;
@@ -108,6 +108,9 @@
 .embla__lazy-load {
   position: relative;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .embla__lazy-load__spinner {
   border: 0.4rem solid rgba(230, 230, 230, 0.2);

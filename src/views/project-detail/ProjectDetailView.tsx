@@ -88,9 +88,11 @@ const ProjectDetailView = () => {
           </h2>
           <div className="ml-4">
             {data.description.map((val, idx) => (
-              <p key={idx} className="mb-2 dark:text-gray-400 text-gray-800">
-                {val}
-              </p>
+              <p
+                key={idx}
+                className="mb-2 dark:text-gray-400 text-gray-800"
+                dangerouslySetInnerHTML={{ __html: val }}
+              ></p>
             ))}
           </div>
         </>
