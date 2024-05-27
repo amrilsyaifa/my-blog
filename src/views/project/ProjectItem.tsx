@@ -14,6 +14,7 @@ export interface ProjectItemProps {
   order: number;
   dev_stack: DevStackProps[];
   is_detail?: boolean;
+  project_by: "self" | "company";
 }
 
 const ProjectItem: FC<ProjectItemProps> = ({
