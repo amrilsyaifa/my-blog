@@ -35,6 +35,10 @@
     "title": "Halaman Tidak Ditemukan – 404!",
     "back_home": "Kembali ke Beranda"
   },
+  "project": {
+    "personal": "Pribadi",
+    "company": "Perusahaan"
+  },
   "project_detail": {
     "overview": "Ringkasan:",
     "description": "Deskripsi:",

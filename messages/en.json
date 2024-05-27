@@ -35,6 +35,10 @@
     "title": "Not found – 404!",
     "back_home": "Go back to Home"
   },
+  "project": {
+    "personal": "Personal",
+    "company": "Company"
+  },
   "project_detail": {
     "overview": "Overview:",
     "description": "Description:",
