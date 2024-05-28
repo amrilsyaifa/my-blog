@@ -16,7 +16,9 @@ const ProjectView = () => {
 
   return (
     <>
-      <Tab data={tabs} value={tab} onSelect={setTab} />
+      <div className="mb-4">
+        <Tab data={tabs} value={tab} onSelect={setTab} />
+      </div>
       {tab === "self" && <PersonalProject />}
       {tab === "company" && <CompanyProject />}
     </>
