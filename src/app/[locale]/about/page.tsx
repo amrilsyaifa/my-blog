@@ -7,6 +7,7 @@ import { Airplay, Home, Coffee, ToggleRight, Volume2 } from "react-feather";
 // import careersData from "@components/data/careers.json";
 // import skillsData from "@components/data/skills.json";
 import AboutCV from "@components/views/about/AboutCV";
+import { getYearDifference } from "@components/helpers/date";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -17,7 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function About() {
   const t = useTranslations("about");
-  const year = diffYears(new Date(), new Date("2020-01-01"));
+  const from = "2018-06-01";
+  const to = new Date().toISOString().split("T")[0];
+  const year = getYearDifference(from, to);
 
   return (
     <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start p-4 md:p-24 pt-20 bg-white dark:bg-slate-900 scrollbar">
