@@ -23,7 +23,7 @@ export default async function LocaleLayout({
   params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { id: string; locale: string };
 }>) {
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {

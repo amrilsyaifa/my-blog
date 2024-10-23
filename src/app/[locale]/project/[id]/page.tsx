@@ -1,11 +1,11 @@
 import { db } from "@components/configs/firebase";
 import ProjectDetailView from "@components/views/project-detail/ProjectDetailView";
 import { doc, getDoc } from "firebase/firestore";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: { id: string; locale: "en" | "id" };
+  params: { id: string; locale: string };
 };
 
 export interface LinkProps {
@@ -27,10 +27,7 @@ export interface ProjectDetailProps {
   dev_stack?: string[];
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   // / read route params
   const { id, locale } = params;
 
