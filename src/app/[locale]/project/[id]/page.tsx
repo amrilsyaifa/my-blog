@@ -158,7 +158,7 @@ export default function ProjectDetail() {
               </h2>
               <div className="space-y-3">
                 {project.description.map((desc, idx) => (
-                  <p key={idx} className="text-text-secondary leading-relaxed text-sm">{desc}</p>
+                  <p key={idx} className="text-text-secondary leading-relaxed text-sm [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-accent/80" dangerouslySetInnerHTML={{ __html: desc }} />
                 ))}
               </div>
             </div>

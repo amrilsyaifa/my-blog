@@ -1,6 +1,14 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+
+export interface Achievement {
+  year: string;
+  title: string;
+  description?: string;
+}
 
 export interface CarrerItemProps {
   id: string;
@@ -15,6 +23,8 @@ export interface CarrerItemProps {
   company_url: string;
   dev_stack: string[];
   company_order: number;
+  work_details?: string[];
+  achievements?: Achievement[];
 }
 
 const CarrerItem: FC<CarrerItemProps> = ({
@@ -28,74 +38,92 @@ const CarrerItem: FC<CarrerItemProps> = ({
   end_date,
   dev_stack,
   company_url,
+  work_details,
 }) => {
   const t = useTranslations("common");
+  const [open, setOpen] = useState(false);
 
-  const startDate = new Date(start_date).toLocaleString("en-us", {
-    month: "short",
-    year: "numeric",
-  });
-  const endDate = is_active
+  const startDate = new Date(start_date).toLocaleString("en-us", { month: "short", year: "numeric" });
+  const endDate   = is_active
     ? t("present")
-    : new Date(end_date ?? new Date()).toLocaleString("en-us", {
-        month: "short",
-        year: "numeric",
-      });
+    : new Date(end_date ?? new Date()).toLocaleString("en-us", { month: "short", year: "numeric" });
+
+  const hasDetails = work_details && work_details.length > 0;
 
   return (
     <div className="relative pl-6 pb-8">
-      {/* Timeline dot */}
       <span className="absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-accent bg-bg" />
-      {/* Timeline line drawn via parent */}
 
-      <div className="bg-bg-card border border-border rounded-lg p-4 hover:border-accent/50 transition-colors duration-300 group">
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
-          <div>
-            <h4 className="text-text-primary font-semibold text-base group-hover:text-accent transition-colors">
-              {job_title}
-            </h4>
-            <div className="flex items-center gap-2 mt-1">
-              <Link
-                href={company_url}
-                rel="noopener noreferrer"
-                target="_blank"
-                className="text-accent text-sm hover:underline"
-              >
-                {company}
-              </Link>
-              <span className="text-text-muted text-xs">•</span>
-              <span className="text-text-secondary text-sm">{job_location}</span>
-              <span className="text-text-muted text-xs">•</span>
-              <span className="text-text-muted text-xs italic">{job_tipe}</span>
+      <div className="bg-bg-card border border-border rounded-lg overflow-hidden hover:border-accent/50 transition-colors duration-300 group">
+        {/* Header */}
+        <div className="p-4">
+          <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+            <div>
+              <h4 className="text-text-primary font-semibold text-base group-hover:text-accent transition-colors">
+                {job_title}
+              </h4>
+              <div className="flex flex-wrap items-center gap-2 mt-1">
+                <Link href={company_url} rel="noopener noreferrer" target="_blank" className="text-accent text-sm hover:underline">
+                  {company}
+                </Link>
+                <span className="text-text-muted text-xs">•</span>
+                <span className="text-text-secondary text-sm">{job_location}</span>
+                <span className="text-text-muted text-xs">•</span>
+                <span className="text-text-muted text-xs italic">{job_tipe}</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {is_active && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Active
+                </span>
+              )}
+              <span className="text-text-muted text-xs whitespace-nowrap">{startDate} — {endDate}</span>
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {is_active && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Active
-              </span>
-            )}
-            <span className="text-text-muted text-xs whitespace-nowrap">
-              {startDate} — {endDate}
-            </span>
-          </div>
+
+          {company_address && <p className="text-text-muted text-xs mb-3">{company_address}</p>}
+
+          {dev_stack.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-3">
+              {dev_stack.map((stack, idx) => (
+                <span key={idx} className="px-2 py-0.5 text-xs rounded-md border border-accent/30 bg-accent/10 text-accent">
+                  {stack}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Toggle button */}
+          {hasDetails && (
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors mt-1"
+            >
+              <svg
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+              {open ? "Hide details" : "Work details"}
+            </button>
+          )}
         </div>
 
-        {company_address && (
-          <p className="text-text-muted text-xs mb-3">{company_address}</p>
-        )}
-
-        {dev_stack.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {dev_stack.map((stack, idx) => (
-              <span
-                key={idx}
-                className="px-2 py-0.5 text-xs rounded-md border border-accent/30 bg-accent/10 text-accent"
-              >
-                {stack}
-              </span>
-            ))}
+        {/* Collapsible work details */}
+        {hasDetails && open && (
+          <div className="border-t border-border px-4 py-3 bg-bg-secondary/30">
+            <ul className="space-y-1.5">
+              {work_details!.map((detail, idx) => (
+                <li key={idx} className="flex gap-2 text-sm text-text-secondary leading-relaxed">
+                  <span className="text-accent mt-1 shrink-0">▸</span>
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>

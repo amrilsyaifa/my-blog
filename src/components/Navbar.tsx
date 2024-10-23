@@ -5,6 +5,7 @@ import Tabs from "@components/constants/tabs";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams, usePathname } from "next/navigation";
 import ThemeSwitch from "./ThemeSwitch";
 import { useDisclosure } from "@components/hooks/useDisclosure";
@@ -54,13 +55,8 @@ const Navbar = () => {
         className="max-w-screen-xl flex items-center justify-between mx-auto px-4 py-3"
       >
         {/* Logo */}
-        <Link
-          ref={logoRef}
-          href={`/${locale}/`}
-          className="text-xl font-bold tracking-widest text-accent hover:text-accent-secondary transition-colors duration-300"
-          style={{ fontFamily: "Chakra Petch, sans-serif" }}
-        >
-          ASY
+        <Link ref={logoRef} href={`/${locale}/`} className="hover:opacity-80 transition-opacity duration-300">
+          <Image src="/asy.png" alt="ASY" width={44} height={44} className="object-contain" priority />
         </Link>
 
         {/* Desktop nav */}
