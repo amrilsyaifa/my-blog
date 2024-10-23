@@ -21,7 +21,7 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }>) {
   const { locale } = await params;
   const messages = await getMessages({ locale });
