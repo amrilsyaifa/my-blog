@@ -1,7 +1,7 @@
 import TitleContact from "@components/views/contact/Title";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@components/i18n/routing";
 import { Instagram, Twitter, Mail } from "react-feather";
 
 export async function generateMetadata(): Promise<Metadata> {

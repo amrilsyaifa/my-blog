@@ -1,12 +1,14 @@
 import { ThemeProvider } from "next-themes";
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider, AbstractIntlMessages } from "next-intl";
 import { getMessages } from "next-intl/server";
 
-export async function Providers({ children }: { children: React.ReactNode }) {
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
-
+export async function Providers({
+  children,
+  messages,
+}: {
+  children: React.ReactNode;
+  messages: AbstractIntlMessages;
+}) {
   return (
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

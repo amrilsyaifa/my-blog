@@ -1,6 +1,6 @@
 "use client";
 import { Locale } from "@components/constants/locale";
-import Link from "next/link";
+import { Link } from "@components/i18n/routing";
 import { useParams, useRouter, usePathname } from "next/navigation";
 
 const Footer = () => {

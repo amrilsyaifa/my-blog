@@ -8,7 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ProjectDetailProps } from "@components/app/[locale]/project/[id]/page";
 import { useDisclosure } from "@components/hooks/useDisclosure";
 import ProjectDetailShimmer from "./ProjectDetailShimmer";
-import Link from "next/link";
+import { Link } from "@components/i18n/routing";
 import { EmblaOptionsType } from "embla-carousel";
 import { useTranslations } from "next-intl";
 

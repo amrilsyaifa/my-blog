@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Sun } from "react-feather";
-import Link from "next/link";
+import { Link } from "@components/i18n/routing";
 import { useTranslations } from "next-intl";
 
 export interface CarrerItemProps {

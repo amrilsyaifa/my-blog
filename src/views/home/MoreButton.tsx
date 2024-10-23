@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@components/i18n/routing";
 import { useParams } from "next/navigation";
 import { FC } from "react";
 
