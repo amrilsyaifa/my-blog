@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { FC } from "react";
 
-export type DevStack = {
+interface DevStack {
   is_open_new_tab: boolean;
   title: string;
-  url?: string;
-};
+  url: string | null;
+}
 export interface ProjectItemProps {
   id: string;
   title: string;
@@ -14,7 +14,6 @@ export interface ProjectItemProps {
   link: string;
   order: number;
   dev_stack: DevStack[];
-  project_by?: "self" | "company";
   is_detail?: boolean;
   thumbnail?: string;
 }
@@ -101,19 +100,22 @@ const ProjectItem: FC<ProjectItemProps> = ({
         <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 mb-4 flex-1">
           {description}
         </p>
-
-        {dev_stack?.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border">
-            {dev_stack.map((stack, idx) => (
-              <span
-                key={idx}
-                className="px-2 py-0.5 text-xs rounded-md bg-accent/10 border border-accent/20 text-accent"
-              >
+      </div>
+      <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
+        <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
+        {dev_stack?.map((stack, idx) => {
+          return (
+            <div key={stack.title} className="flex flex-row items-center">
+              <span className="text-gray-800 dark:text-[#ec7a56]">
                 {stack.title}
               </span>
-            ))}
-          </div>
-        )}
+              {idx !== dev_stack.length - 1 && (
+                <div className="ml-2 w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
+              )}
+            </div>
+          );
+        })}
+        <span className="font-bold dark:text-gray-400 text-gray-800"> ]</span>
       </div>
     </div>
   );

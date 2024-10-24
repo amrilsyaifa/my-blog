@@ -216,3 +216,30 @@ html:not(.dark) .card-glass {
   mask-composite: exclude;
   pointer-events: none;
 }
+
+.curve {
+  svg {
+    width: 100vw;
+    height: calc(100vh + 600px);
+    top: -300px;
+    left: 0;
+    position: fixed;
+    pointer-events: none;
+  }
+}
+
+.inner {
+  background-color: black;
+  .page {
+    background-color: white;
+  }
+  .slide {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+  }
+}

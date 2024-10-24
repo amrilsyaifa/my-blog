@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Chakra_Petch } from "next/font/google";
 import { Providers } from "./providers";
-import "../globals.css";
-import { NextIntlClientProvider } from "next-intl";
+import "../globals.scss";
+import Navbar from "@components/components/Navbar";
+import Footer from "@components/components/Footer";
+import { routing } from "@components/i18n/routing";
+import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
-import CustomCursor from "@components/components/CustomCursor";
+import PageAnimatePresence from "@components/components/layout/PageAnimatePresence";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -27,12 +30,17 @@ export default async function RootLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
-      <body className={chakrapetch.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>{children}</Providers>
-          <CustomCursor />
-        </NextIntlClientProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body
+        className={`${chakrapetch.className} overflow-y-auto overflow-x-hidden`}
+      >
+        <Providers messages={messages}>
+          <PageAnimatePresence>
+            <Navbar />
+            {children}
+            <Footer />
+          </PageAnimatePresence>
+        </Providers>
       </body>
     </html>
   );
