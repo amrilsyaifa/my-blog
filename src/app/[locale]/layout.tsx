@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Chakra_Petch } from "next/font/google";
 import { Providers } from "./providers";
-import "../globals.scss";
+import "../globals.css";
 import Navbar from "@components/components/Navbar";
 import Footer from "@components/components/Footer";
 import { routing } from "@components/i18n/routing";
