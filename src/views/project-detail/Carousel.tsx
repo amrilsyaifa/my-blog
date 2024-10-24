@@ -8,7 +8,7 @@ import {
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
-import "../../app/embla.css";
+import "../../app/embla.scss";
 import { ImageProps } from "@components/app/[locale]/project/[id]/page";
 
 type PropType = {

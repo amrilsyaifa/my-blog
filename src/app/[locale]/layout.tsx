@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Chakra_Petch } from "next/font/google";
 import { Providers } from "./providers";
-import "../globals.css";
+import "../globals.scss";
 import Navbar from "@components/components/Navbar";
 import Footer from "@components/components/Footer";
 import { routing } from "@components/i18n/routing";
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
+import PageAnimatePresence from "@components/components/layout/PageAnimatePresence";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -36,11 +37,15 @@ export default async function LocaleLayout({
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={chakrapetch.className}>
+      <body
+        className={`${chakrapetch.className} overflow-y-auto overflow-x-hidden`}
+      >
         <Providers messages={messages}>
-          <Navbar />
-          {children}
-          <Footer />
+          <PageAnimatePresence>
+            <Navbar />
+            {children}
+            <Footer />
+          </PageAnimatePresence>
         </Providers>
       </body>
     </html>

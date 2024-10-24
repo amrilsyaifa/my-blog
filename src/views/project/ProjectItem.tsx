@@ -1,13 +1,18 @@
 import { Link } from "@components/i18n/routing";
 import { FC } from "react";
 
+interface DevStack {
+  is_open_new_tab: boolean;
+  title: string;
+  url: string | null;
+}
 export interface ProjectItemProps {
   id: string;
   title: string;
   description: string;
   link: string;
   order: number;
-  dev_stack: string[];
+  dev_stack: DevStack[];
   is_detail?: boolean;
 }
 
@@ -19,6 +24,7 @@ const ProjectItem: FC<ProjectItemProps> = ({
   is_detail,
 }) => {
   const newLink = link[0] === "/" ? link.replace("/", "") : link;
+
   return (
     <div className="w-full md:max-w-sm p-6 border border-gray-200 rounded-lg shadow  dark:border-gray-700 flex flex-col justify-between">
       <div className="flex flex-col">
@@ -37,10 +43,12 @@ const ProjectItem: FC<ProjectItemProps> = ({
       </div>
       <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
         <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
-        {dev_stack.map((stack, idx) => {
+        {dev_stack?.map((stack, idx) => {
           return (
-            <div key={stack} className="flex flex-row items-center">
-              <span className="text-gray-800 dark:text-[#ec7a56]">{stack}</span>
+            <div key={stack.title} className="flex flex-row items-center">
+              <span className="text-gray-800 dark:text-[#ec7a56]">
+                {stack.title}
+              </span>
               {idx !== dev_stack.length - 1 && (
                 <div className="ml-2 w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
               )}
