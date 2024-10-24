@@ -33,7 +33,7 @@ const config: Config = {
           "linear-gradient(135deg, #0f1117 0%, #1a1d27 50%, #0f1117 100%)",
       },
       animation: {
-        "float": "float 3s ease-in-out infinite",
+        float: "float 3s ease-in-out infinite",
         "glow-pulse": "glowPulse 2s ease-in-out infinite",
         "slide-up": "slideUp 0.6s ease-out forwards",
         "fade-in": "fadeIn 0.8s ease-out forwards",
@@ -64,6 +64,5 @@ const config: Config = {
     },
   },
   darkMode: ["class"],
-  plugins: [],
 };
 export default config;

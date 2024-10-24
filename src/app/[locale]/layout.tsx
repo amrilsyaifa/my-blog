@@ -7,7 +7,7 @@ import Footer from "@components/components/Footer";
 import { routing } from "@components/i18n/routing";
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
-import PageAnimatePresence from "@components/components/layout/PageAnimatePresence";
+import PageTransitionEffect from "@components/hoc/PageTransitionEffect";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -35,11 +35,11 @@ export default async function RootLayout({
         className={`${chakrapetch.className} overflow-y-auto overflow-x-hidden`}
       >
         <Providers messages={messages}>
-          <PageAnimatePresence>
+          <PageTransitionEffect>
             <Navbar />
             {children}
             <Footer />
-          </PageAnimatePresence>
+          </PageTransitionEffect>
         </Providers>
       </body>
     </html>
