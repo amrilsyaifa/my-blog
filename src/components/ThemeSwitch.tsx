@@ -24,7 +24,7 @@ const ThemeSwitch = () => {
       onClick={onClickToogleTheme}
       className={classNames("toggle-slot", {
         "bg-[#374151] shadow-[0_2px_10px_#e4e7ec]": checked,
-        "bg-white shadow-[0_2px_10px_#374151]": !checked,
+        "bg-gray-100 shadow-[0_2px_10px_#374151]": !checked,
       })}
     >
       <div

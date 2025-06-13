@@ -17,7 +17,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white dark:bg-slate-900 p-4">
+    <footer className="bg-gray-100 dark:bg-slate-900 p-4">
       <div className="h-14 max-w-screen-xl mx-auto flex md:flex-row flex-col md:items-center md:justify-between">
         <div className="flex flex-row items-center gap-4 justify-between md:justify-normal">
           <Link
@@ -29,7 +29,7 @@ const Footer = () => {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
                 focusable="false"
@@ -51,7 +51,7 @@ const Footer = () => {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
                 focusable="false"
@@ -73,7 +73,7 @@ const Footer = () => {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
                 focusable="false"

@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Contact() {
   const t = useTranslations("contact");
   return (
-    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start justify-center p-24 bg-white dark:bg-slate-900">
+    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start justify-center p-24 bg-gray-100 dark:bg-slate-900">
       <div className="flex flex-col items-center justify-center w-full">
         <TitleContact title={t("title")} />
         <div className="mt-16">
