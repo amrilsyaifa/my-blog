@@ -1,5 +1,6 @@
 "use client";
 
+import Tab from "@components/components/Tab";
 import { useEffect, useState } from "react";
 import ProjectItem, { ProjectItemProps } from "./ProjectItem";
 import { useDisclosure } from "@components/hooks/useDisclosure";
@@ -8,7 +9,13 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import ProjectShimmer from "./ProjectShimmer";
 
+const tabs = [
+  { label: "Personal", value: "self" },
+  { label: "Company", value: "company" },
+];
+
 const ProjectView = () => {
+  const [tab, setTab] = useState("self");
   const [isLoading, handle] = useDisclosure(true);
   const [projects, setProjects] = useState<ProjectItemProps[]>([]);
 
@@ -45,13 +52,17 @@ const ProjectView = () => {
         </div>
       )}
       {!hasEmptyData && (
-        <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-6 gap-4">
-          {projects
-            .sort((a, b) => b.order - a.order)
-            .map((project, idx) => (
-              <ProjectItem {...project} key={idx} />
-            ))}
-        </div>
+        <>
+          <Tab data={tabs} value={tab} onSelect={setTab} />
+          <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-6 gap-4">
+            {projects
+              .sort((a, b) => b.order - a.order)
+              .filter((project) => project.project_by === tab)
+              .map((project, idx) => (
+                <ProjectItem {...project} key={idx} />
+              ))}
+          </div>
+        </>
       )}
     </>
   );

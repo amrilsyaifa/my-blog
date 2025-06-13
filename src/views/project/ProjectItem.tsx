@@ -13,6 +13,7 @@ export interface ProjectItemProps {
   link: string;
   order: number;
   dev_stack: DevStack[];
+  project_by?: "self" | "company";
   is_detail?: boolean;
 }
 
@@ -43,7 +44,6 @@ const ProjectItem: FC<ProjectItemProps> = ({
       <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
         <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
         {dev_stack?.map((stack, idx) => {
-          console.log("stack", stack);
           return (
             <div key={idx} className="flex flex-row items-center">
               <span className="text-gray-800 dark:text-[#ec7a56]">
