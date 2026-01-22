@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Sun } from "react-feather";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
@@ -43,52 +42,53 @@ const CarrerItem: FC<CarrerItemProps> = ({
         year: "numeric",
       });
   return (
-    <div className="flex flex-row gap-4 ">
-      <div className="w-4 h-4">
-        <Sun className="dark:text-[#ec7a56] text-gray-800 w-4 h-4 mt-1.5" />
-      </div>
-      <div className="flex flex-col items-start">
-        <h3 className="font-bold text-lg dark:text-[#ec7a56] text-gray-800 ">
+    <div className="retro-career-card">
+      <div className="retro-career-header">
+        <span className="retro-career-icon">►</span>
+        <h4 style={{ color: "#0000FF", margin: 0, fontSize: "16px" }}>
           {job_title}
-          <span className="font-normal text-sm pl-2 dark:text-white text-gray-800">
-            ({job_tipe})
-          </span>
-        </h3>
-        <div className="flex flex-row items-center gap-2 flex-wrap">
-          <Link href={company_url} rel="noopener noreferrer" target="_blank">
-            <p className="dark:text-gray-400 text-gray-800 text-md">
-              {company}.
-            </p>
+        </h4>
+        <span style={{ color: "#808080", fontSize: "12px", marginLeft: "8px" }}>
+          ({job_tipe})
+        </span>
+      </div>
+      
+      <div className="retro-career-details">
+        <div style={{ marginBottom: "4px" }}>
+          <Link
+            href={company_url}
+            rel="noopener noreferrer"
+            target="_blank"
+            style={{ color: "#0000FF", textDecoration: "underline" }}
+          >
+            {company}
           </Link>
-          <div className="flex flex-row items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
-            <p className="font-bold text-md dark:text-gray-400 text-gray-800">
-              {job_location}
-            </p>
-          </div>
+          <span style={{ color: "#000000", margin: "0 8px" }}>•</span>
+          <span style={{ color: "#000000", fontWeight: "bold" }}>
+            {job_location}
+          </span>
         </div>
-        <p className="text-md dark:text-gray-400 text-gray-800">
-          {startDate} - {endDate}
-        </p>
-        <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
-          <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
-          {dev_stack.map((stack, idx) => {
-            return (
-              <div key={stack} className="flex flex-row items-center">
-                <span className="text-gray-800 dark:text-[#ec7a56]">
-                  {stack}
-                </span>
-                {idx !== dev_stack.length - 1 && (
-                  <div className="ml-2 w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
-                )}
-              </div>
-            );
-          })}
-          <span className="font-bold dark:text-gray-400 text-gray-800"> ]</span>
+        
+        <div style={{ color: "#808080", fontSize: "12px", marginBottom: "8px" }}>
+          📅 {startDate} - {endDate}
+          {is_active && (
+            <span className="blink" style={{ marginLeft: "8px", color: "#FF0000" }}>
+              ● ACTIVE
+            </span>
+          )}
         </div>
-        <p className=" text-md dark:text-gray-400 text-gray-800">
-          {company_address}
-        </p>
+        
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", marginTop: "8px" }}>
+          {dev_stack.map((stack, idx) => (
+            <span key={idx} className="tech-badge" style={{ fontSize: "10px" }}>
+              {stack}
+            </span>
+          ))}
+        </div>
+        
+        <div style={{ color: "#808080", fontSize: "11px", marginTop: "8px" }}>
+          📍 {company_address}
+        </div>
       </div>
     </div>
   );

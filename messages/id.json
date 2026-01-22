@@ -10,8 +10,12 @@
   "home": {
     "greeting": "Halo 👋 ✋ ✋",
     "description": "Saya Amril Syaifa, seorang software engineer berpengalaman dari Indonesia sebagai fullstack developer.",
+    "running_text": "Saya Amril Syaifa Yasin",
     "next_description": "Saya memiliki pengalaman dalam pengembangan aplikasi web dan mobile.",
-    "more": "Lebih banyak tentang saya"
+    "more": "Lebih banyak tentang saya",
+    "visitor": "Anda adalah pengunjung ke #",
+    "best_viewed": "Situs ini paling baik dilihat di Netscape Navigator 3.0 atau lebih tinggi dengan resolusi 800x600",
+    "welcome": "Selamat datang!"
   },
   "about": {
     "about_me": "Tentang Saya",
@@ -19,14 +23,24 @@
     "this_is_me": "Ini saya:",
     "works": "Software engineer",
     "english": "Percakapan bahasa Inggris untuk bisnis",
-    "location": "Fulltime remote",
+    "location": "Remote penuh waktu",
     "coffee": "2 gelas kopi sehari",
     "game": "Pemain game moba",
     "careers": "Karir:",
-    "skills": "Keterampilan:"
+    "skills": "Keterampilan:",
+    "years": "tahun",
+    "name": "Nama",
+    "role": "Peran",
+    "locate": "Lokasi",
+    "experience": "Pengalaman",
+    "interests": "Kesukaan",
+    "bio": "Bio:"
   },
   "contact": {
-    "title": "Ayo kita ngobrol lebih jauh..."
+    "title": "Ayo kita ngobrol lebih jauh...",
+    "get_in_touch": "Hubungi Saya!",
+    "feel_free": "Jangan ragu untuk menghubungi saya! Saya senang mendengar dari pengunjung!",
+    "social_links": "Tautan Sosial"
   },
   "common": {
     "present": "Sekarang",
@@ -36,10 +50,43 @@
     "title": "Halaman Tidak Ditemukan – 404!",
     "back_home": "Kembali ke Beranda"
   },
+  "project": {
+    "title": "Proyek",
+    "personal": "Proyek Pribadi",
+    "my_personal": "Proyek Pribadi Saya:",
+    "my_company": "Proyek Perusahaan Saya:",
+    "company": "Proyek Perusahaan",
+    "loading": "Memuat proyek...",
+    "no_data": "Tidak ada proyek tersedia",
+    "new_project": "PROYEK BARU SEGERA HADIR",
+    "more": "lebih"
+  },
   "project_detail": {
     "overview": "Ringkasan:",
     "description": "Deskripsi:",
     "links": "Tautan:",
-    "link": "Tautan:"
+    "link": "Tautan:",
+    "back_to_projects": "Kembali ke Proyek",
+    "technologies": "Teknologi yang Digunakan"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Catatan Petualangan Coding Saya",
+    "loading": "Memuat posting...",
+    "no_data": "Tidak ada posting blog tersedia",
+    "posted": "Diposting:"
+  },
+  "video": {
+    "title": "Video",
+    "description": "Selamat datang di Galeri Video Saya!",
+    "sub_description": "Lihat beberapa video dan klip favorit saya di bawah ini. Nikmati kontennya!",
+    "feature": "Video Unggulan",
+    "loading": "Memuat video...",
+    "no_data": "Tidak ada video tersedia",
+    "comming_soon": "VIDEO BARU SEGERA HADIR!",
+    "last_updated": "Terakhir diperbarui:"
+  },
+  "footer": {
+    "copyright": "Semua hak dilindungi"
   }
 }

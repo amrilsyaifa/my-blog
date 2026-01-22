@@ -1,0 +1,155 @@
+/* Navigation */
+.nav-menu {
+  background-color: #c0c0c0;
+  border: 3px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  padding: 4px;
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu a {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0;
+  background-color: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #0000ff;
+  font-size: 13px;
+}
+
+.nav-menu a:visited {
+  color: #800080;
+}
+
+.nav-menu a:hover {
+  background-color: #e0e0e0;
+  border-style: inset;
+  color: #ff0000;
+}
+
+/* Hamburger menu button - hidden on desktop */
+.hamburger-menu {
+  display: none;
+  background-color: #c0c0c0;
+  border: 2px outset #dfdfdf;
+  padding: 8px 12px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 3px;
+  background-color: #000000;
+  display: block;
+}
+
+.hamburger-menu:active {
+  border-style: inset;
+}
+
+/* Overlay for mobile */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* Mobile navigation - hidden by default */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: #c0c0c0;
+    border: none;
+    padding: 20px 0;
+    margin: 0;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 999;
+    border-right: 3px solid #808080;
+  }
+
+  .nav-menu.nav-open {
+    left: 0;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-menu.nav-open ~ .nav-overlay {
+    display: block;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 12px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #dfdfdf;
+    background-color: transparent;
+    font-size: 14px;
+  }
+
+  .nav-menu a:hover {
+    background-color: #e0e0e0;
+    border: none;
+  }
+
+  .nav-menu a:active {
+    background-color: #808080;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 480px) {
+  .hamburger-menu {
+    padding: 6px 10px;
+  }
+
+  .hamburger-line {
+    width: 20px;
+    height: 2px;
+  }
+
+  .nav-menu {
+    width: 75vw;
+  }
+
+  .nav-menu a {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}

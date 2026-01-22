@@ -43,41 +43,37 @@ const AboutCV = () => {
   return (
     <>
       {careersData.length > 0 && (
-        <>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
-            {t("careers")}
+        <div className="retro-section">
+          <h3 style={{ color: "#0000FF", marginBottom: "16px" }}>
+            💼 {t("careers")}
           </h3>
-          <div className="ml-4">
-            <ul className="mt-2">
-              {careersData
-                .sort((a, b) => b.company_order - a.company_order)
-                .map((career) => (
-                  <li className="mb-3" key={career.id}>
-                    <CarrerItem {...career} />
-                  </li>
-                ))}
-            </ul>
+          <div className="retro-timeline">
+            {careersData
+              .sort((a, b) => b.company_order - a.company_order)
+              .map((career) => (
+                <div key={career.id} className="retro-timeline-item">
+                  <CarrerItem {...career} />
+                </div>
+              ))}
           </div>
-        </>
+        </div>
       )}
 
       {skillsData.length > 0 && (
-        <>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
-            {t("skills")}
+        <div className="retro-section">
+          <h3 style={{ color: "#0000FF", marginBottom: "16px" }}>
+            ⚡ {t("skills")}
           </h3>
-          <div className="ml-4">
-            <ul className="mt-2">
-              {skillsData
-                .sort((a, b) => a.skill_order - b.skill_order)
-                .map((skill) => (
-                  <li className="mb-3" key={skill.id}>
-                    <SkillItem {...skill} />
-                  </li>
-                ))}
-            </ul>
+          <div className="retro-skills-grid">
+            {skillsData
+              .sort((a, b) => a.skill_order - b.skill_order)
+              .map((skill) => (
+                <div key={skill.id} className="retro-skill-item">
+                  <SkillItem {...skill} />
+                </div>
+              ))}
           </div>
-        </>
+        </div>
       )}
     </>
   );

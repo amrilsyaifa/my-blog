@@ -1,11 +1,8 @@
+import Navigation from "@components/components/Navigation";
+import Footer from "@components/components/Footer";
 import { diffYears } from "@components/helpers/common";
-import TitleAbout from "@components/views/about/Title";
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
-import { Airplay, Home, Coffee, ToggleRight, Volume2 } from "react-feather";
-
-// import careersData from "@components/data/careers.json";
-// import skillsData from "@components/data/skills.json";
+import { getTranslations } from "next-intl/server";
 import AboutCV from "@components/views/about/AboutCV";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,66 +12,59 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function About() {
-  const t = useTranslations("about");
+export default async function About({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("about");
   const year = diffYears(new Date(), new Date("2020-01-01"));
 
   return (
-    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start p-4 md:p-24 pt-20 bg-gray-100 dark:bg-slate-900 scrollbar">
-      <div className="max-w-screen-xl md:max-w-screen-md mx-auto w-full">
-        <div className="w-full">
-          <TitleAbout title={t("about_me")} />
-          <p className="mt-4 text-xl md:text-2xl ">{t("greeting", { year })}</p>
-          <h3 className="mt-8 text-xl md:text-2xl dark:text-[#ec7a56] text-gray-800">
-            {t("this_is_me")}
-          </h3>
-          <div className="ml-4">
-            <ul className="mt-2">
-              <li className="mb-3">
-                <div className="flex flex-row items-center gap-4">
-                  <Airplay className="dark:text-[#ec7a56] text-gray-800" />
-                  <span className="text-gray-800 dark:text-white">
-                    {t("works")}
-                  </span>
-                </div>
-              </li>
-              <li className="mb-3">
-                <div className="flex flex-row items-center gap-4">
-                  <Home className="dark:text-[#ec7a56] text-gray-800" />
-                  <span className="text-gray-800 dark:text-white">
-                    {t("location")}
-                  </span>
-                </div>
-              </li>
-              <li className="mb-3">
-                <div className="flex flex-row items-center gap-4">
-                  <Volume2 className="dark:text-[#ec7a56] text-gray-800" />
-                  <span className="text-gray-800 dark:text-white">
-                    {t("english")}
-                  </span>
-                </div>
-              </li>
-              <li className="mb-3">
-                <div className="flex flex-row items-center gap-4">
-                  <ToggleRight className="dark:text-[#ec7a56] text-gray-800" />
-                  <span className="text-gray-800 dark:text-white">
-                    {t("game")}
-                  </span>
-                </div>
-              </li>
-              <li className="mb-3">
-                <div className="flex flex-row items-center gap-4">
-                  <Coffee className="dark:text-[#ec7a56] text-gray-800" />
-                  <span className="text-gray-800 dark:text-white">
-                    {t("coffee")}
-                  </span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <AboutCV />
-        </div>
+    <div className="container">
+      <Navigation locale={locale} />
+
+      <div className="page-header">
+        <h1 className="page-title">{t("about_me")}</h1>
       </div>
-    </main>
+
+      <div className="content-wrapper">
+        <table className="about-table">
+          <tbody>
+            <tr>
+              <td className="label">{t("name")}:</td>
+              <td className="value">Amril Syaifa Yasin</td>
+            </tr>
+            <tr>
+              <td className="label">{t("role")}:</td>
+              <td className="value">{t("works")}</td>
+            </tr>
+            <tr>
+              <td className="label">{t("locate")}:</td>
+              <td className="value">{t("location")}</td>
+            </tr>
+            <tr>
+              <td className="label">{t("experience")}:</td>
+              <td className="value">
+                {year} {t("years")}
+              </td>
+            </tr>
+            <tr>
+              <td className="label">{t("interests")}:</td>
+              <td className="value">
+                {t("game")}, {t("coffee")}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style={{ color: "#0000FF" }}>{t("bio")}:</h3>
+        <p>{t("greeting", { year })}</p>
+      </div>
+      <AboutCV />
+
+      <Footer />
+    </div>
   );
 }

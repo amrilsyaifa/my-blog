@@ -10,8 +10,12 @@
   "home": {
     "greeting": "Hello 👋 ✋ ✋",
     "description": "I'm Amril Syaifa, an experienced software engineer from Indonesia as a fullstack developer.",
+    "running_text": "I'm Amril Syaifa Yasin",
     "next_description": "I have experience in web and mobile application development.",
-    "more": "More about me"
+    "more": "More about me",
+    "visitor": "You are visitor #",
+    "best_viewed": "Best viewed in Netscape Navigator 3.0 or higher at 800x600 resolution",
+    "welcome": "Welcome!"
   },
   "about": {
     "about_me": "About Me",
@@ -23,10 +27,20 @@
     "coffee": "2 cups of coffee a day",
     "game": "Moba game player",
     "careers": "Careers:",
-    "skills": "Skills:"
+    "skills": "Skills:",
+    "years": "years",
+    "name": "Name",
+    "role": "Role",
+    "locate": "Location",
+    "experience": "Experience",
+    "interests": "Interests",
+    "bio": "Bio:"
   },
   "contact": {
-    "title": "Let's have a talk..."
+    "title": "Let's have a talk...",
+    "get_in_touch": "Get In Touch!",
+    "feel_free": "Feel free to reach out to me! I love hearing from visitors!",
+    "social_links": "Social Links"
   },
   "common": {
     "present": "Present",
@@ -36,10 +50,43 @@
     "title": "Not found – 404!",
     "back_home": "Go back to Home"
   },
+  "project": {
+    "title": "Projects",
+    "personal": "Personal Projects",
+    "my_personal": "My Personal Projects:",
+    "my_company": "My Company Projects:",
+    "company": "Company Projects",
+    "loading": "Loading projects...",
+    "no_data": "No projects available",
+    "new_project": "NEW PROJECTS COMING SOON",
+    "more": "more"
+  },
   "project_detail": {
     "overview": "Overview:",
     "description": "Description:",
     "links": "Links:",
-    "link": "Link:"
+    "link": "Link:",
+    "back_to_projects": "Back to Projects",
+    "technologies": "Technologies Used"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "A Diary of My Coding Adventures",
+    "loading": "Loading posts...",
+    "no_data": "No blog posts available",
+    "posted": "Posted:"
+  },
+  "video": {
+    "title": "Videos",
+    "description": "Welcome to My Video Gallery!",
+    "sub_description": "Check out some of my favorite videos and clips below. Enjoy the content!",
+    "feature": "Featured Videos",
+    "loading": "Loading videos...",
+    "no_data": "No videos available",
+    "comming_soon": "MORE VIDEOS COMING SOON!",
+    "last_updated": "Last updated:"
+  },
+  "footer": {
+    "copyright": "All rights reserved"
   }
 }

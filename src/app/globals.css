@@ -1,3 +1,5 @@
+@import "./retro-globals.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,7 +19,9 @@
   height: 1em;
   width: 1.5em;
   transform-origin: 50% 50%;
-  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+  transition:
+    opacity 150ms,
+    transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
 }
 
 .sun-checked {
@@ -43,7 +47,9 @@
   width: 1em;
   border-radius: 50%;
   box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
-  transition: background-color 250ms, border-color 250ms,
+  transition:
+    background-color 250ms,
+    border-color 250ms,
     transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
 }
 
@@ -64,7 +70,9 @@
   height: 1em;
   width: 1.5em;
   transform-origin: 50% 50%;
-  transition: opacity 150ms, transform 500ms cubic-bezier(0.26, 2.5, 0.46, 0.71);
+  transition:
+    opacity 150ms,
+    transform 500ms cubic-bezier(0.26, 2.5, 0.46, 0.71);
 }
 
 .moon-checked {

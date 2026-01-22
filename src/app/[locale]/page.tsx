@@ -1,22 +1,58 @@
-import MoreButton from "@components/views/home/MoreButton";
-import TitleHome from "@components/views/home/Title";
-import { useTranslations } from "next-intl";
+import Navigation from "@components/components/Navigation";
+import Footer from "@components/components/Footer";
+import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
-export default function Home() {
-  const t = useTranslations("home");
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations("home");
+  const currentYear = new Date().getFullYear();
 
   return (
-    <main className="flex min-h-[calc(100vh-5.5em)] flex-col items-start justify-center p-4 md:p-24 bg-gray-100 dark:bg-slate-900">
-      <div className="max-w-screen-xl md:max-w-screen-md mx-auto">
-        <TitleHome title={t("greeting")} />
-        <p className="text-lg md:text-2xl mt-10 text-gray-900 dark:text-gray-100">
-          {t("description")}
-        </p>
-        <p className="text-lg md:text-2xl text-gray-900 dark:text-gray-100">
-          {t("next_description")}
-        </p>
-        <MoreButton title={t("more")} />
+    <div className="container">
+      <Navigation locale={locale} />
+
+      <div className="page-header">
+        <h1 className="page-title">{t("greeting")} 🌟</h1>
+        <p className="page-subtitle">{`~ Est. ${currentYear} ~`}</p>
       </div>
-    </main>
+
+      <div className="marquee">
+        <div className="marquee-content">{t("welcome")}</div>
+      </div>
+
+      <div className="content-wrapper">
+        <p className="big-text">{t("description")}</p>
+        <p className="big-text">{t("next_description")}</p>
+        <hr />
+        <p style={{ color: "#FF0000" }}>
+          <strong>{t("best_viewed")}</strong>
+        </p>
+      </div>
+
+      <div className="more-about-me">
+        <Link
+          href="/en/about"
+          rel="noopener noreferrer"
+          className="retro-footer-btn"
+        >
+          {t("more")}
+        </Link>
+      </div>
+
+      <div className="visitor-counter">
+        <div className="visitor-counter-icon">👁️</div>
+        <p className="visitor-counter-text">
+          {t("visitor")}
+          <span className="blink">42,337</span>
+        </p>
+      </div>
+
+      <Footer />
+    </div>
   );
 }

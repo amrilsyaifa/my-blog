@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Aperture } from "react-feather";
 
 export interface SkillItemProps {
   id: string;
@@ -10,20 +9,47 @@ export interface SkillItemProps {
 
 const SkillItem: FC<SkillItemProps> = ({ name, data }) => {
   return (
-    <div className="flex flex-row gap-4 ">
-      <div className="w-4 h-4">
-        <Aperture className="dark:text-[#ec7a56] text-gray-800 w-4 h-4 mt-1.5" />
+    <div
+      style={{
+        backgroundColor: "#E0E0E0",
+        border: "2px outset #DFDFDF",
+        padding: "12px",
+        borderRadius: "0",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          marginBottom: "8px",
+        }}
+      >
+        <span style={{ fontSize: "16px" }}>⚙️</span>
+        <h4 style={{ color: "#0000FF", margin: 0, fontSize: "14px", fontWeight: "bold" }}>
+          {name}
+        </h4>
       </div>
-      <div className="flex flex-col items-start">
-        <h3 className="font-bold text-lg">{name}</h3>
-        <div className="flex flex-row items-center flex-wrap gap-4">
-          {data.map((item) => (
-            <div key={item} className="flex flex-row items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-800" />
-              <p className="text-md italic">{item}</p>
-            </div>
-          ))}
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+        }}
+      >
+        {data.map((item) => (
+          <div
+            key={item}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+            }}
+          >
+            <span style={{ color: "#FF0000", fontSize: "8px" }}>■</span>
+            <span style={{ color: "#000000", fontSize: "12px" }}>{item}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
