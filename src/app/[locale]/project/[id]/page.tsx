@@ -6,7 +6,8 @@ import { db } from "@components/configs/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 
 export interface LinkProps {
@@ -39,7 +40,7 @@ export default function ProjectDetail() {
     "landscape" | "portrait" | "square"
   >("landscape");
 
-  const getProjectDetail = async () => {
+  const getProjectDetail = useCallback(async () => {
     try {
       const docRef = doc(db, "project_detail", id as string);
       const docSnap = await getDoc(docRef);
@@ -54,11 +55,11 @@ export default function ProjectDetail() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     getProjectDetail();
-  }, [id]);
+  }, [getProjectDetail]);
 
   const handlePrevImage = () => {
     if (project?.images) {
@@ -145,11 +146,13 @@ export default function ProjectDetail() {
             className="carousel-container"
             data-orientation={imageOrientation}
           >
-            <img
+            <Image
               src={project.images[currentImageIndex].url}
               alt={project.images[currentImageIndex].description}
               className="carousel-image"
               onLoad={handleImageLoad}
+              width={800}
+              height={600}
               style={{
                 maxHeight:
                   imageOrientation === "portrait"

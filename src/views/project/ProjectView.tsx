@@ -1,7 +1,7 @@
 "use client";
 
 import Tab from "@components/components/Tab";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ProjectItem, { ProjectItemProps } from "./ProjectItem";
 import { useDisclosure } from "@components/hooks/useDisclosure";
 import EmptyData from "@components/components/EmptyData";
@@ -19,7 +19,7 @@ const ProjectView = () => {
   const [isLoading, handle] = useDisclosure(true);
   const [projects, setProjects] = useState<ProjectItemProps[]>([]);
 
-  const getProjects = async () => {
+  const getProjects = useCallback(async () => {
     try {
       handle.open();
       const querySnapshot = await getDocs(collection(db, "projects"));
@@ -32,11 +32,11 @@ const ProjectView = () => {
       console.log(error);
       alert("Failed to fetch data");
     }
-  };
+  }, [handle]);
 
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [getProjects]);
 
   if (isLoading) {
     return <ProjectShimmer />;

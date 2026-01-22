@@ -1,20 +1,17 @@
 "use client";
 
 import Navigation from "@components/components/Navigation";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
-export default async function NotFoundPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations("404");
+export default function NotFoundPage() {
+  const { locale } = useParams();
+  const t = useTranslations("404");
 
   return (
     <div className="container">
-      <Navigation locale={locale} />
+      <Navigation locale={locale as string} />
 
       <div
         style={{
@@ -69,12 +66,12 @@ export default async function NotFoundPage({
             <br />
             C:\INTERNET\WEBSITE\{`>`}_ Our webmaster has been notified.
             <br />
-            C:\INTERNET\WEBSITE\{`>`}_ Press F5 to refresh (it won't help)
+            C:\INTERNET\WEBSITE\{`>`}_ Press F5 to refresh (it won&apos;t help)
           </div>
 
           <div style={{ marginBottom: "20px" }}>
             <p style={{ margin: "0 0 10px 0", color: "#000000" }}>
-              Sorry! The page you're looking for has disappeared into the
+              Sorry! The page you&apos;re looking for has disappeared into the
               digital void.
             </p>
             <p style={{ margin: "0", color: "#000000", fontSize: "14px" }}>
@@ -144,7 +141,8 @@ export default async function NotFoundPage({
       </div>
 
       <div className="under-construction" style={{ marginBottom: "20px" }}>
-        This page is definitely under construction! Or maybe it's just LOST!
+        This page is definitely under construction! Or maybe it&apos;s just
+        LOST!
       </div>
 
       <table

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Carousel from "./Carousel";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
@@ -22,7 +22,7 @@ const ProjectDetailView = () => {
   const [data, setData] = useState({} as ProjectDetailProps);
   const { id, locale } = useParams();
 
-  const getProjectDetail = async () => {
+  const getProjectDetail = useCallback(async () => {
     try {
       handle.open();
       const docRef = doc(db, "project_detail", id as string);
@@ -38,12 +38,12 @@ const ProjectDetailView = () => {
       handle.close();
       alert("Failed to fetch data");
     }
-  };
+  }, [id, handle]);
 
   useEffect(() => {
     // fetch data from firestore
     getProjectDetail();
-  }, []);
+  }, [getProjectDetail]);
 
   if (isLoading) {
     return <ProjectDetailShimmer />;

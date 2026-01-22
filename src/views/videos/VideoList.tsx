@@ -2,7 +2,7 @@
 
 import YouTubeEmbed from "@components/components/YouTubeEmbed";
 import { useDisclosure } from "@components/hooks/useDisclosure";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { db } from "@components/configs/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import VideoShimmer from "./VideoShimmer";
@@ -17,7 +17,7 @@ const VideoList = () => {
   const [videos, setVideos] = useState<VideoItemsProps[]>([]);
 
   const [isLoading, handle] = useDisclosure(true);
-  const getVideos = async () => {
+  const getVideos = useCallback(async () => {
     try {
       handle.open();
       const querySnapshot = await getDocs(collection(db, "videos"));
@@ -30,11 +30,11 @@ const VideoList = () => {
       console.log(error);
       alert("Failed to fetch data");
     }
-  };
+  }, [handle]);
 
   useEffect(() => {
     getVideos();
-  }, []);
+  }, [getVideos]);
 
   if (isLoading) {
     return <VideoShimmer />;

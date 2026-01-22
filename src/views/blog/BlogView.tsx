@@ -1,7 +1,7 @@
 "use client";
 
 import Tab from "@components/components/Tab";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import BlogItem, { BlogItemProps } from "./BlogItem";
 import BlogShimmer from "./BlogShimmer";
 import { collection, getDocs } from "firebase/firestore";
@@ -19,7 +19,7 @@ const BlogView = () => {
   const [tab, setTab] = useState("en");
   const [blogs, setBlogs] = useState<BlogItemProps[]>([]);
 
-  const getBlogs = async () => {
+  const getBlogs = useCallback(async () => {
     try {
       handle.open();
       const querySnapshot = await getDocs(collection(db, "blogs"));
@@ -32,11 +32,11 @@ const BlogView = () => {
       console.log(error);
       alert("Failed to fetch data");
     }
-  };
+  }, [handle]);
 
   useEffect(() => {
     getBlogs();
-  }, []);
+  }, [getBlogs]);
 
   if (isLoading) {
     return <BlogShimmer />;

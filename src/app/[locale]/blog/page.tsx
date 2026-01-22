@@ -74,8 +74,13 @@ export default function Blog({ params }: { params: { locale: string } }) {
           </div>
         ) : (
           posts.map((post, index) => (
-            <Link href={post.url} rel="noopener noreferrer" target="_blank">
-              <div key={post.id || index} className="blog-card">
+            <Link
+              key={post.id || index}
+              href={post.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <div className="blog-card">
                 <h3 className="blog-card-title">{post.title}</h3>
                 <p className="blog-card-date">
                   {t("posted")} {post.date}
