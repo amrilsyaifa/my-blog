@@ -210,9 +210,8 @@ export default function ProjectDetail() {
                   lineHeight: "1.6",
                   marginBottom: "10px",
                 }}
-              >
-                {desc}
-              </p>
+                dangerouslySetInnerHTML={{ __html: desc }}
+              />
             ))}
           </>
         )}

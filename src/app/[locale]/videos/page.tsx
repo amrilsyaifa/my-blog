@@ -2,7 +2,6 @@
 
 import Navigation from "@components/components/Navigation";
 import YouTubeEmbed from "@components/components/YouTubeEmbed";
-import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
@@ -69,55 +68,11 @@ export default function Videos({ params }: { params: { locale: string } }) {
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
           >
             {sortedVideos.map((video) => (
-              <div
+              <YouTubeEmbed
                 key={video.videoId}
-                style={{
-                  backgroundColor: "#C0C0C0",
-                  padding: "15px",
-                  border: "3px outset #DFDFDF",
-                }}
-              >
-                <h4
-                  style={{
-                    color: "#000080",
-                    marginTop: "0",
-                    marginBottom: "12px",
-                  }}
-                >
-                  🎥 {video.title}
-                </h4>
-                <div
-                  style={{
-                    backgroundColor: "#000000",
-                    padding: "10px",
-                    border: "2px solid #808080",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "relative",
-                      paddingBottom: "56.25%",
-                      height: 0,
-                      overflow: "hidden",
-                    }}
-                  >
-                    <iframe
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                      }}
-                      src={`https://www.youtube.com/embed/${video.videoId}`}
-                      title={video.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
+                title={video.title}
+                videoId={video.videoId}
+              />
             ))}
           </div>
         )}
