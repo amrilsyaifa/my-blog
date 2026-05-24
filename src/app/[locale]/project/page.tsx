@@ -1,19 +1,16 @@
 "use client";
 
-import Navigation from "@components/components/Navigation";
+import Navbar from "@components/components/Navbar";
 import Footer from "@components/components/Footer";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import classNames from "classnames";
 
-type DevStack = {
-  is_open_new_tab: boolean;
-  title: string;
-  url?: string;
-};
-
+type DevStack = { is_open_new_tab: boolean; title: string; url?: string };
 interface Project {
   id: string;
   title: string;
@@ -25,109 +22,102 @@ interface Project {
   is_detail?: boolean;
 }
 
-export default function Project({ params }: { params: { locale: string } }) {
+export default function Project() {
   const t = useTranslations("project");
+  const { locale } = useParams();
   const [activeTab, setActiveTab] = useState<"self" | "company">("self");
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getProjects = async () => {
-    try {
-      setIsLoading(true);
-      const querySnapshot = await getDocs(collection(db, "projects"));
-      const projectData: Project[] = [];
-      querySnapshot.forEach((doc) => {
-        projectData.push(doc.data() as Project);
-      });
-      setProjects(projectData);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getProjects();
+    (async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "projects"));
+        const data: Project[] = [];
+        snapshot.forEach((doc) => data.push(doc.data() as Project));
+        setProjects(data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
-  const filteredProjects = projects
-    .filter((p) => p.project_by === activeTab)
-    .sort((a, b) => b.order - a.order);
+  const filtered = projects.filter((p) => p.project_by === activeTab).sort((a, b) => b.order - a.order);
 
   return (
-    <div className="container">
-      <Navigation locale={params.locale} />
-
-      <div className="page-header">
-        <h1 className="page-title">{t("title")}</h1>
-      </div>
-
-      <div className="tabs">
-        <button
-          className={`tab-button ${activeTab === "self" ? "active" : ""}`}
-          onClick={() => setActiveTab("self")}
-        >
-          {t("personal")}
-        </button>
-        <button
-          className={`tab-button ${activeTab === "company" ? "active" : ""}`}
-          onClick={() => setActiveTab("company")}
-        >
-          {t("company")}
-        </button>
-      </div>
-
-      <div className="tab-content">
-        {isLoading ? (
-          <div className="empty-state">
-            <p style={{ color: "#000000" }}>{t("loading")}</p>
+    <div className="min-h-screen flex flex-col bg-bg">
+      <Navbar />
+      <main className="flex-1 pt-24 pb-16">
+        <div className="max-w-screen-lg mx-auto px-4">
+          {/* Header */}
+          <div className="mb-10">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-8 h-px bg-accent" />
+              <span className="text-accent text-sm font-semibold tracking-widest uppercase">Portfolio</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-text-primary">{t("title")}</h1>
           </div>
-        ) : filteredProjects.length === 0 ? (
-          <div className="empty-state">
-            <p style={{ color: "#000000" }}>{t("no_data")}</p>
+
+          {/* Tabs */}
+          <div className="flex gap-2 mb-8">
+            {(["self", "company"] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={classNames(
+                  "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                  {
+                    "bg-accent text-white shadow-glow-sm": activeTab === tab,
+                    "bg-bg-card border border-border text-text-secondary hover:border-accent/50 hover:text-text-primary": activeTab !== tab,
+                  }
+                )}
+              >
+                {tab === "self" ? t("personal") : t("company")}
+              </button>
+            ))}
           </div>
-        ) : (
-          <>
-            <h3 style={{ color: "#0000FF", marginTop: "0" }}>
-              {activeTab === "self" ? t("my_personal") : t("my_company")}
-            </h3>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
-            >
-              {filteredProjects.map((project) => {
-                const projectLink = project.is_detail
-                  ? `/${params.locale}${project.link}`
-                  : project.link;
-                const isExternalLink = !project.is_detail;
+
+          {/* Content */}
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-40 bg-bg-card border border-border rounded-xl animate-pulse" />
+              ))}
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center py-20 text-text-muted">{t("no_data")}</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filtered.map((project) => {
+                const href = project.is_detail ? `/${locale}${project.link}` : project.link;
                 return (
                   <Link
                     key={project.id}
-                    href={projectLink}
-                    target={isExternalLink ? "_blank" : undefined}
-                    rel={isExternalLink ? "noopener noreferrer" : undefined}
-                    style={{ textDecoration: "none" }}
+                    href={href}
+                    target={project.is_detail ? undefined : "_blank"}
+                    rel={project.is_detail ? undefined : "noopener noreferrer"}
+                    className="group block"
                   >
-                    <div className="project-card">
-                      <h4 className="project-card-title">{project.title}</h4>
-                      <p className="project-card-desc">{project.description}</p>
-                      {project.dev_stack && project.dev_stack.length > 0 && (
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "6px",
-                            flexWrap: "wrap",
-                          }}
-                        >
+                    <div className="bg-bg-card border border-border rounded-xl p-5 h-full flex flex-col justify-between hover:border-accent/50 hover:shadow-glow-sm transition-all duration-300 hover:-translate-y-0.5">
+                      <div>
+                        <h3 className="text-base font-bold text-text-primary group-hover:text-accent transition-colors mb-2 capitalize">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 mb-4">
+                          {project.description}
+                        </p>
+                      </div>
+                      {project.dev_stack?.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border">
                           {project.dev_stack.slice(0, 8).map((tech, idx) => (
-                            <span key={idx} className="tech-badge">
+                            <span key={idx} className="px-2 py-0.5 text-xs rounded-md bg-accent/10 border border-accent/20 text-accent">
                               {tech.title}
                             </span>
                           ))}
                           {project.dev_stack.length > 8 && (
-                            <span className="project-card-meta">
-                              +{project.dev_stack.length - 3}
-                            </span>
+                            <span className="text-xs text-text-muted">+{project.dev_stack.length - 8} {t("more")}</span>
                           )}
                         </div>
                       )}
@@ -136,15 +126,9 @@ export default function Project({ params }: { params: { locale: string } }) {
                 );
               })}
             </div>
-            {activeTab === "company" && (
-              <div className="under-construction" style={{ marginTop: "20px" }}>
-                🚧 {t("new_project")} 🚧
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
+          )}
+        </div>
+      </main>
       <Footer />
     </div>
   );

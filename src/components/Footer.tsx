@@ -13,54 +13,45 @@ const Footer = () => {
 
   const onChangeLocale = (val: string) => {
     const findLocale = Locale.find((loc) => loc === val);
-    let newPath = pathName.replace(`/${locale}`, `/${findLocale}`);
+    const newPath = pathName.replace(`/${locale}`, `/${findLocale}`);
     router.replace(newPath);
   };
 
   return (
-    <footer className="retro-footer">
-      <div className="retro-footer-container">
-        {/* Left side - Social Links */}
-        <div className="retro-footer-social">
-          <Link
-            href="https://github.com/amrilsyaifa"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="retro-footer-btn"
-          >
-            GitHub
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/amril-syaifa-yasin-506530141/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="retro-footer-btn"
-          >
-            LinkedIn
-          </Link>
-          <Link
-            href="https://medium.com/@amrilsyaifa"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="retro-footer-btn"
-          >
-            Medium
-          </Link>
+    <footer className="border-t border-border/40 mt-16" style={{ backgroundColor: "var(--footer-bg)" }}>
+      <div className="max-w-screen-xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Social links */}
+        <div className="flex items-center gap-3">
+          {[
+            { label: "GitHub", href: "https://github.com/amrilsyaifa" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/amril-syaifa-yasin-506530141/" },
+            { label: "Medium", href: "https://medium.com/@amrilsyaifa" },
+          ].map(({ label, href }) => (
+            <Link
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-xs font-medium text-text-secondary border border-border rounded-md hover:border-accent hover:text-accent transition-all duration-300 hover:shadow-glow-sm"
+            >
+              {label}
+            </Link>
+          ))}
         </div>
 
-        {/* Right side - Language Dropdown & Copyright */}
-        <div className="retro-footer-right">
+        {/* Right: language + copyright */}
+        <div className="flex items-center gap-4">
           <select
             value={locale as string}
             onChange={(e) => onChangeLocale(e.target.value)}
-            className="retro-footer-select"
+            className="bg-bg-card text-text-secondary border border-border rounded-md px-2 py-1 text-xs cursor-pointer hover:border-accent focus:border-accent focus:outline-none transition-colors"
           >
             <option value="en">English</option>
             <option value="id">Indonesia</option>
           </select>
-          <div className="retro-footer-copyright">
+          <span className="text-text-muted text-xs">
             © {currentYear} {t("copyright")}
-          </div>
+          </span>
         </div>
       </div>
     </footer>

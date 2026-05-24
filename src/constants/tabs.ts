@@ -4,6 +4,8 @@ const Tabs = [
   { path: "/project", key: "project" },
   { path: "/blog", key: "blog" },
   { path: "/videos", key: "videos" },
+  { path: "/certification", key: "certification" },
+  { path: "/community", key: "community" },
   { path: "/contact", key: "contact" },
 ];
 

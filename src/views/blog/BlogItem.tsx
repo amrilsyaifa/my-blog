@@ -13,17 +13,15 @@ export interface BlogItemProps {
 
 const BlogItem: FC<BlogItemProps> = ({ title, description, date, url }) => {
   return (
-    <Link href={url} rel="noopener noreferrer" target="_blank">
-      <div className="flex flex-col">
-        <h1 className="text-lg font-bold line-clamp-2 dark:text-[#ec7a56] text-gray-800">
+    <Link href={url} rel="noopener noreferrer" target="_blank" className="group block">
+      <div className="flex flex-col gap-2 hover:-translate-y-0.5 transition-transform duration-200">
+        <h2 className="text-base font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-2">
           {title}
-        </h1>
-        <p className="text-md mt-4 line-clamp-2 dark:text-gray-400 text-gray-800">
+        </h2>
+        <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">
           {description}
         </p>
-        <p className="text-sm mt-4 dark:text-gray-400 text-gray-800 italic capitalize">
-          {date}
-        </p>
+        <p className="text-xs text-text-muted italic">{date}</p>
       </div>
     </Link>
   );

@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import CustomCursor from "@components/components/CustomCursor";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -30,6 +31,7 @@ export default async function RootLayout({
       <body className={chakrapetch.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>{children}</Providers>
+          <CustomCursor />
         </NextIntlClientProvider>
       </body>
     </html>

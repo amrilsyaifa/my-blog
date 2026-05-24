@@ -26,37 +26,34 @@ const ProjectItem: FC<ProjectItemProps> = ({
 }) => {
   const newLink = link[0] === "/" ? link.replace("/", "") : link;
   return (
-    <div className="w-full md:max-w-sm p-6 border border-gray-200 rounded-lg shadow  dark:border-gray-700 flex flex-col justify-between">
-      <div className="flex flex-col">
+    <div className="group bg-bg-card border border-border rounded-xl p-5 flex flex-col justify-between hover:border-accent/50 hover:shadow-glow-sm transition-all duration-300 hover:-translate-y-0.5">
+      <div className="flex flex-col flex-1">
         <Link
           href={newLink}
           rel="noopener noreferrer"
           target={is_detail ? undefined : "_blank"}
         >
-          <h5 className="mb-2 text-lg font-bold tracking-tight line-clamp-2 dark:text-[#ec7a56] text-gray-800 capitalize">
+          <h3 className="mb-2 text-base font-bold capitalize text-text-primary group-hover:text-accent transition-colors line-clamp-2">
             {title}
-          </h5>
+          </h3>
         </Link>
-        <p className="mb-3 font-normal line-clamp-3 dark:text-gray-400 text-gray-800 italic">
+        <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 mb-4">
           {description}
         </p>
       </div>
-      <div className="flex flex-row items-center text-gray-400 text-md gap-2 flex-wrap">
-        <span className="font-bold dark:text-gray-400 text-gray-800">[ </span>
-        {dev_stack?.map((stack, idx) => {
-          return (
-            <div key={idx} className="flex flex-row items-center">
-              <span className="text-gray-800 dark:text-[#ec7a56]">
-                {stack.title}
-              </span>
-              {idx !== dev_stack.length - 1 && (
-                <div className="ml-2 w-1.5 h-1.5 rounded-full dark:bg-[#ec7a56] bg-gray-600" />
-              )}
-            </div>
-          );
-        })}
-        <span className="font-bold dark:text-gray-400 text-gray-800"> ]</span>
-      </div>
+
+      {dev_stack?.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-border">
+          {dev_stack.map((stack, idx) => (
+            <span
+              key={idx}
+              className="px-2 py-0.5 text-xs rounded-md bg-accent/10 border border-accent/20 text-accent"
+            >
+              {stack.title}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

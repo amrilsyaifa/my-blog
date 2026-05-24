@@ -15,27 +15,27 @@ interface TabProps {
 
 const Tab: FC<TabProps> = ({ data, value, onSelect }) => {
   return (
-    <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+    <div className="flex gap-2">
       {data.map((item) => (
-        <li
-          className="me-2"
+        <button
           key={item.value}
+          disabled={item.isDisabled}
           onClick={() => onSelect?.(item.value)}
-        >
-          <div
-            className={classNames("inline-block p-4 rounded-t-lg ", {
-              "text-blue-600": item.value === value,
-              "cursor-not-allowed text-gray-400 dark:text-gray-500":
+          className={classNames(
+            "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+            {
+              "bg-accent text-white shadow-glow-sm": item.value === value,
+              "bg-bg-card border border-border text-text-secondary hover:border-accent/50 hover:text-text-primary":
+                item.value !== value && !item.isDisabled,
+              "opacity-40 cursor-not-allowed bg-bg-card border border-border text-text-muted":
                 item.isDisabled,
-              "cursor-pointer hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300":
-                !item.isDisabled,
-            })}
-          >
-            {item.label}
-          </div>
-        </li>
+            }
+          )}
+        >
+          {item.label}
+        </button>
       ))}
-    </ul>
+    </div>
   );
 };
 

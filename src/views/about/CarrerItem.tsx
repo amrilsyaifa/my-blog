@@ -41,54 +41,63 @@ const CarrerItem: FC<CarrerItemProps> = ({
         month: "short",
         year: "numeric",
       });
+
   return (
-    <div className="retro-career-card">
-      <div className="retro-career-header">
-        <span className="retro-career-icon">►</span>
-        <h4 style={{ color: "#0000FF", margin: 0, fontSize: "16px" }}>
-          {job_title}
-        </h4>
-        <span style={{ color: "#808080", fontSize: "12px", marginLeft: "8px" }}>
-          ({job_tipe})
-        </span>
-      </div>
-      
-      <div className="retro-career-details">
-        <div style={{ marginBottom: "4px" }}>
-          <Link
-            href={company_url}
-            rel="noopener noreferrer"
-            target="_blank"
-            style={{ color: "#0000FF", textDecoration: "underline" }}
-          >
-            {company}
-          </Link>
-          <span style={{ color: "#000000", margin: "0 8px" }}>•</span>
-          <span style={{ color: "#000000", fontWeight: "bold" }}>
-            {job_location}
-          </span>
-        </div>
-        
-        <div style={{ color: "#808080", fontSize: "12px", marginBottom: "8px" }}>
-          📅 {startDate} - {endDate}
-          {is_active && (
-            <span className="blink" style={{ marginLeft: "8px", color: "#FF0000" }}>
-              ● ACTIVE
+    <div className="relative pl-6 pb-8">
+      {/* Timeline dot */}
+      <span className="absolute left-0 top-1.5 w-3 h-3 rounded-full border-2 border-accent bg-bg" />
+      {/* Timeline line drawn via parent */}
+
+      <div className="bg-bg-card border border-border rounded-lg p-4 hover:border-accent/50 transition-colors duration-300 group">
+        <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+          <div>
+            <h4 className="text-text-primary font-semibold text-base group-hover:text-accent transition-colors">
+              {job_title}
+            </h4>
+            <div className="flex items-center gap-2 mt-1">
+              <Link
+                href={company_url}
+                rel="noopener noreferrer"
+                target="_blank"
+                className="text-accent text-sm hover:underline"
+              >
+                {company}
+              </Link>
+              <span className="text-text-muted text-xs">•</span>
+              <span className="text-text-secondary text-sm">{job_location}</span>
+              <span className="text-text-muted text-xs">•</span>
+              <span className="text-text-muted text-xs italic">{job_tipe}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {is_active && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Active
+              </span>
+            )}
+            <span className="text-text-muted text-xs whitespace-nowrap">
+              {startDate} — {endDate}
             </span>
-          )}
+          </div>
         </div>
-        
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", marginTop: "8px" }}>
-          {dev_stack.map((stack, idx) => (
-            <span key={idx} className="tech-badge" style={{ fontSize: "10px" }}>
-              {stack}
-            </span>
-          ))}
-        </div>
-        
-        <div style={{ color: "#808080", fontSize: "11px", marginTop: "8px" }}>
-          📍 {company_address}
-        </div>
+
+        {company_address && (
+          <p className="text-text-muted text-xs mb-3">{company_address}</p>
+        )}
+
+        {dev_stack.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {dev_stack.map((stack, idx) => (
+              <span
+                key={idx}
+                className="px-2 py-0.5 text-xs rounded-md border border-accent/30 bg-accent/10 text-accent"
+              >
+                {stack}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

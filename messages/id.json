@@ -5,14 +5,17 @@
     "contact": "Kontak",
     "project": "Proyek",
     "blog": "Blog",
-    "videos": "Video"
+    "videos": "Video",
+    "certification": "Sertifikasi",
+    "community": "Komunitas"
   },
   "home": {
-    "greeting": "Halo 👋 ✋ ✋",
-    "description": "Saya Amril Syaifa, seorang software engineer berpengalaman dari Indonesia sebagai fullstack developer.",
+    "greeting": "Halo!",
+    "description": "Saya Amril Syaifa Yasin, software engineer fullstack yang bersemangat dari Indonesia. Saya membangun aplikasi web & mobile modern dengan kode yang bersih dan scalable.",
     "running_text": "Saya Amril Syaifa Yasin",
     "next_description": "Saya memiliki pengalaman dalam pengembangan aplikasi web dan mobile.",
-    "more": "Lebih banyak tentang saya",
+    "more": "Tentang Saya",
+    "projects": "Lihat Proyek",
     "visitor": "Anda adalah pengunjung ke #",
     "best_viewed": "Situs ini paling baik dilihat di Netscape Navigator 3.0 atau lebih tinggi dengan resolusi 800x600",
     "welcome": "Selamat datang!"
@@ -26,15 +29,15 @@
     "location": "Remote penuh waktu",
     "coffee": "2 gelas kopi sehari",
     "game": "Pemain game moba",
-    "careers": "Karir:",
-    "skills": "Keterampilan:",
+    "careers": "Karir",
+    "skills": "Keterampilan",
     "years": "tahun",
     "name": "Nama",
     "role": "Peran",
     "locate": "Lokasi",
     "experience": "Pengalaman",
     "interests": "Kesukaan",
-    "bio": "Bio:"
+    "bio": "Bio"
   },
   "contact": {
     "title": "Ayo kita ngobrol lebih jauh...",
@@ -52,20 +55,20 @@
   },
   "project": {
     "title": "Proyek",
-    "personal": "Proyek Pribadi",
+    "personal": "Pribadi",
     "my_personal": "Proyek Pribadi Saya:",
     "my_company": "Proyek Perusahaan Saya:",
-    "company": "Proyek Perusahaan",
+    "company": "Perusahaan",
     "loading": "Memuat proyek...",
     "no_data": "Tidak ada proyek tersedia",
     "new_project": "PROYEK BARU SEGERA HADIR",
     "more": "lebih"
   },
   "project_detail": {
-    "overview": "Ringkasan:",
-    "description": "Deskripsi:",
-    "links": "Tautan:",
-    "link": "Tautan:",
+    "overview": "Ringkasan",
+    "description": "Deskripsi",
+    "links": "Tautan",
+    "link": "Tautan",
     "back_to_projects": "Kembali ke Proyek",
     "technologies": "Teknologi yang Digunakan"
   },
@@ -79,12 +82,26 @@
   "video": {
     "title": "Video",
     "description": "Selamat datang di Galeri Video Saya!",
-    "sub_description": "Lihat beberapa video dan klip favorit saya di bawah ini. Nikmati kontennya!",
+    "sub_description": "Lihat beberapa video dan klip favorit saya di bawah ini.",
     "feature": "Video Unggulan",
     "loading": "Memuat video...",
     "no_data": "Tidak ada video tersedia",
     "comming_soon": "VIDEO BARU SEGERA HADIR!",
     "last_updated": "Terakhir diperbarui:"
+  },
+  "certification": {
+    "title": "Sertifikasi",
+    "description": "Sertifikat profesional dan pencapaian",
+    "view": "Lihat Sertifikat",
+    "issued_by": "Diterbitkan oleh"
+  },
+  "community": {
+    "title": "Komunitas",
+    "description": "Event dan kegiatan yang pernah saya ikuti",
+    "loading": "Memuat event...",
+    "no_data": "Belum ada event komunitas",
+    "photos": "Foto",
+    "view_all": "Lihat Semua Foto"
   },
   "footer": {
     "copyright": "Semua hak dilindungi"

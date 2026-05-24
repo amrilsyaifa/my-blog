@@ -9,46 +9,19 @@ export interface SkillItemProps {
 
 const SkillItem: FC<SkillItemProps> = ({ name, data }) => {
   return (
-    <div
-      style={{
-        backgroundColor: "#E0E0E0",
-        border: "2px outset #DFDFDF",
-        padding: "12px",
-        borderRadius: "0",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          marginBottom: "8px",
-        }}
-      >
-        <span style={{ fontSize: "16px" }}>⚙️</span>
-        <h4 style={{ color: "#0000FF", margin: 0, fontSize: "14px", fontWeight: "bold" }}>
-          {name}
-        </h4>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "8px",
-        }}
-      >
+    <div className="bg-bg-card border border-border rounded-lg p-4 hover:border-accent/50 transition-colors duration-300">
+      <h4 className="text-text-primary font-semibold text-sm mb-3 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+        {name}
+      </h4>
+      <div className="flex flex-wrap gap-1.5">
         {data.map((item) => (
-          <div
+          <span
             key={item}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-            }}
+            className="px-2 py-0.5 text-xs rounded-md bg-bg border border-border text-text-secondary hover:border-accent/40 hover:text-accent transition-colors duration-200"
           >
-            <span style={{ color: "#FF0000", fontSize: "8px" }}>■</span>
-            <span style={{ color: "#000000", fontSize: "12px" }}>{item}</span>
-          </div>
+            {item}
+          </span>
         ))}
       </div>
     </div>

@@ -5,36 +5,39 @@
     "contact": "Contact",
     "project": "Projects",
     "blog": "Blog",
-    "videos": "Videos"
+    "videos": "Videos",
+    "certification": "Certification",
+    "community": "Community"
   },
   "home": {
-    "greeting": "Hello 👋 ✋ ✋",
-    "description": "I'm Amril Syaifa, an experienced software engineer from Indonesia as a fullstack developer.",
+    "greeting": "Hello!",
+    "description": "I'm Amril Syaifa Yasin, a passionate fullstack software engineer from Indonesia. I craft modern web & mobile applications with clean, scalable code.",
     "running_text": "I'm Amril Syaifa Yasin",
     "next_description": "I have experience in web and mobile application development.",
-    "more": "More about me",
+    "more": "About Me",
+    "projects": "See Projects",
     "visitor": "You are visitor #",
     "best_viewed": "Best viewed in Netscape Navigator 3.0 or higher at 800x600 resolution",
     "welcome": "Welcome!"
   },
   "about": {
     "about_me": "About Me",
-    "greeting": "Hi, my name is Amril. I am a profesional fullstack developer from Medan, Indonesia. I have been working as fullstack developer for {year} years. I have experience in web and mobile application development.",
+    "greeting": "Hi, my name is Amril. I am a professional fullstack developer from Medan, Indonesia. I have been working as a fullstack developer for {year} years. I have experience in web and mobile application development.",
     "this_is_me": "This is me:",
     "works": "Software engineer",
     "english": "English conversation business",
     "location": "Fulltime remote",
     "coffee": "2 cups of coffee a day",
     "game": "Moba game player",
-    "careers": "Careers:",
-    "skills": "Skills:",
+    "careers": "Careers",
+    "skills": "Skills",
     "years": "years",
     "name": "Name",
     "role": "Role",
     "locate": "Location",
     "experience": "Experience",
     "interests": "Interests",
-    "bio": "Bio:"
+    "bio": "Bio"
   },
   "contact": {
     "title": "Let's have a talk...",
@@ -52,20 +55,20 @@
   },
   "project": {
     "title": "Projects",
-    "personal": "Personal Projects",
+    "personal": "Personal",
     "my_personal": "My Personal Projects:",
     "my_company": "My Company Projects:",
-    "company": "Company Projects",
+    "company": "Company",
     "loading": "Loading projects...",
     "no_data": "No projects available",
     "new_project": "NEW PROJECTS COMING SOON",
     "more": "more"
   },
   "project_detail": {
-    "overview": "Overview:",
-    "description": "Description:",
-    "links": "Links:",
-    "link": "Link:",
+    "overview": "Overview",
+    "description": "Description",
+    "links": "Links",
+    "link": "Link",
     "back_to_projects": "Back to Projects",
     "technologies": "Technologies Used"
   },
@@ -79,12 +82,26 @@
   "video": {
     "title": "Videos",
     "description": "Welcome to My Video Gallery!",
-    "sub_description": "Check out some of my favorite videos and clips below. Enjoy the content!",
+    "sub_description": "Check out some of my favorite videos and clips below.",
     "feature": "Featured Videos",
     "loading": "Loading videos...",
     "no_data": "No videos available",
     "comming_soon": "MORE VIDEOS COMING SOON!",
     "last_updated": "Last updated:"
+  },
+  "certification": {
+    "title": "Certifications",
+    "description": "Professional certificates and achievements",
+    "view": "View Certificate",
+    "issued_by": "Issued by"
+  },
+  "community": {
+    "title": "Community",
+    "description": "Events and activities I've been part of",
+    "loading": "Loading events...",
+    "no_data": "No community events yet",
+    "photos": "Photos",
+    "view_all": "View All Photos"
   },
   "footer": {
     "copyright": "All rights reserved"
