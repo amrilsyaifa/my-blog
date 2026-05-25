@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: PH,
     paddingVertical: 7,
     alignItems: "center",
+    marginTop: -32,
   },
   contactBarText: { fontSize: 8.5, color: "#555", textAlign: "center" },
 
@@ -178,9 +179,9 @@ export default function CVDocumentATS({ data }: { data: CVData }) {
 
   // Links for WEBSITES / PORTFOLIOS / PROFILES
   const profileLinks = [
-    data.linkedin    ? { label: "LinkedIn",   value: data.linkedin }    : null,
     data.portfolio_url ? { label: "Portfolio", value: data.portfolio_url } : null,
-    data.github      ? { label: "GitHub",     value: data.github }      : null,
+    data.linkedin      ? { label: "LinkedIn",  value: data.linkedin }      : null,
+    data.github        ? { label: "GitHub",    value: data.github }        : null,
   ].filter(Boolean) as { label: string; value: string }[];
 
   // Contact bar: location | phone | email
@@ -322,7 +323,7 @@ export default function CVDocumentATS({ data }: { data: CVData }) {
             {includedCerts.map((c, i) => (
               <View key={i} style={{ marginBottom: 2 }}>
                 {c.href ? (
-                  <Link src={c.href} style={styles.certText}>
+                  <Link src={c.href} style={[styles.certText, { textDecoration: "none" }]}>
                     • {c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}
                   </Link>
                 ) : (

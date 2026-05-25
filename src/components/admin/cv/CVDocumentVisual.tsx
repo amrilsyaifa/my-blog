@@ -245,7 +245,7 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
                 <View key={c.id} style={styles.certRow}>
                   <Text style={styles.certDot}>◆</Text>
                   {c.href ? (
-                    <Link src={c.href} style={styles.certText}>
+                    <Link src={c.href} style={[styles.certText, { textDecoration: "none" }]}>
                       {c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}
                     </Link>
                   ) : (
