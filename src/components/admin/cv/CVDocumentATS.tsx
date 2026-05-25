@@ -171,7 +171,7 @@ export default function CVDocumentATS({ data }: { data: CVData }) {
   const includedProjects = data.projects.filter(p => p.included);
 
   // Flatten all skill items into a single list for 2-column bullet grid
-  const allSkillItems = includedSkills.flatMap(s => s.data);
+  const allSkillItems = includedSkills.flatMap(s => s.included_items);
   const skillPairs: [string, string | undefined][] = [];
   for (let i = 0; i < allSkillItems.length; i += 2) {
     skillPairs.push([allSkillItems[i], allSkillItems[i + 1]]);

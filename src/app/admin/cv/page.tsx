@@ -54,6 +54,7 @@ export default function CVGeneratorPage() {
       const savedSkillIds    = cvProf.included_skills   as string[] | null ?? null;
       const savedCertIds     = cvProf.included_certs    as string[] | null ?? null;
       const savedProjectIds  = cvProf.included_projects as string[] | null ?? null;
+      const savedSkillItems  = cvProf.skill_items as Record<string, string[]> | null ?? null;
 
       const careers: CareerCV[] = careersSnap.docs
         .map(d => {
@@ -76,12 +77,14 @@ export default function CVGeneratorPage() {
         .sort((a, b) => b.company_order - a.company_order);
 
       const skills: SkillCV[] = skillsSnap.docs.map(d => {
-        const r = d.data() as Record<string, unknown>;
+        const r    = d.data() as Record<string, unknown>;
+        const all  = (r.data as string[]) ?? [];
         return {
-          id:       d.id,
-          name:     (r.name as string)   ?? "",
-          data:     (r.data as string[]) ?? [],
-          included: savedSkillIds ? savedSkillIds.includes(d.id) : true,
+          id:             d.id,
+          name:           (r.name as string) ?? "",
+          data:           all,
+          included_items: savedSkillItems?.[d.id] ?? all,
+          included:       savedSkillIds ? savedSkillIds.includes(d.id) : true,
         };
       });
 
@@ -159,6 +162,7 @@ export default function CVGeneratorPage() {
         languages:          data.languages,
         included_careers:   data.careers.filter(c => c.included).map(c => c.id),
         included_skills:    data.skills.filter(s => s.included).map(s => s.id),
+        skill_items:        Object.fromEntries(data.skills.map(s => [s.id, s.included_items])),
         included_certs:     data.certifications.filter(c => c.included).map(c => c.id),
         included_projects:  data.projects.filter(p => p.included).map(p => p.id),
       });

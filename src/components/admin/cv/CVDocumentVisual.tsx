@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: DARK,
     backgroundColor: "#fff",
-    paddingTop: 0,
+    paddingTop: 32,
     paddingBottom: 48,
     paddingHorizontal: 0,
     lineHeight: 1.4,
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 18,
+    marginTop: -32,
   },
   photoWrapper: {
     width: 70, height: 70, borderRadius: 35,
@@ -50,8 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: ACCENT, alignItems: "center", justifyContent: "center",
   },
   bannerRight:  { flex: 1 },
-  bannerName:   { fontSize: 18, fontFamily: "Helvetica-Bold", color: "#fff", marginBottom: 3 },
-  bannerRole:   { fontSize: 10, color: "#a5b4fc", marginBottom: 5 },
+  bannerName:   { fontSize: 18, fontFamily: "Helvetica-Bold", color: "#fff", marginBottom: 6 },
+  bannerRole:   { fontSize: 10, color: "#a5b4fc", marginBottom: 5, marginTop: 2 },
   contactGrid:  { flexDirection: "row", flexWrap: "wrap" },
   contactItem:  { fontSize: 8, color: "#cbd5e1", marginRight: 10, marginBottom: 2 },
   body:         { paddingHorizontal: 44, paddingTop: 14 },
@@ -175,15 +176,17 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               <SectionHead title="PROFESSIONAL EXPERIENCE" />
               {includedCareers.map(c => (
                 <View key={c.id} style={{ marginBottom: 8 }}>
-                  <View style={styles.expRow}>
-                    <Text style={styles.expTitle}>{c.job_title}</Text>
-                    <Text style={styles.expDates}>
-                      {formatDate(c.start_date)} – {c.is_active ? "Present" : formatDate(c.end_date)}
+                  <View wrap={false}>
+                    <View style={styles.expRow}>
+                      <Text style={styles.expTitle}>{c.job_title}</Text>
+                      <Text style={styles.expDates}>
+                        {formatDate(c.start_date)} – {c.is_active ? "Present" : formatDate(c.end_date)}
+                      </Text>
+                    </View>
+                    <Text style={styles.expCompany}>
+                      {c.company}{c.job_location ? ` · ${c.job_location}` : ""}{c.job_tipe ? ` · ${c.job_tipe}` : ""}
                     </Text>
                   </View>
-                  <Text style={styles.expCompany}>
-                    {c.company}{c.job_location ? ` · ${c.job_location}` : ""}{c.job_tipe ? ` · ${c.job_tipe}` : ""}
-                  </Text>
                   {(c.work_details ?? []).map((d, i) => (
                     <View key={i} style={styles.bullet}>
                       <Text style={styles.bulletDot}>▸</Text>
@@ -231,7 +234,7 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               {includedSkills.map(s => (
                 <View key={s.id} style={styles.skillRow}>
                   <Text style={styles.skillCat}>{s.name}</Text>
-                  <Text style={styles.skillItems}>{s.data.join("  ·  ")}</Text>
+                  <Text style={styles.skillItems}>{s.included_items.join("  ·  ")}</Text>
                 </View>
               ))}
             </>
@@ -243,7 +246,7 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               <SectionHead title="CERTIFICATIONS" />
               {includedCerts.map(c => (
                 <View key={c.id} style={styles.certRow}>
-                  <Text style={styles.certDot}>◆</Text>
+                  <Text style={styles.certDot}>•</Text>
                   {c.href ? (
                     <Link src={c.href} style={[styles.certText, { textDecoration: "none" }]}>
                       {c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}
@@ -262,7 +265,7 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               <SectionHead title="PORTFOLIO" />
               {includedProjects.map(p => (
                 <View key={p.id} style={styles.portRow}>
-                  <Text style={styles.portDot}>◈</Text>
+                  <Text style={styles.portDot}>•</Text>
                   <Text style={styles.portText}>{p.title}{p.link ? ` — ${resolveLink(p.link)}` : ""}</Text>
                 </View>
               ))}

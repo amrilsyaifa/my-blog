@@ -27,10 +27,11 @@ export interface CareerCV {
 }
 
 export interface SkillCV {
-  id:       string;
-  name:     string;
-  data:     string[];
-  included: boolean;
+  id:             string;
+  name:           string;
+  data:           string[];     // all items from Firestore
+  included_items: string[];     // subset selected for CV
+  included:       boolean;
 }
 
 export interface CertCV {

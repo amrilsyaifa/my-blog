@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { CVData, EducationItem, Language } from "./types";
+import { CVData, EducationItem, Language, SkillCV } from "./types";
 
 const cls = "w-full bg-[#0f1117] border border-[#2d3748] text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50";
 const lbl = "block text-xs font-medium text-slate-400 uppercase tracking-wider mb-1";
@@ -42,6 +42,79 @@ function Section({ title, children, defaultOpen = true }: { title: string; child
         <span className="text-slate-500 text-sm">{open ? "▲" : "▼"}</span>
       </button>
       {open && <div className="px-4 py-4 space-y-4 bg-[#0a0d14]">{children}</div>}
+    </div>
+  );
+}
+
+function SkillCategoryRow({
+  skill, onToggleCategory, onToggleItem, onToggleAll,
+}: {
+  skill: SkillCV;
+  onToggleCategory: (checked: boolean) => void;
+  onToggleItem: (item: string, checked: boolean) => void;
+  onToggleAll: (allChecked: boolean) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const allSelected = skill.included_items.length === skill.data.length;
+  const someSelected = skill.included_items.length > 0 && !allSelected;
+
+  return (
+    <div className="border border-[#2d3748] rounded-lg overflow-hidden">
+      {/* Category header row */}
+      <div className="flex items-center gap-3 px-3 py-2.5 bg-[#0f1117]">
+        <input type="checkbox" checked={skill.included}
+          onChange={e => onToggleCategory(e.target.checked)}
+          className="accent-indigo-500 shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm text-slate-200 font-medium">{skill.name}</p>
+          <p className="text-xs text-slate-500">
+            {skill.included_items.length}/{skill.data.length} selected
+          </p>
+        </div>
+        {skill.included && (
+          <button type="button" onClick={() => setOpen(v => !v)}
+            className="text-xs text-slate-400 hover:text-slate-200 px-2 py-1 rounded transition-colors shrink-0">
+            {open ? "▲ Hide" : "▼ Items"}
+          </button>
+        )}
+      </div>
+
+      {/* Individual items */}
+      {skill.included && open && (
+        <div className="px-3 py-2 bg-[#0a0d14] border-t border-[#2d3748] space-y-1">
+          {/* Select all / none */}
+          <div className="flex gap-3 mb-2">
+            <button type="button" onClick={() => onToggleAll(true)}
+              disabled={allSelected}
+              className="text-xs text-indigo-400 hover:text-indigo-300 disabled:opacity-30 transition-colors">
+              All
+            </button>
+            <button type="button" onClick={() => onToggleAll(false)}
+              disabled={!someSelected && !allSelected}
+              className="text-xs text-slate-500 hover:text-slate-300 disabled:opacity-30 transition-colors">
+              None
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {skill.data.map(item => {
+              const checked = skill.included_items.includes(item);
+              return (
+                <label key={item}
+                  className={`flex items-center gap-1.5 px-2 py-1 rounded-md border text-xs cursor-pointer transition-colors ${
+                    checked
+                      ? "border-indigo-500/50 bg-indigo-600/10 text-indigo-300"
+                      : "border-[#2d3748] text-slate-500 hover:border-slate-500"
+                  }`}>
+                  <input type="checkbox" checked={checked}
+                    onChange={e => onToggleItem(item, e.target.checked)}
+                    className="accent-indigo-500 w-3 h-3" />
+                  {item}
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -240,26 +313,35 @@ export default function CVForm({ data, onChange }: Props) {
       {/* 5. Skills */}
       <Section title="Skills" defaultOpen={false}>
         <p className="text-xs text-slate-500 -mt-1">
-          From your <Link href="/admin/skills" className="text-indigo-400 underline underline-offset-2">Skills</Link> data. Toggle categories to include/exclude.
+          From your <Link href="/admin/skills" className="text-indigo-400 underline underline-offset-2">Skills</Link> data. Toggle categories and individual items.
         </p>
         {data.skills.length === 0 ? (
           <p className="text-xs text-slate-600 italic">No skills found.</p>
         ) : (
           <div className="space-y-2">
             {data.skills.map((s, i) => (
-              <label key={s.id} className="flex items-center gap-3 p-3 rounded-lg border border-[#2d3748] hover:border-indigo-500/30 cursor-pointer transition-colors">
-                <input type="checkbox" checked={s.included}
-                  onChange={e => {
-                    const next = [...data.skills];
-                    next[i] = { ...next[i], included: e.target.checked };
-                    set("skills", next);
-                  }}
-                  className="accent-indigo-500" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-slate-200 font-medium">{s.name}</p>
-                  <p className="text-xs text-slate-500 truncate">{s.data.join(", ")}</p>
-                </div>
-              </label>
+              <SkillCategoryRow
+                key={s.id}
+                skill={s}
+                onToggleCategory={checked => {
+                  const next = [...data.skills];
+                  next[i] = { ...next[i], included: checked };
+                  set("skills", next);
+                }}
+                onToggleItem={(item, checked) => {
+                  const next = [...data.skills];
+                  const items = checked
+                    ? [...next[i].included_items, item]
+                    : next[i].included_items.filter(x => x !== item);
+                  next[i] = { ...next[i], included_items: items };
+                  set("skills", next);
+                }}
+                onToggleAll={allChecked => {
+                  const next = [...data.skills];
+                  next[i] = { ...next[i], included_items: allChecked ? [...next[i].data] : [] };
+                  set("skills", next);
+                }}
+              />
             ))}
           </div>
         )}
