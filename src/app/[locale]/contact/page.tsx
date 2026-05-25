@@ -1,6 +1,7 @@
 import Navbar from "@components/components/Navbar";
 import Footer from "@components/components/Footer";
 import ContactScene from "@components/components/ContactScene";
+import CVDownloadSection from "@components/components/CVDownloadSection";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -115,6 +116,8 @@ export default async function Contact({
                   </Link>
                 ))}
               </div>
+
+              <CVDownloadSection />
             </div>
 
             {/* ── Right: Three.js scene ──────────────────── */}

@@ -43,10 +43,16 @@ const CarrerItem: FC<CarrerItemProps> = ({
   const t = useTranslations("common");
   const [open, setOpen] = useState(false);
 
-  const startDate = new Date(start_date).toLocaleString("en-us", { month: "short", year: "numeric" });
-  const endDate   = is_active
+  const startDate = new Date(start_date).toLocaleString("en-us", {
+    month: "short",
+    year: "numeric",
+  });
+  const endDate = is_active
     ? t("present")
-    : new Date(end_date ?? new Date()).toLocaleString("en-us", { month: "short", year: "numeric" });
+    : new Date(end_date ?? new Date()).toLocaleString("en-us", {
+        month: "short",
+        year: "numeric",
+      });
 
   const hasDetails = work_details && work_details.length > 0;
 
@@ -63,13 +69,22 @@ const CarrerItem: FC<CarrerItemProps> = ({
                 {job_title}
               </h4>
               <div className="flex flex-wrap items-center gap-2 mt-1">
-                <Link href={company_url} rel="noopener noreferrer" target="_blank" className="text-accent text-sm hover:underline">
+                <Link
+                  href={company_url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-accent text-sm hover:underline"
+                >
                   {company}
                 </Link>
                 <span className="text-text-muted text-xs">•</span>
-                <span className="text-text-secondary text-sm">{job_location}</span>
+                <span className="text-text-secondary text-sm">
+                  {job_location}
+                </span>
                 <span className="text-text-muted text-xs">•</span>
-                <span className="text-text-muted text-xs italic">{job_tipe}</span>
+                <span className="text-text-muted text-xs italic">
+                  {job_tipe}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
@@ -79,16 +94,23 @@ const CarrerItem: FC<CarrerItemProps> = ({
                   Active
                 </span>
               )}
-              <span className="text-text-muted text-xs whitespace-nowrap">{startDate} — {endDate}</span>
+              <span className="text-text-muted text-xs whitespace-nowrap">
+                {startDate} — {endDate}
+              </span>
             </div>
           </div>
 
-          {company_address && <p className="text-text-muted text-xs mb-3">{company_address}</p>}
+          {company_address && (
+            <p className="text-text-muted text-xs mb-3">{company_address}</p>
+          )}
 
           {dev_stack.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mb-3">
               {dev_stack.map((stack, idx) => (
-                <span key={idx} className="px-2 py-0.5 text-xs rounded-md border border-accent/30 bg-accent/10 text-accent">
+                <span
+                  key={idx}
+                  className="px-2 py-0.5 text-xs rounded-md border border-accent/30 bg-accent/10 text-accent"
+                >
                   {stack}
                 </span>
               ))}
@@ -104,9 +126,16 @@ const CarrerItem: FC<CarrerItemProps> = ({
             >
               <svg
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
               {open ? "Hide details" : "Work details"}
             </button>
@@ -117,12 +146,17 @@ const CarrerItem: FC<CarrerItemProps> = ({
         {hasDetails && open && (
           <div className="border-t border-border px-4 py-3 bg-bg-secondary/30">
             <ul className="space-y-1.5">
-              {work_details!.map((detail, idx) => (
-                <li key={idx} className="flex gap-2 text-sm text-text-secondary leading-relaxed">
-                  <span className="text-accent mt-1 shrink-0">▸</span>
-                  <span>{detail}</span>
-                </li>
-              ))}
+              {work_details!.flatMap((detail, idx) =>
+                detail.split("\n").filter(line => line.trim() !== "").map((line, j) => (
+                  <li
+                    key={`${idx}-${j}`}
+                    className="flex gap-2 text-sm text-text-secondary leading-relaxed"
+                  >
+                    <span className="text-accent mt-0.5 shrink-0">▸</span>
+                    <span>{line}</span>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
         )}

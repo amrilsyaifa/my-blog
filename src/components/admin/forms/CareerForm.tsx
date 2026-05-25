@@ -139,12 +139,16 @@ export default function CareerForm({ data, onChange }: Props) {
 
       {activeTab === "details" && (
         <>
-          <DynamicList
-            label="Work Details (responsibilities / tasks)"
-            value={data.work_details ?? []}
-            onChange={v => set("work_details", v)}
-            placeholder="e.g. Led migration from monolith to microservices"
-          />
+          <div>
+            <label className={lbl}>Work Details (responsibilities / tasks)</label>
+            <p className="text-xs text-slate-500 mb-1">One bullet per line — press Enter to add a new item</p>
+            <textarea
+              className={`${cls} min-h-[160px] resize-y leading-relaxed`}
+              placeholder={"e.g. Led migration from monolith to microservices\ne.g. Mentored 3 junior engineers"}
+              value={(data.work_details ?? []).join("\n")}
+              onChange={e => set("work_details", e.target.value.split("\n"))}
+            />
+          </div>
           <AchievementEditor
             value={data.achievements ?? []}
             onChange={v => set("achievements", v)}

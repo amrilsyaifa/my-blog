@@ -47,10 +47,14 @@ export default function CareersAdminPage() {
 
   const save = async () => {
     setSaving(true);
+    const payload = {
+      ...form,
+      work_details: (form.work_details ?? []).filter(s => s.trim() !== ""),
+    };
     if (selected) {
-      await updateDoc(doc(db, "careers", selected.id), form as unknown as Record<string, unknown>);
+      await updateDoc(doc(db, "careers", selected.id), payload as unknown as Record<string, unknown>);
     } else {
-      await addDoc(collection(db, "careers"), form);
+      await addDoc(collection(db, "careers"), payload);
     }
     setSaving(false);
     setModal(false);
