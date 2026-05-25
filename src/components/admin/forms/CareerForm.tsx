@@ -55,7 +55,7 @@ function AchievementEditor({
             <input className={`${cls} flex-1`} placeholder="Achievement title" value={item.title} onChange={e => update(i, "title", e.target.value)} />
             <button type="button" onClick={() => remove(i)} className="px-2 rounded-lg bg-red-900/40 hover:bg-red-800/60 text-red-400 text-sm shrink-0">×</button>
           </div>
-          <input className={cls} placeholder="Description (optional)" value={item.description ?? ""} onChange={e => update(i, "description", e.target.value)} />
+          <textarea className={`${cls} min-h-[72px] resize-y leading-relaxed`} placeholder="Description (optional)" value={item.description ?? ""} onChange={e => update(i, "description", e.target.value)} />
         </div>
       ))}
       <button type="button" onClick={add} className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
