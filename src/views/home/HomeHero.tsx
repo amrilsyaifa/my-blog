@@ -7,19 +7,35 @@ import gsap from "gsap";
 import dynamic from "next/dynamic";
 import useTypewriter from "@components/hooks/useTypewriter";
 
-const AvatarScene = dynamic(() => import("@components/components/AvatarScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-    </div>
-  ),
-});
+const AvatarScene = dynamic(
+  () => import("@components/components/AvatarScene"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+      </div>
+    ),
+  },
+);
 
 const TECH_STACK = [
-  "React", "TypeScript", "Next.js", "Node.js",
-  "React Native", "Three.js", "Firebase", "PostgreSQL",
-  "GraphQL", "Docker", "AWS", "Tailwind CSS",
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Golang",
+  "Node.js",
+  "React Native",
+  "Laravel",
+  "AI/ML",
+  "Three.js",
+  "Firebase",
+  "PostgreSQL",
+  "GraphQL",
+  "Docker",
+  "Microservices",
+  "AWS",
+  "Tailwind CSS",
 ];
 
 interface HomeHeroProps {
@@ -28,7 +44,11 @@ interface HomeHeroProps {
   projectsLabel: string;
 }
 
-export default function HomeHero({ description, more, projectsLabel }: HomeHeroProps) {
+export default function HomeHero({
+  description,
+  more,
+  projectsLabel,
+}: HomeHeroProps) {
   const { locale } = useParams();
   const roleText = useTypewriter("Software Engineer", 80);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -42,10 +62,29 @@ export default function HomeHero({ description, more, projectsLabel }: HomeHeroP
     if (!heroRef.current) return;
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.fromTo(nameRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7 })
-      .fromTo(subtitleRef.current, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3")
-      .fromTo(descRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2")
-      .fromTo(ctaRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2");
+    tl.fromTo(
+      nameRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.7 },
+    )
+      .fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.3",
+      )
+      .fromTo(
+        descRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.2",
+      )
+      .fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.2",
+      );
   }, []);
 
   useEffect(() => {
@@ -81,7 +120,9 @@ export default function HomeHero({ description, more, projectsLabel }: HomeHeroP
               <br />
               <span
                 className="text-transparent bg-clip-text"
-                style={{ backgroundImage: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
+                style={{
+                  backgroundImage: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                }}
               >
                 Syaifa Yasin
               </span>
@@ -111,7 +152,9 @@ export default function HomeHero({ description, more, projectsLabel }: HomeHeroP
               <Link
                 href={`/${locale}/about`}
                 className="px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-glow-md hover:-translate-y-0.5"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}
+                style={{
+                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                }}
               >
                 {more}
               </Link>
@@ -143,7 +186,10 @@ export default function HomeHero({ description, more, projectsLabel }: HomeHeroP
             {/* Glow behind scene */}
             <div
               className="absolute inset-0 rounded-full blur-3xl opacity-20 pointer-events-none"
-              style={{ background: "radial-gradient(circle, #6366f1 0%, transparent 70%)" }}
+              style={{
+                background:
+                  "radial-gradient(circle, #6366f1 0%, transparent 70%)",
+              }}
             />
             <AvatarScene />
           </div>
@@ -158,7 +204,10 @@ export default function HomeHero({ description, more, projectsLabel }: HomeHeroP
           style={{ width: "200%" }}
         >
           {[...TECH_STACK, ...TECH_STACK].map((tech, i) => (
-            <span key={i} className="text-xs font-semibold tracking-widest uppercase text-text-muted">
+            <span
+              key={i}
+              className="text-xs font-semibold tracking-widest uppercase text-text-muted"
+            >
               {tech}
               <span className="ml-12 text-accent opacity-40">·</span>
             </span>
