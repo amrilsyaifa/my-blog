@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import { Chakra_Petch } from "next/font/google";
 import { Providers } from "./providers";
 import "../globals.css";
-import Navbar from "@components/components/Navbar";
-import Footer from "@components/components/Footer";
-import { routing } from "@components/i18n/routing";
-import { notFound } from "next/navigation";
-import { getMessages } from "next-intl/server";
 import PageTransitionEffect from "@components/hoc/PageTransitionEffect";
+import CustomCursor from "@components/components/CustomCursor";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -21,24 +17,16 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ id: string; locale: string }>;
 }>) {
-  const { locale } = await params;
-  const messages = await getMessages({ locale });
-
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body
-        className={`${chakrapetch.className} overflow-y-auto overflow-x-hidden`}
-      >
-        <Providers messages={messages}>
+      <body className={`${chakrapetch.className} overflow-y-auto overflow-x-hidden`}>
+        <Providers>
+          <CustomCursor />
           <PageTransitionEffect>
-            <Navbar />
             {children}
-            <Footer />
           </PageTransitionEffect>
         </Providers>
       </body>

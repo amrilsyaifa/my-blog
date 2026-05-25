@@ -14,6 +14,7 @@ export interface ProjectItemProps {
   link: string;
   order: number;
   dev_stack: DevStack[];
+  project_by?: "self" | "company";
   is_detail?: boolean;
   thumbnail?: string;
 }

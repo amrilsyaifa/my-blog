@@ -9,7 +9,7 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import "../../app/embla.css";
-import { ImageProps } from "@components/app/[locale]/project/[id]/page";
+import { ImageProps } from "@components/app/[locale]/project/[id]/types";
 
 type PropType = {
   slides: ImageProps[];

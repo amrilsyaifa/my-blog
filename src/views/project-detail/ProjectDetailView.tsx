@@ -5,7 +5,7 @@ import Carousel from "./Carousel";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import { useParams, useRouter } from "next/navigation";
-import { ProjectDetailProps } from "@components/app/[locale]/project/[id]/page";
+import { ProjectDetailProps } from "@components/app/[locale]/project/[id]/types";
 import { useDisclosure } from "@components/hooks/useDisclosure";
 import ProjectDetailShimmer from "./ProjectDetailShimmer";
 import Link from "next/link";
