@@ -57,6 +57,15 @@ export interface Language {
   proficiency: string;
 }
 
+export interface CommunityCV {
+  id:          string;
+  title:       string;
+  description: string;
+  date:        string;
+  location:    string;
+  included:    boolean;
+}
+
 export interface CVData {
   name:           string;
   role:           string;
@@ -75,4 +84,5 @@ export interface CVData {
   certifications: CertCV[];
   projects:       ProjectCV[];
   languages:      Language[];
+  community:      CommunityCV[];
 }

@@ -412,6 +412,38 @@ export default function CVForm({ data, onChange }: Props) {
         <LanguageEditor value={data.languages} onChange={v => set("languages", v)} />
       </Section>
 
+      {/* 9. Community */}
+      <Section title="Community" defaultOpen={false}>
+        <p className="text-xs text-slate-500 -mt-1">
+          From your <Link href="/admin/community" className="text-indigo-400 underline underline-offset-2">Community</Link> data. Toggle to include/exclude. Defaults to unchecked.
+        </p>
+        {data.community.length === 0 ? (
+          <p className="text-xs text-slate-600 italic">No community entries found.</p>
+        ) : (
+          <div className="space-y-2">
+            {data.community.map((c, i) => (
+              <label key={c.id} className="flex items-start gap-3 p-3 rounded-lg border border-[#2d3748] hover:border-indigo-500/30 cursor-pointer transition-colors">
+                <input
+                  type="checkbox"
+                  checked={c.included}
+                  onChange={e => {
+                    const next = [...data.community];
+                    next[i] = { ...next[i], included: e.target.checked };
+                    set("community", next);
+                  }}
+                  className="mt-0.5 accent-indigo-500"
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-slate-200 font-medium">{c.title}</p>
+                  <p className="text-xs text-slate-500">{c.location}{c.date ? ` · ${c.date.slice(0, 7)}` : ""}</p>
+                  {c.description && <p className="text-xs text-slate-600 mt-0.5 truncate">{c.description}</p>}
+                </div>
+              </label>
+            ))}
+          </div>
+        )}
+      </Section>
+
     </div>
   );
 }

@@ -129,10 +129,11 @@ function formatDate(d: string): string {
 }
 
 export default function CVDocumentVisual({ data }: { data: CVData }) {
-  const includedCareers  = data.careers.filter(c => c.included);
-  const includedSkills   = data.skills.filter(s => s.included);
-  const includedCerts    = data.certifications.filter(c => c.included);
-  const includedProjects = data.projects.filter(p => p.included);
+  const includedCareers   = data.careers.filter(c => c.included);
+  const includedSkills    = data.skills.filter(s => s.included);
+  const includedCerts     = data.certifications.filter(c => c.included);
+  const includedProjects  = data.projects.filter(p => p.included);
+  const includedCommunity = data.community.filter(c => c.included);
 
   const contactItems = [data.email, data.phone, data.linkedin, data.github, data.portfolio_url, data.location].filter(Boolean);
 
@@ -279,6 +280,23 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               <Text style={styles.langText}>
                 {data.languages.map(l => `${l.name} (${l.proficiency})`).join("  ·  ")}
               </Text>
+            </>
+          )}
+
+          {/* Community */}
+          {includedCommunity.length > 0 && (
+            <>
+              <SectionHead title="COMMUNITY" />
+              {includedCommunity.map((c, i) => (
+                <View key={i} style={{ marginBottom: 6 }}>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 1 }}>
+                    <Text style={{ fontSize: 10, fontFamily: "Helvetica-Bold", color: DARK }}>{c.title}</Text>
+                    {c.date ? <Text style={{ fontSize: 8.5, color: MUTED }}>{c.date.slice(0, 7)}</Text> : null}
+                  </View>
+                  {c.location ? <Text style={{ fontSize: 9, color: MUTED, marginBottom: 1 }}>{c.location}</Text> : null}
+                  {c.description ? <Text style={{ fontSize: 9, color: "#374151" }}>{c.description}</Text> : null}
+                </View>
+              ))}
             </>
           )}
         </View>

@@ -165,10 +165,11 @@ function SectionRow({ label, children }: { label: string; children: React.ReactN
 }
 
 export default function CVDocumentATS({ data }: { data: CVData }) {
-  const includedCareers  = data.careers.filter(c => c.included);
-  const includedSkills   = data.skills.filter(s => s.included);
-  const includedCerts    = data.certifications.filter(c => c.included);
-  const includedProjects = data.projects.filter(p => p.included);
+  const includedCareers    = data.careers.filter(c => c.included);
+  const includedSkills     = data.skills.filter(s => s.included);
+  const includedCerts      = data.certifications.filter(c => c.included);
+  const includedProjects   = data.projects.filter(p => p.included);
+  const includedCommunity  = data.community.filter(c => c.included);
 
   // Flatten all skill items into a single list for 2-column bullet grid
   const allSkillItems = includedSkills.flatMap(s => s.included_items);
@@ -354,6 +355,22 @@ export default function CVDocumentATS({ data }: { data: CVData }) {
               <Text key={i} style={styles.portText}>
                 • {p.title}{p.link ? ` — ${resolveLink(p.link)}` : ""}
               </Text>
+            ))}
+          </SectionRow>
+        )}
+
+        {/* ── 11. Community ── */}
+        {includedCommunity.length > 0 && (
+          <SectionRow label="COMMUNITY">
+            {includedCommunity.map((c, i) => (
+              <View key={i} style={{ marginBottom: i < includedCommunity.length - 1 ? 5 : 0 }}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                  <Text style={[styles.certText, { fontFamily: "Helvetica-Bold" }]}>{c.title}</Text>
+                  {c.date ? <Text style={{ fontSize: 9, color: "#444" }}>{c.date.slice(0, 7)}</Text> : null}
+                </View>
+                {c.location ? <Text style={{ fontSize: 9, color: "#444" }}>{c.location}</Text> : null}
+                {c.description ? <Text style={styles.certText}>{c.description}</Text> : null}
+              </View>
             ))}
           </SectionRow>
         )}

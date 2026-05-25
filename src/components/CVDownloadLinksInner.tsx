@@ -6,14 +6,14 @@ import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import CVDocumentATS    from "./admin/cv/CVDocumentATS";
 import CVDocumentVisual from "./admin/cv/CVDocumentVisual";
-import type { CVData, CareerCV, SkillCV, CertCV, Achievement, ProjectCV, Language } from "./admin/cv/types";
+import type { CVData, CareerCV, SkillCV, CertCV, Achievement, ProjectCV, Language, CommunityCV } from "./admin/cv/types";
 
 const EMPTY: CVData = {
   name: "", role: "", location: "",
   email: "", phone: "", linkedin: "", github: "",
   portfolio_url: "", target_job: "", photo_url: "", summary: "",
   education: [], careers: [], skills: [], certifications: [],
-  projects: [], languages: [],
+  projects: [], languages: [], community: [],
 };
 
 export default function CVDownloadLinksInner() {
@@ -22,23 +22,25 @@ export default function CVDownloadLinksInner() {
 
   const load = useCallback(async () => {
     try {
-      const [aboutSnap, cvSnap, careersSnap, skillsSnap, certsSnap, projectsSnap] = await Promise.all([
+      const [aboutSnap, cvSnap, careersSnap, skillsSnap, certsSnap, projectsSnap, communitySnap] = await Promise.all([
         getDoc(doc(db, "about", "profile")),
         getDoc(doc(db, "cv", "profile")),
         getDocs(collection(db, "careers")),
         getDocs(collection(db, "skills")),
         getDocs(collection(db, "certifications")),
         getDocs(collection(db, "projects")),
+        getDocs(collection(db, "community")),
       ]);
 
       const about  = aboutSnap.exists() ? (aboutSnap.data() as Record<string, unknown>) : {};
       const cvProf = cvSnap.exists()    ? (cvSnap.data()    as Record<string, unknown>) : {};
 
-      const savedCareerIds  = cvProf.included_careers  as string[] | null ?? null;
-      const savedSkillIds   = cvProf.included_skills   as string[] | null ?? null;
-      const savedCertIds    = cvProf.included_certs    as string[] | null ?? null;
-      const savedProjectIds = cvProf.included_projects as string[] | null ?? null;
-      const savedSkillItems = cvProf.skill_items as Record<string, string[]> | null ?? null;
+      const savedCareerIds    = cvProf.included_careers   as string[] | null ?? null;
+      const savedSkillIds     = cvProf.included_skills    as string[] | null ?? null;
+      const savedCertIds      = cvProf.included_certs     as string[] | null ?? null;
+      const savedProjectIds   = cvProf.included_projects  as string[] | null ?? null;
+      const savedCommunityIds = cvProf.included_community as string[] | null ?? null;
+      const savedSkillItems   = cvProf.skill_items as Record<string, string[]> | null ?? null;
 
       const careers: CareerCV[] = careersSnap.docs
         .map(d => {
@@ -98,6 +100,20 @@ export default function CVDownloadLinksInner() {
         })
         .sort((a, b) => a.title.localeCompare(b.title));
 
+      const community: CommunityCV[] = communitySnap.docs
+        .map(d => {
+          const r = d.data() as Record<string, unknown>;
+          return {
+            id:          d.id,
+            title:       (r.title_en as string) || (r.title as string) || "",
+            description: (r.description_en as string) || (r.description as string) || "",
+            date:        (r.date     as string) ?? "",
+            location:    (r.location as string) ?? "",
+            included:    savedCommunityIds ? savedCommunityIds.includes(d.id) : false,
+          };
+        })
+        .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+
       setData({
         name:           (about.name        as string) ?? "",
         role:           (about.role        as string) ?? "",
@@ -116,6 +132,7 @@ export default function CVDownloadLinksInner() {
         skills,
         certifications,
         projects,
+        community,
       });
     } catch (e) {
       console.error(e);

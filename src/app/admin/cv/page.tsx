@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { collection, getDocs, getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import CVForm from "@components/components/admin/cv/CVForm";
-import type { CVData, CareerCV, SkillCV, CertCV, Achievement, ProjectCV, Language } from "@components/components/admin/cv/types";
+import type { CVData, CareerCV, SkillCV, CertCV, Achievement, ProjectCV, Language, CommunityCV } from "@components/components/admin/cv/types";
 
 // Single dynamic import for ALL react-pdf code — prevents "Ro is not a function"
 const CVPdfClient = dynamic(
@@ -22,7 +22,7 @@ const EMPTY: CVData = {
   email: "", phone: "", linkedin: "", github: "",
   portfolio_url: "", target_job: "", photo_url: "", summary: "",
   education: [], careers: [], skills: [], certifications: [],
-  projects: [], languages: [],
+  projects: [], languages: [], community: [],
 };
 
 type Template = "ats" | "visual";
@@ -37,13 +37,14 @@ export default function CVGeneratorPage() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [aboutSnap, cvSnap, careersSnap, skillsSnap, certsSnap, projectsSnap] = await Promise.all([
+      const [aboutSnap, cvSnap, careersSnap, skillsSnap, certsSnap, projectsSnap, communitySnap] = await Promise.all([
         getDoc(doc(db, "about", "profile")),
         getDoc(doc(db, "cv", "profile")),
         getDocs(collection(db, "careers")),
         getDocs(collection(db, "skills")),
         getDocs(collection(db, "certifications")),
         getDocs(collection(db, "projects")),
+        getDocs(collection(db, "community")),
       ]);
 
       const about  = aboutSnap.exists() ? (aboutSnap.data() as Record<string, unknown>) : {};
@@ -53,8 +54,9 @@ export default function CVGeneratorPage() {
       const savedCareerIds   = cvProf.included_careers  as string[] | null ?? null;
       const savedSkillIds    = cvProf.included_skills   as string[] | null ?? null;
       const savedCertIds     = cvProf.included_certs    as string[] | null ?? null;
-      const savedProjectIds  = cvProf.included_projects as string[] | null ?? null;
-      const savedSkillItems  = cvProf.skill_items as Record<string, string[]> | null ?? null;
+      const savedProjectIds   = cvProf.included_projects  as string[] | null ?? null;
+      const savedCommunityIds = cvProf.included_community as string[] | null ?? null;
+      const savedSkillItems   = cvProf.skill_items as Record<string, string[]> | null ?? null;
 
       const careers: CareerCV[] = careersSnap.docs
         .map(d => {
@@ -114,6 +116,20 @@ export default function CVGeneratorPage() {
         })
         .sort((a, b) => a.title.localeCompare(b.title));
 
+      const community: CommunityCV[] = communitySnap.docs
+        .map(d => {
+          const r = d.data() as Record<string, unknown>;
+          return {
+            id:          d.id,
+            title:       (r.title_en as string) || (r.title as string) || "",
+            description: (r.description_en as string) || (r.description as string) || "",
+            date:        (r.date     as string) ?? "",
+            location:    (r.location as string) ?? "",
+            included:    savedCommunityIds ? savedCommunityIds.includes(d.id) : false,
+          };
+        })
+        .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+
       setData({
         name:           (cvProf.name     as string) || (about.name     as string) || "",
         role:           (cvProf.role     as string) || (about.role     as string) || "",
@@ -132,6 +148,7 @@ export default function CVGeneratorPage() {
         skills,
         certifications,
         projects,
+        community,
       });
     } catch (e) {
       console.error(e);
@@ -165,6 +182,7 @@ export default function CVGeneratorPage() {
         skill_items:        Object.fromEntries(data.skills.map(s => [s.id, s.included_items])),
         included_certs:     data.certifications.filter(c => c.included).map(c => c.id),
         included_projects:  data.projects.filter(p => p.included).map(p => p.id),
+        included_community: data.community.filter(c => c.included).map(c => c.id),
       });
       setSaved(true);
       setTimeout(() => setSaved(false), 2500);
