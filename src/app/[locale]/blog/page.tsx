@@ -8,7 +8,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
 import Link from "next/link";
 import Image from "next/image";
-import classNames from "classnames";
 
 const PAGE_SIZE = 20;
 
@@ -18,18 +17,12 @@ interface BlogPost {
   title_id?:       string;
   description_en:  string;
   description_id?: string;
-  /* legacy fallback */
   title?:       string;
   description?: string;
-  lang?:        "en" | "id";
   url:          string;
   date:         string;
   order:        number;
   thumbnail?:   string;
-}
-
-function loc(en: string, id: string | undefined, tab: string): string {
-  return tab === "id" && id ? id : en;
 }
 
 function BlogSkeleton() {
@@ -50,10 +43,9 @@ function BlogSkeleton() {
   );
 }
 
-function BlogCard({ post, tab }: { post: BlogPost; tab: string }) {
-  const title       = loc(post.title_en || post.title || "", post.title_id, tab);
-  const description = loc(post.description_en || post.description || "", post.description_id, tab);
-  const langLabel   = post.title_en ? tab.toUpperCase() : (post.lang ?? tab).toUpperCase();
+function BlogCard({ post }: { post: BlogPost }) {
+  const title       = post.title_en || post.title || "";
+  const description = post.description_en || post.description || "";
 
   return (
     <Link href={post.url} target="_blank" rel="noopener noreferrer" className="group block">
@@ -82,14 +74,9 @@ function BlogCard({ post, tab }: { post: BlogPost; tab: string }) {
 
         {/* Content */}
         <div className="flex flex-col gap-1 flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2">
-            <h2 className="text-base font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-2 flex-1">
-              {title}
-            </h2>
-            <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded-md bg-accent/10 border border-accent/20 text-accent uppercase tracking-wider">
-              {langLabel}
-            </span>
-          </div>
+          <h2 className="text-base font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-2">
+            {title}
+          </h2>
           <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">{description}</p>
           <p className="text-xs text-text-muted italic mt-auto">{post.date}</p>
         </div>
@@ -100,13 +87,11 @@ function BlogCard({ post, tab }: { post: BlogPost; tab: string }) {
 
 export default function Blog() {
   const t = useTranslations("blog");
-  const [activeTab, setActiveTab] = useState<"en" | "id">("en");
-  const [blogs,     setBlogs]     = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blogs,        setBlogs]        = useState<BlogPost[]>([]);
+  const [isLoading,    setIsLoading]    = useState(true);
   const [displayCount, setDisplayCount] = useState(PAGE_SIZE);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  /* Fetch all once */
   useEffect(() => {
     (async () => {
       try {
@@ -122,18 +107,10 @@ export default function Blog() {
     })();
   }, []);
 
-  /* Reset page when tab changes */
-  useEffect(() => { setDisplayCount(PAGE_SIZE); }, [activeTab]);
+  const sorted  = blogs.sort((a, b) => b.order - a.order);
+  const visible = sorted.slice(0, displayCount);
+  const hasMore = visible.length < sorted.length;
 
-  /* Filter + sort */
-  const filtered = blogs
-    .filter((b) => b.title_en ? true : b.lang === activeTab)
-    .sort((a, b) => b.order - a.order);
-
-  const visible = filtered.slice(0, displayCount);
-  const hasMore = visible.length < filtered.length;
-
-  /* Infinite scroll observer */
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el || !hasMore) return;
@@ -150,7 +127,6 @@ export default function Blog() {
       <Navbar />
       <main className="flex-1 pt-24 pb-16">
         <div className="max-w-screen-lg mx-auto px-4">
-          {/* Header */}
           <div className="mb-10">
             <div className="flex items-center gap-2 mb-3">
               <span className="w-8 h-px bg-accent" />
@@ -160,26 +136,6 @@ export default function Blog() {
             <p className="text-text-secondary">{t("description")}</p>
           </div>
 
-          {/* Language tabs */}
-          <div className="flex gap-2 mb-8">
-            {(["en", "id"] as const).map((lang) => (
-              <button
-                key={lang}
-                onClick={() => setActiveTab(lang)}
-                className={classNames(
-                  "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300",
-                  {
-                    "bg-accent text-white shadow-glow-sm": activeTab === lang,
-                    "bg-bg-card border border-border text-text-secondary hover:border-accent/50 hover:text-text-primary": activeTab !== lang,
-                  }
-                )}
-              >
-                {lang === "en" ? "English" : "Indonesia"}
-              </button>
-            ))}
-          </div>
-
-          {/* Posts */}
           {isLoading ? (
             <BlogSkeleton />
           ) : visible.length === 0 ? (
@@ -196,20 +152,19 @@ export default function Blog() {
             <>
               <div className="space-y-3">
                 {visible.map((post) => (
-                  <BlogCard key={post.id} post={post} tab={activeTab} />
+                  <BlogCard key={post.id} post={post} />
                 ))}
               </div>
 
-              {/* Infinite scroll sentinel */}
               {hasMore && (
                 <div ref={sentinelRef} className="flex justify-center py-10">
                   <div className="w-6 h-6 rounded-full border-2 border-accent border-t-transparent animate-spin" />
                 </div>
               )}
 
-              {!hasMore && filtered.length > PAGE_SIZE && (
+              {!hasMore && sorted.length > PAGE_SIZE && (
                 <p className="text-center text-xs text-text-muted py-8">
-                  {filtered.length} posts loaded
+                  {sorted.length} posts loaded
                 </p>
               )}
             </>
