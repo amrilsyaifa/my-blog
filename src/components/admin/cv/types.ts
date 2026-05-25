@@ -12,17 +12,18 @@ export interface Achievement {
 }
 
 export interface CareerCV {
-  id:           string;
-  job_title:    string;
-  company:      string;
-  job_location: string;
-  job_tipe:     string;
-  start_date:   string;
-  end_date:     string;
-  is_active:    boolean;
-  work_details: string[];
-  achievements: Achievement[];
-  included:     boolean;
+  id:            string;
+  job_title:     string;
+  company:       string;
+  job_location:  string;
+  job_tipe:      string;
+  start_date:    string;
+  end_date:      string;
+  is_active:     boolean;
+  work_details:  string[];
+  achievements:  Achievement[];
+  company_order: number;
+  included:      boolean;
 }
 
 export interface SkillCV {
@@ -37,6 +38,7 @@ export interface CertCV {
   title:    string;
   issuer:   string;
   year?:    string;
+  href?:    string;
   included: boolean;
 }
 

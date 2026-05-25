@@ -59,20 +59,21 @@ export default function CVGeneratorPage() {
         .map(d => {
           const r = d.data() as Record<string, unknown>;
           return {
-            id:           d.id,
-            job_title:    (r.job_title    as string)  ?? "",
-            company:      (r.company      as string)  ?? "",
-            job_location: (r.job_location as string)  ?? "",
-            job_tipe:     (r.job_tipe     as string)  ?? "",
-            start_date:   (r.start_date   as string)  ?? "",
-            end_date:     (r.end_date     as string)  ?? "",
-            is_active:    (r.is_active    as boolean) ?? false,
-            work_details: (r.work_details as string[])     ?? [],
-            achievements: (r.achievements as Achievement[]) ?? [],
+            id:            d.id,
+            job_title:     (r.job_title     as string)  ?? "",
+            company:       (r.company       as string)  ?? "",
+            job_location:  (r.job_location  as string)  ?? "",
+            job_tipe:      (r.job_tipe      as string)  ?? "",
+            start_date:    (r.start_date    as string)  ?? "",
+            end_date:      (r.end_date      as string)  ?? "",
+            is_active:     (r.is_active     as boolean) ?? false,
+            work_details:  (r.work_details  as string[])      ?? [],
+            achievements:  (r.achievements  as Achievement[])  ?? [],
+            company_order: (r.company_order as number)  ?? 0,
             included: savedCareerIds ? savedCareerIds.includes(d.id) : true,
           };
         })
-        .sort((a, b) => (b.start_date ?? "").localeCompare(a.start_date ?? ""));
+        .sort((a, b) => b.company_order - a.company_order);
 
       const skills: SkillCV[] = skillsSnap.docs.map(d => {
         const r = d.data() as Record<string, unknown>;
@@ -91,6 +92,7 @@ export default function CVGeneratorPage() {
           title:    (r.title  as string) ?? "",
           issuer:   (r.issuer as string) ?? "",
           year:     (r.year   as string) ?? "",
+          href:     (r.href   as string) ?? "",
           included: savedCertIds ? savedCertIds.includes(d.id) : true,
         };
       });

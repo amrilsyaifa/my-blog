@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   Font,
+  Link,
 } from "@react-pdf/renderer";
 import { CVData } from "./types";
 
@@ -243,7 +244,13 @@ export default function CVDocumentVisual({ data }: { data: CVData }) {
               {includedCerts.map(c => (
                 <View key={c.id} style={styles.certRow}>
                   <Text style={styles.certDot}>◆</Text>
-                  <Text style={styles.certText}>{c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}</Text>
+                  {c.href ? (
+                    <Link src={c.href} style={styles.certText}>
+                      {c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}
+                    </Link>
+                  ) : (
+                    <Text style={styles.certText}>{c.title} — {c.issuer}{c.year ? ` | ${c.year}` : ""}</Text>
+                  )}
                 </View>
               ))}
             </>
