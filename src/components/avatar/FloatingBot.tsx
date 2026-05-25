@@ -59,7 +59,7 @@ export default function FloatingBot() {
   });
 
   return (
-    <group ref={groupRef} position={[1.6, 0.6, 0.2]}>
+    <group ref={groupRef} position={[1.1, 0.18, 0.15]}>
       {/* Body */}
       <mesh>
         <boxGeometry args={[0.3, 0.32, 0.22]} />
@@ -120,7 +120,7 @@ export default function FloatingBot() {
       </mesh>
 
       {/* AI speech bubble */}
-      <group position={[0.28, 0.5, 0.08]} rotation={[0, -0.3, 0]}>
+      <group position={[0.26, 0.48, 0.1]} rotation={[0, -0.4, 0]}>
         <mesh>
           <boxGeometry args={[0.28, 0.14, 0.02]} />
           <meshStandardMaterial color="#1e2130" opacity={0.85} transparent emissive="#6366f1" emissiveIntensity={0.05} />

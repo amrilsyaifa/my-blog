@@ -78,7 +78,7 @@ export default function AvatarScene() {
   return (
     <div className="w-full h-full" style={{ minHeight: "500px" }}>
       <Canvas
-        camera={{ position: [0, 0.55, 3.2], fov: 42 }}
+        camera={{ position: [0.35, 0.7, 3.3], fov: 42 }}
         style={{ background: "transparent" }}
         shadows
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
