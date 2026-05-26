@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@aws-sdk/client-s3vectors": "^3.1053.0",
+    "@google/generative-ai": "^0.24.1",
     "@react-pdf/renderer": "^4.5.1",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
@@ -23,6 +26,7 @@
     "next": "15.0.7",
     "next-intl": "^3.23.2",
     "next-themes": "^0.3.0",
+    "pdf-parse": "^2.4.5",
     "react": "^18",
     "react-dom": "^18",
     "react-feather": "^2.0.10",
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.177.0",
