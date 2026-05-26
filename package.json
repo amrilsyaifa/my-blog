@@ -12,6 +12,7 @@
     "@aws-sdk/client-s3": "^3.1053.0",
     "@aws-sdk/client-s3vectors": "^3.1053.0",
     "@google/generative-ai": "^0.24.1",
+    "@next/third-parties": "^16.2.6",
     "@react-pdf/renderer": "^4.5.1",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.0",
