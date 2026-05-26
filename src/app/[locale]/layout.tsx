@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import "../globals.css";
 import PageTransitionEffect from "@components/hoc/PageTransitionEffect";
 import CustomCursor from "@components/components/CustomCursor";
+import ChatWidgetLoader from "@components/components/chat/ChatWidgetLoader";
 
 const chakrapetch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
@@ -28,6 +29,7 @@ export default async function RootLayout({
           <PageTransitionEffect>
             {children}
           </PageTransitionEffect>
+          <ChatWidgetLoader />
         </Providers>
       </body>
     </html>

@@ -16,6 +16,8 @@ const NAV = [
   { href: "/admin/certifications", label: "Certifications", icon: "✦" },
   { href: "/admin/community",      label: "Community",      icon: "◎" },
   { href: "/admin/cv",             label: "CV Generator",   icon: "◻" },
+  { href: "/admin/rag",            label: "RAG / Chat",     icon: "◍" },
+  { href: "/admin/chat-sessions", label: "Chat Sessions",  icon: "◑" },
 ];
 
 export default function AdminSidebar() {
