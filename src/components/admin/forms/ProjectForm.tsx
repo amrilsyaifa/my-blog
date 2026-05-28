@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@components/configs/firebase";
 import CloudinaryUpload from "@components/components/admin/CloudinaryUpload";
+import type { TechStackItem } from "@components/app/admin/tech-stacks/page";
 
 export interface DevStack {
   title:           string;
+  value:           string;
   url:             string;
   is_open_new_tab: boolean;
 }
@@ -30,27 +34,105 @@ const tabInactive = "px-4 py-1.5 rounded-md text-xs font-semibold text-slate-400
 interface Props { data: ProjectFormData; onChange: (d: ProjectFormData) => void; }
 
 function DevStackEditor({ value, onChange }: { value: DevStack[]; onChange: (v: DevStack[]) => void }) {
-  const add    = () => onChange([...value, { title: "", url: "", is_open_new_tab: true }]);
-  const update = (i: number, k: keyof DevStack, v: string | boolean) => {
-    const next = [...value]; next[i] = { ...next[i], [k]: v }; onChange(next);
+  const [masterList, setMasterList] = useState<TechStackItem[]>([]);
+  const [search,     setSearch]     = useState("");
+  const [open,       setOpen]       = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const snap = await getDoc(doc(db, "config", "tech_stacks"));
+      if (snap.exists()) setMasterList((snap.data().items as TechStackItem[]) ?? []);
+    })();
+  }, []);
+
+  const selectedValues = new Set(value.map(d => d.value));
+
+  const addTech = (item: TechStackItem) => {
+    if (selectedValues.has(item.value)) return;
+    onChange([...value, { title: item.label, value: item.value, url: item.url, is_open_new_tab: item.is_open_new_tab }]);
+    setSearch("");
+    setOpen(false);
   };
-  const remove = (i: number) => onChange(value.filter((_, idx) => idx !== i));
+
+  const removeTech = (v: string) => onChange(value.filter(d => d.value !== v));
+
+  const available = masterList.filter(
+    m => !selectedValues.has(m.value) &&
+    (search === "" || m.label.toLowerCase().includes(search.toLowerCase()))
+  );
 
   return (
     <div className="space-y-2">
       <label className={lbl}>Dev Stack</label>
-      {value.map((item, i) => (
-        <div key={i} className="flex gap-2 items-center">
-          <input className={`${cls} flex-1`} placeholder="Name" value={item.title} onChange={e => update(i, "title", e.target.value)} />
-          <input className={`${cls} flex-1`} placeholder="URL (optional)" value={item.url} onChange={e => update(i, "url", e.target.value)} />
-          <label className="flex items-center gap-1 text-xs text-slate-400 whitespace-nowrap">
-            <input type="checkbox" checked={item.is_open_new_tab} onChange={e => update(i, "is_open_new_tab", e.target.checked)} className="accent-indigo-600" />
-            new tab
-          </label>
-          <button type="button" onClick={() => remove(i)} className="px-2 py-1 rounded-lg bg-red-900/40 hover:bg-red-800/60 text-red-400 text-sm">×</button>
+
+      {/* Selected techs */}
+      {value.length > 0 && (
+        <div className="flex flex-wrap gap-2 p-3 bg-[#0a0d14] border border-[#2d3748] rounded-lg">
+          {value.map(tech => (
+            <span key={tech.value} className="flex items-center gap-1.5 px-2.5 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded-lg text-xs text-indigo-200">
+              {tech.title}
+              <button type="button" onClick={() => removeTech(tech.value)}
+                className="text-indigo-400 hover:text-red-400 transition-colors leading-none">×</button>
+            </span>
+          ))}
         </div>
-      ))}
-      <button type="button" onClick={add} className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">+ Add tech</button>
+      )}
+
+      {/* Dropdown picker from master list */}
+      <div className="relative">
+        <button
+          type="button"
+          onClick={() => setOpen(o => !o)}
+          className="w-full text-left text-xs text-indigo-400 hover:text-indigo-300 border border-dashed border-[#2d3748] hover:border-indigo-500/40 rounded-lg px-3 py-2 transition-colors"
+        >
+          + Pick from tech stack list
+        </button>
+
+        {open && (
+          <div className="absolute z-20 top-full mt-1 left-0 w-full bg-[#0f1117] border border-[#2d3748] rounded-xl shadow-xl">
+            <div className="p-2 border-b border-[#2d3748]">
+              <input
+                autoFocus
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search tech stack…"
+                className="w-full bg-transparent text-slate-200 text-xs placeholder:text-slate-600 focus:outline-none px-1"
+              />
+            </div>
+            <div className="max-h-48 overflow-y-auto py-1">
+              {available.length === 0 && (
+                <p className="px-3 py-2 text-xs text-slate-600 italic">
+                  {masterList.length === 0
+                    ? "No tech stacks in master list. Add them at /admin/tech-stacks."
+                    : "No matches."}
+                </p>
+              )}
+              {available.map(item => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => addTech(item)}
+                  className="w-full text-left px-3 py-2 text-xs text-slate-300 hover:bg-[#1e2130] flex items-center gap-2"
+                >
+                  <span className="font-medium">{item.label}</span>
+                  <span className="text-slate-600 font-mono">{item.value}</span>
+                </button>
+              ))}
+            </div>
+            <div className="p-2 border-t border-[#2d3748]">
+              <button type="button" onClick={() => setOpen(false)} className="w-full text-xs text-slate-600 hover:text-slate-400">Close</button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {masterList.length === 0 && (
+        <p className="text-[10px] text-slate-600">
+          No master tech stacks found. First add them at{" "}
+          <a href="/admin/tech-stacks" target="_blank" className="text-indigo-400 underline">/admin/tech-stacks</a>.
+        </p>
+      )}
     </div>
   );
 }
@@ -72,7 +154,6 @@ export default function ProjectForm({ data, onChange }: Props) {
         </button>
       </div>
 
-      {/* EN fields */}
       {lang === "en" && (
         <>
           <div>
@@ -86,7 +167,6 @@ export default function ProjectForm({ data, onChange }: Props) {
         </>
       )}
 
-      {/* ID fields */}
       {lang === "id" && (
         <>
           <div>
@@ -100,7 +180,6 @@ export default function ProjectForm({ data, onChange }: Props) {
         </>
       )}
 
-      {/* Common fields */}
       <div>
         <label className={lbl}>Link</label>
         <input className={cls} value={data.link} onChange={e => set("link", e.target.value)} placeholder="https://..." />

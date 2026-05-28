@@ -1,15 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ChatPanel from "./ChatPanel";
+import ChatCoachmark from "./ChatCoachmark";
+
+const COACHMARK_KEY = "chat-coachmark-seen";
 
 export default function ChatWidget() {
-  const [open,    setOpen]    = useState(false);
-  const [hasNew,  setHasNew]  = useState(false);
+  const [open,          setOpen]          = useState(false);
+  const [hasNew,        setHasNew]        = useState(false);
+  const [showCoachmark, setShowCoachmark] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem(COACHMARK_KEY)) return;
+    const id = setTimeout(() => setShowCoachmark(true), 2500);
+    return () => clearTimeout(id);
+  }, []);
+
+  const dismissCoachmark = () => {
+    localStorage.setItem(COACHMARK_KEY, "1");
+    setShowCoachmark(false);
+  };
 
   const handleOpen = () => {
     setOpen(true);
     setHasNew(false);
+    dismissCoachmark();
   };
 
   return (
@@ -19,6 +35,11 @@ export default function ChatWidget() {
         <div className="animate-in slide-in-from-bottom-4 fade-in duration-200">
           <ChatPanel onClose={() => setOpen(false)} />
         </div>
+      )}
+
+      {/* Coachmark */}
+      {showCoachmark && !open && (
+        <ChatCoachmark onDismiss={dismissCoachmark} />
       )}
 
       {/* Bubble button */}

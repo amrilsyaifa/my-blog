@@ -3,23 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@components/configs/firebase";
+import { useTranslations } from "next-intl";
 
 interface Message {
   role:    "user" | "assistant";
   content: string;
 }
 
-const STARTERS = [
-  "What is Amril's work experience?",
-  "What technologies does Amril know?",
-  "What projects has Amril worked on?",
-];
-
 interface Props {
   onClose: () => void;
 }
 
 export default function ChatPanel({ onClose }: Props) {
+  const t = useTranslations("chat");
   const [step,       setStep]       = useState<"survey" | "chat">("survey");
   const [name,       setName]       = useState("");
   const [position,   setPosition]   = useState("");
@@ -155,7 +151,7 @@ export default function ChatPanel({ onClose }: Props) {
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#2d3748] bg-[#0f1117] shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-sm font-semibold text-slate-100">Ask about Amril</span>
+          <span className="text-sm font-semibold text-slate-100">{t("header")}</span>
         </div>
         <button onClick={onClose}
           className="text-slate-500 hover:text-slate-200 transition-colors text-lg leading-none">
@@ -167,13 +163,13 @@ export default function ChatPanel({ onClose }: Props) {
       {step === "survey" && (
         <div className="flex-1 flex flex-col justify-center px-6 py-6 space-y-5">
           <div className="space-y-1 text-center">
-            <p className="text-base font-semibold text-slate-100">Halo! Boleh kenalan dulu? 👋</p>
-            <p className="text-xs text-slate-500">Sebelum mulai, ceritain sedikit tentang kamu ya</p>
+            <p className="text-base font-semibold text-slate-100">{t("survey_title")}</p>
+            <p className="text-xs text-slate-500">{t("survey_subtitle")}</p>
           </div>
 
           <div className="space-y-3">
             <div>
-              <label className="text-xs text-slate-400 mb-1.5 block">Nama kamu</label>
+              <label className="text-xs text-slate-400 mb-1.5 block">{t("name_label")}</label>
               <input
                 autoFocus
                 type="text"
@@ -182,20 +178,20 @@ export default function ChatPanel({ onClose }: Props) {
                 onKeyDown={e => {
                   if (e.key === "Enter") document.getElementById("pos-input")?.focus();
                 }}
-                placeholder="Contoh: Budi Santoso"
+                placeholder={t("name_placeholder")}
                 className="w-full bg-[#1e2130] border border-[#2d3748] text-slate-200 text-sm rounded-lg px-3 py-2.5 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/60 transition-colors"
               />
             </div>
 
             <div>
-              <label className="text-xs text-slate-400 mb-1.5 block">Posisi / pekerjaan kamu</label>
+              <label className="text-xs text-slate-400 mb-1.5 block">{t("position_label")}</label>
               <input
                 id="pos-input"
                 type="text"
                 value={position}
                 onChange={e => setPosition(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter") startChat(); }}
-                placeholder="Contoh: HR Manager, Software Engineer"
+                placeholder={t("position_placeholder")}
                 className="w-full bg-[#1e2130] border border-[#2d3748] text-slate-200 text-sm rounded-lg px-3 py-2.5 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/60 transition-colors"
               />
             </div>
@@ -205,7 +201,7 @@ export default function ChatPanel({ onClose }: Props) {
               disabled={!name.trim() || !position.trim() || submitting}
               className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              {submitting ? "Memulai…" : "Mulai Chat →"}
+              {submitting ? t("submitting") : t("start")}
             </button>
           </div>
         </div>
@@ -219,10 +215,10 @@ export default function ChatPanel({ onClose }: Props) {
             {isEmpty ? (
               <div className="space-y-4">
                 <p className="text-xs text-slate-500 text-center">
-                  Halo, <span className="text-slate-300">{name}</span>! Tanya apa saja tentang Amril.
+                  {t("greeting", { name })}
                 </p>
                 <div className="space-y-2">
-                  {STARTERS.map(s => (
+                  {([t("starter_1"), t("starter_2"), t("starter_3")] as string[]).map(s => (
                     <button key={s} onClick={() => send(s)}
                       className="w-full text-left text-xs text-slate-400 hover:text-slate-200 border border-[#2d3748] hover:border-indigo-500/40 bg-[#1e2130] hover:bg-[#252a3a] rounded-lg px-3 py-2 transition-colors">
                       {s}
@@ -261,7 +257,7 @@ export default function ChatPanel({ onClose }: Props) {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask a question… (Enter to send)"
+                placeholder={t("input_placeholder")}
                 disabled={streaming}
                 className="flex-1 bg-transparent text-slate-200 text-xs placeholder:text-slate-600 resize-none focus:outline-none leading-relaxed max-h-28 overflow-y-auto"
               />
@@ -272,7 +268,7 @@ export default function ChatPanel({ onClose }: Props) {
                 </svg>
               </button>
             </div>
-            <p className="text-[10px] text-slate-600 mt-1.5 text-center">Powered by Gemini · Shift+Enter for new line</p>
+            <p className="text-[10px] text-slate-600 mt-1.5 text-center">{t("shift_enter")}</p>
           </div>
         </>
       )}

@@ -105,5 +105,25 @@
   },
   "footer": {
     "copyright": "Semua hak dilindungi"
+  },
+  "chat": {
+    "header": "Tanya tentang Amril",
+    "survey_title": "Halo! Boleh kenalan dulu? 👋",
+    "survey_subtitle": "Sebelum mulai, ceritain sedikit tentang kamu ya",
+    "name_label": "Nama kamu",
+    "name_placeholder": "Contoh: Budi Santoso",
+    "position_label": "Posisi / pekerjaan kamu",
+    "position_placeholder": "Contoh: HR Manager, Software Engineer",
+    "submitting": "Memulai…",
+    "start": "Mulai Chat →",
+    "greeting": "Halo, {name}! Tanya apa saja tentang Amril.",
+    "input_placeholder": "Tulis pertanyaan… (Enter untuk kirim)",
+    "shift_enter": "Shift+Enter untuk baris baru",
+    "starter_1": "Apa pengalaman kerja Amril?",
+    "starter_2": "Teknologi apa yang dikuasai Amril?",
+    "starter_3": "Proyek apa yang pernah dikerjakan Amril?",
+    "coachmark_title": "Chat dengan AI saya! 👋",
+    "coachmark_desc": "Tanya apa saja tentang pengalaman, proyek, atau skill saya.",
+    "coachmark_cta": "Mengerti"
   }
 }

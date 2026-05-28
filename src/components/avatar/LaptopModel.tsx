@@ -4,42 +4,64 @@ import { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Group, Mesh, MeshStandardMaterial } from "three";
 import gsap from "gsap";
+import { useTheme } from "next-themes";
 
 /* ── Palette ────────────────────────────────────────────── */
-const ALU   = "#9a9a9c";   // space gray aluminum
-const BEZEL = "#1a1a1c";   // screen bezel
-const SCR   = "#1e2127";   // One Dark background
+const ALU = "#9a9a9c"; // aluminum (same in both themes)
 
-/* ── Code syntax colours (One Dark Pro) ────────────────── */
-const KW  = "#c678dd";
-const FN  = "#61afef";
-const STR = "#98c379";
-const TXT = "#abb2bf";
-const CMT = "#5c6370";
+const DARK = {
+  BEZEL: "#1a1a1c",
+  SCR:   "#1e2127",
+  MENU:  "#2c313a",
+  DECK:  "#2c2c2e",
+  KEYS:  "#3c3c3e",
+  PAD:   "#3a3a3c",
+  KW:    "#c678dd",
+  FN:    "#61afef",
+  STR:   "#98c379",
+  TXT:   "#abb2bf",
+  CMT:   "#5c6370",
+};
+
+const LIGHT = {
+  BEZEL: "#d1d1d3",
+  SCR:   "#fafafa",
+  MENU:  "#e8e8ea",
+  DECK:  "#e0e0e2",
+  KEYS:  "#c8c8ca",
+  PAD:   "#d4d4d6",
+  KW:    "#a626a4",
+  FN:    "#4078f2",
+  STR:   "#50a14f",
+  TXT:   "#383a42",
+  CMT:   "#a0a1a7",
+};
 
 /* ── Code rows ──────────────────────────────────────────── */
 type Seg = { c: string; w: number; ml: number };
 
-const ROWS: Seg[][] = [
-  [{ c: CMT, w: 0.60, ml: 0 }],                                        // // portfolio.tsx
-  [],
-  [{ c: KW,  w: 0.12, ml: 0    }, { c: TXT, w: 0.10, ml: 0.13 },
-   { c: TXT, w: 0.06, ml: 0.25 }, { c: STR, w: 0.18, ml: 0.32 }],     // import React from 'react'
-  [{ c: KW,  w: 0.12, ml: 0    }, { c: TXT, w: 0.06, ml: 0.13 },
-   { c: FN,  w: 0.16, ml: 0.20 }, { c: TXT, w: 0.06, ml: 0.37 },
-   { c: STR, w: 0.16, ml: 0.44 }],                                     // import { useState } from 'react'
-  [],
-  [{ c: KW,  w: 0.10, ml: 0    }, { c: FN,  w: 0.16, ml: 0.11 },
-   { c: TXT, w: 0.04, ml: 0.28 }, { c: KW,  w: 0.12, ml: 0.33 },
-   { c: TXT, w: 0.04, ml: 0.46 }],                                     // const Portfolio = () => {
-  [{ c: KW,  w: 0.08, ml: 0.04 }, { c: TXT, w: 0.12, ml: 0.13 },
-   { c: FN,  w: 0.18, ml: 0.26 }],                                     //   const [skills] = ...
-  [{ c: KW,  w: 0.10, ml: 0.04 }, { c: STR, w: 0.26, ml: 0.15 }],     //   return <Portfolio />
-  [{ c: TXT, w: 0.04, ml: 0    }],                                     // }
-];
+function makeRows(p: typeof DARK): Seg[][] {
+  return [
+    [{ c: p.CMT, w: 0.60, ml: 0 }],
+    [],
+    [{ c: p.KW, w: 0.12, ml: 0 }, { c: p.TXT, w: 0.10, ml: 0.13 },
+     { c: p.TXT, w: 0.06, ml: 0.25 }, { c: p.STR, w: 0.18, ml: 0.32 }],
+    [{ c: p.KW, w: 0.12, ml: 0 }, { c: p.TXT, w: 0.06, ml: 0.13 },
+     { c: p.FN, w: 0.16, ml: 0.20 }, { c: p.TXT, w: 0.06, ml: 0.37 },
+     { c: p.STR, w: 0.16, ml: 0.44 }],
+    [],
+    [{ c: p.KW, w: 0.10, ml: 0 }, { c: p.FN, w: 0.16, ml: 0.11 },
+     { c: p.TXT, w: 0.04, ml: 0.28 }, { c: p.KW, w: 0.12, ml: 0.33 },
+     { c: p.TXT, w: 0.04, ml: 0.46 }],
+    [{ c: p.KW, w: 0.08, ml: 0.04 }, { c: p.TXT, w: 0.12, ml: 0.13 },
+     { c: p.FN, w: 0.18, ml: 0.26 }],
+    [{ c: p.KW, w: 0.10, ml: 0.04 }, { c: p.STR, w: 0.26, ml: 0.15 }],
+    [{ c: p.TXT, w: 0.04, ml: 0 }],
+  ];
+}
 
 /* ── Blinking cursor ────────────────────────────────────── */
-function BlinkingCursor({ position }: { position: [number, number, number] }) {
+function BlinkingCursor({ position, color }: { position: [number, number, number]; color: string }) {
   const ref = useRef<Mesh>(null);
   useEffect(() => {
     let vis = true;
@@ -52,13 +74,13 @@ function BlinkingCursor({ position }: { position: [number, number, number] }) {
   return (
     <mesh ref={ref} position={position}>
       <boxGeometry args={[0.018, 0.026, 0.001]} />
-      <meshStandardMaterial color={TXT} emissive={TXT} emissiveIntensity={0.9} />
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.9} />
     </mesh>
   );
 }
 
 /* ── Code display ───────────────────────────────────────── */
-function CodeDisplay() {
+function CodeDisplay({ p }: { p: typeof DARK }) {
   const W      = 1.66;
   const H      = 1.05;
   const ROW_H  = 0.075;
@@ -71,7 +93,7 @@ function CodeDisplay() {
       {/* macOS menu bar */}
       <mesh position={[0, H / 2 - 0.023, 0]}>
         <boxGeometry args={[W, 0.034, 0.001]} />
-        <meshStandardMaterial color="#2c313a" emissive="#2c313a" emissiveIntensity={0.35} />
+        <meshStandardMaterial color={p.MENU} emissive={p.MENU} emissiveIntensity={0.35} />
       </mesh>
 
       {/* Traffic-light dots */}
@@ -83,7 +105,7 @@ function CodeDisplay() {
       ))}
 
       {/* Code rows */}
-      {ROWS.map((row, ri) => {
+      {makeRows(p).map((row, ri) => {
         const rowY = H / 2 - PAD_T - ri * ROW_H;
         return (
           <group key={ri} position={[0, rowY, 0]}>
@@ -108,6 +130,7 @@ function CodeDisplay() {
       {/* Blinking cursor — row 9 */}
       <BlinkingCursor
         position={[-W / 2 + PAD_L + 0.009, H / 2 - PAD_T - 9 * ROW_H, 0]}
+        color={p.TXT}
       />
     </group>
   );
@@ -131,6 +154,9 @@ function AppleLogo() {
 
 /* ── Main laptop model ──────────────────────────────────── */
 export default function LaptopModel() {
+  const { resolvedTheme } = useTheme();
+  const p = resolvedTheme === "light" ? LIGHT : DARK;
+
   const groupRef  = useRef<Group>(null);
   const scrMatRef = useRef<MeshStandardMaterial>(null);
   const mouseRef  = useRef({ x: 0, y: 0 });
@@ -191,7 +217,7 @@ export default function LaptopModel() {
       {/* Keyboard deck */}
       <mesh position={[0, 0.034, -0.05]}>
         <boxGeometry args={[1.55, 0.003, 0.88]} />
-        <meshStandardMaterial color="#2c2c2e" roughness={0.6} metalness={0.2} />
+        <meshStandardMaterial color={p.DECK} roughness={0.6} metalness={0.2} />
       </mesh>
 
       {/* Key rows — 3 rows of 12 */}
@@ -200,7 +226,7 @@ export default function LaptopModel() {
           {Array.from({ length: 12 }).map((_, ki) => (
             <mesh key={ki} position={[-0.66 + ki * 0.12, 0, 0]}>
               <boxGeometry args={[0.090, 0.003, 0.072]} />
-              <meshStandardMaterial color="#3c3c3e" roughness={0.75} metalness={0.1} />
+              <meshStandardMaterial color={p.KEYS} roughness={0.75} metalness={0.1} />
             </mesh>
           ))}
         </group>
@@ -209,7 +235,7 @@ export default function LaptopModel() {
       {/* Trackpad */}
       <mesh position={[0, 0.034, 0.3]}>
         <boxGeometry args={[0.44, 0.003, 0.32]} />
-        <meshStandardMaterial color="#3a3a3c" roughness={0.18} metalness={0.65} />
+        <meshStandardMaterial color={p.PAD} roughness={0.18} metalness={0.65} />
       </mesh>
 
       {/* Hinge bar */}
@@ -229,7 +255,7 @@ export default function LaptopModel() {
         {/* Bezel */}
         <mesh position={[0, 0.575, 0.029]}>
           <boxGeometry args={[1.76, 1.12, 0.004]} />
-          <meshStandardMaterial color={BEZEL} roughness={0.85} />
+          <meshStandardMaterial color={p.BEZEL} roughness={0.85} />
         </mesh>
 
         {/* Screen panel */}
@@ -237,16 +263,16 @@ export default function LaptopModel() {
           <boxGeometry args={[1.66, 1.05, 0.002]} />
           <meshStandardMaterial
             ref={scrMatRef}
-            color={SCR}
-            emissive={SCR}
-            emissiveIntensity={0.22}
+            color={p.SCR}
+            emissive={p.SCR}
+            emissiveIntensity={resolvedTheme === "light" ? 0.05 : 0.22}
             roughness={0.0}
           />
         </mesh>
 
         {/* Code on screen */}
         <group position={[0, 0.575, 0.034]}>
-          <CodeDisplay />
+          <CodeDisplay p={p} />
         </group>
 
         {/* Apple logo — back */}

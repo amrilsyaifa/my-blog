@@ -105,5 +105,25 @@
   },
   "footer": {
     "copyright": "All rights reserved"
+  },
+  "chat": {
+    "header": "Ask about Amril",
+    "survey_title": "Hi there! Mind introducing yourself? 👋",
+    "survey_subtitle": "Before we start, tell me a little about you",
+    "name_label": "Your name",
+    "name_placeholder": "e.g. John Doe",
+    "position_label": "Your position / role",
+    "position_placeholder": "e.g. HR Manager, Software Engineer",
+    "submitting": "Starting…",
+    "start": "Start Chat →",
+    "greeting": "Hi, {name}! Ask me anything about Amril.",
+    "input_placeholder": "Ask a question… (Enter to send)",
+    "shift_enter": "Shift+Enter for new line",
+    "starter_1": "What is Amril's work experience?",
+    "starter_2": "What technologies does Amril know?",
+    "starter_3": "What projects has Amril worked on?",
+    "coachmark_title": "Chat with my AI! 👋",
+    "coachmark_desc": "Ask anything about my experience, projects, or skills.",
+    "coachmark_cta": "Got it"
   }
 }

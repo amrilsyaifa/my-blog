@@ -33,8 +33,12 @@ export default async function RootLayout({
           </PageTransitionEffect>
           <ChatWidgetLoader />
         </Providers>
-        <GATracker />
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <GATracker />
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
+          </>
+        )}
       </body>
     </html>
   );

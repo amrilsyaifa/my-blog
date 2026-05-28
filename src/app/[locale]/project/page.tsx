@@ -13,7 +13,7 @@ import classNames from "classnames";
 
 const PAGE_SIZE = 20;
 
-type DevStack = { is_open_new_tab: boolean; title: string; url?: string };
+type DevStack = { is_open_new_tab: boolean; title: string; value?: string; url?: string };
 interface Project {
   id: string;
   /* bilingual */
@@ -127,6 +127,7 @@ export default function Project() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [displayCount, setDisplayCount] = useState(PAGE_SIZE);
+  const [techFilter, setTechFilter] = useState<string | null>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -144,9 +145,22 @@ export default function Project() {
     })();
   }, []);
 
-  useEffect(() => { setDisplayCount(PAGE_SIZE); }, [activeTab]);
+  useEffect(() => { setDisplayCount(PAGE_SIZE); setTechFilter(null); }, [activeTab]);
+  useEffect(() => { setDisplayCount(PAGE_SIZE); }, [techFilter]);
 
-  const filtered = projects.filter((p) => p.project_by === activeTab).sort((a, b) => b.order - a.order);
+  function techValue(t: DevStack): string {
+    return t.value || t.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  }
+
+  const tabProjects = projects.filter((p) => p.project_by === activeTab).sort((a, b) => b.order - a.order);
+
+  const availableTechs = Array.from(
+    new Map(tabProjects.flatMap(p => p.dev_stack.map(t => [techValue(t), t.title])))
+  ).map(([value, title]) => ({ value, title })).sort((a, b) => a.title.localeCompare(b.title));
+
+  const filtered = techFilter
+    ? tabProjects.filter(p => p.dev_stack.some(t => techValue(t) === techFilter))
+    : tabProjects;
   const visible = filtered.slice(0, displayCount);
   const hasMore = visible.length < filtered.length;
 
@@ -174,17 +188,69 @@ export default function Project() {
             <h1 className="text-4xl md:text-5xl font-bold text-text-primary">{t("title")}</h1>
           </div>
 
-          <div className="flex gap-2 mb-8">
-            {(["self", "company"] as const).map((tab) => (
-              <button key={tab} onClick={() => setActiveTab(tab)} className={classNames(
-                "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300",
-                { "bg-accent text-white shadow-glow-sm": activeTab === tab,
-                  "bg-bg-card border border-border text-text-secondary hover:border-accent/50 hover:text-text-primary": activeTab !== tab }
-              )}>
-                {tab === "self" ? t("personal") : t("company")}
-              </button>
-            ))}
+          {/* Tabs + filter row */}
+          <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
+            <div className="flex gap-2">
+              {(["self", "company"] as const).map((tab) => (
+                <button key={tab} onClick={() => setActiveTab(tab)} className={classNames(
+                  "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                  { "bg-accent text-white shadow-glow-sm": activeTab === tab,
+                    "bg-bg-card border border-border text-text-secondary hover:border-accent/50 hover:text-text-primary": activeTab !== tab }
+                )}>
+                  {tab === "self" ? t("personal") : t("company")}
+                </button>
+              ))}
+            </div>
+
+            {availableTechs.length > 0 && (
+              <div className="relative">
+                <select
+                  value=""
+                  onChange={e => {
+                    const v = e.target.value;
+                    setTechFilter(v || null);
+                    e.target.value = "";
+                  }}
+                  className={classNames(
+                    "appearance-none bg-bg-card border rounded-lg pl-3 pr-8 py-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent/40 cursor-pointer",
+                    techFilter
+                      ? "border-accent/50 text-text-primary"
+                      : "border-border text-text-secondary"
+                  )}
+                >
+                  <option value="">Filter by tech stack…</option>
+                  {availableTechs.map(tech => (
+                    <option key={tech.value} value={tech.value}>{tech.title}</option>
+                  ))}
+                </select>
+                <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            )}
           </div>
+
+          {/* Active filter chip */}
+          {techFilter && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {availableTechs.filter(tech => tech.value === techFilter).map(tech => (
+                <span
+                  key={tech.value}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-lg bg-accent/15 border border-accent/30 text-accent"
+                >
+                  {tech.title}
+                  <button
+                    type="button"
+                    onClick={() => setTechFilter(null)}
+                    className="hover:text-red-400 transition-colors leading-none text-base"
+                    aria-label="Clear filter"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
 
           {isLoading ? (
             <ProjectSkeleton />

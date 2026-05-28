@@ -4,6 +4,7 @@ import { Suspense, useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { PointLight } from "three";
+import { useTheme } from "next-themes";
 import LaptopModel from "./avatar/LaptopModel";
 import FloatingBot from "./avatar/FloatingBot";
 
@@ -75,6 +76,9 @@ function LoadingFallback() {
 }
 
 export default function AvatarScene() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme !== "light";
+
   return (
     <div className="w-full h-full" style={{ minHeight: "500px" }}>
       <Canvas
@@ -86,7 +90,7 @@ export default function AvatarScene() {
       >
         <StaticLights />
         <DynamicFillLight />
-        <Stars radius={35} depth={30} count={700} factor={2} fade speed={0.35} />
+        {isDark && <Stars radius={35} depth={30} count={700} factor={2} fade speed={0.35} />}
 
         <Suspense fallback={<LoadingFallback />}>
           <LaptopModel />
